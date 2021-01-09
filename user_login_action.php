@@ -3,12 +3,22 @@ require_once('database_info.php');
 
 $conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");
 
-$username = $_POST['Username'];
-$password = $_POST['Password'];
+if (!$conn) {
+	echo "oci_connect failed\n";
+	$e = oci_error();
+	echo $e['message'];
+	  }
+else
+{
+	  
+$username = $_POST['username'];
+$password = $_POST['password'];
 $password = sha1($password);
 
 $result = oci_parse($conn, "SELECT * FROM gracze WHERE nick = '$username';");
-oci_execute($result, OCI_NO_AUTO_COMMIT);
+$_SESSION['test'] = oci_parse($conn, "SELECT table_name FROM user_tables");
+oci_execute($result);
+oci_execute($_SESSION['test']);
 
 $count = oci_num_rows($result);
 
@@ -37,5 +47,5 @@ else
 		header('Location:login_page.php');
 	}
 }
-
+}
 oci_close($conn);

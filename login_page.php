@@ -21,7 +21,7 @@ else {
 
     <body>
         <b>Logowanie</b><br><br>
-        <form id='player_log' action='user_login_action.php' method='POST'>
+        <form id='user_log' action='user_login_action.php' method='POST'>
             Login:<br>
             <input type='text' name='username'><br><br>
             Hasło:<br>
@@ -33,6 +33,14 @@ else {
         if ($_SESSION['login_exists'] == 'false') {
             echo "<span style='color:red'><b>Niepoprawna nazwa użytkownika.</b></span><br><br>";
             $_SESSION['login_exists'] = '';
+            while ($row = oci_fetch_array($_SESSION['test'], OCI_BOTH)) {
+                echo "<span style='color:red'><b>Niepoprawna nazwa użytkownika.</b></span><br><br>";
+                echo "<tr>\n";
+                foreach ($row as $item) {
+                    echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+                }
+                echo "</tr>\n";
+            }
         }
 
         if ($_SESSION['auth'] == 'false') {
@@ -40,7 +48,7 @@ else {
             $_SESSION['auth'] = '';
         }
         ?>
-        Jeśli nie masz konta <a href='user_registration.php'>Zarejestruj się.</a><br><br>
+        Jeśli nie masz konta <a href='registration_page.php'>Zarejestruj się.</a><br><br>
         <a href='index.html'>Strona główna</a>
     </body>
 
