@@ -21,7 +21,7 @@ else {
 
     <body>
         <b>Logowanie</b><br><br>
-        <form id='player_log' action='user_login.php' method='POST'>
+        <form id='player_log' action='user_login_action.php' method='POST'>
             Login:<br>
             <input type='text' name='username'><br><br>
             Hasło:<br>
