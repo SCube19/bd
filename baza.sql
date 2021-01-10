@@ -1,14 +1,21 @@
-drop table gracze;
-drop table typy;
-drop table rankingAdvanced;
-drop table rankingBasic;
-drop table formuly;
-drop table gry;
-drop table statystyki;
-drop table historie;
+--drop procedure dodaj_statsy;
+--drop procedure zsdr;
+--drop trigger dodaj_statystyki;
+--drop trigger ze_statystyk_do_rankingu;
+
+--cascade constraints ma wyjebane na polaczenia
+drop table typy cascade constraints;
+drop table rankingAdvanced cascade constraints;
+drop table rankingBasic cascade constraints;
+drop table formuly cascade constraints;
+drop table statystyki cascade constraints;
+drop table historie cascade constraints;
+drop table gracze cascade constraints;
+drop table gry cascade constraints;
+drop table rozgrywki cascade constraints;
 
 create table typy(
-    typ varchar2(10) primary key
+    typ varchar2(20) primary key
 );
 
 create table gry(
@@ -19,7 +26,7 @@ create table gry(
 create table gracze(
     nick varchar2(20) primary key,
     haslo varchar2(20) not null,
-    typ_gracza varchar2(10) not null references typy
+    typ_gracza varchar2(20) not null references typy
 );
 
 create table statystyki(
@@ -38,6 +45,7 @@ create table rozgrywki(
 --ruch_gracza1 varchar2(4) not null,
 --....
 --);
+
 create table historie(
     nick_gracza varchar2(20) not null references gracze,
     id number(6) not null references rozgrywki
@@ -47,7 +55,7 @@ create table rankingBasic(
     nick_gracza varchar2(20) not null references gracze,
     ilosc_zagranych number(5) not null,
     ilosc_wygranych number(5) not null,
-    ilosc_remisów number(5) not null,
+    ilosc_remisow number(5) not null,
     gra varchar2(20) not null references gry
 );
 
@@ -77,10 +85,10 @@ end;
 /
 
 create or replace procedure zsdr(nick varchar2, gra varchar2) is
-    cursor formlyCur is (select * from formuly);
+    cursor formulyCur is (select * from formuly);
 begin
     insert into rankingBasic values (nick, 0, 0, 0, gra);
-    for formula in formlyCur
+    for formula in formulyCur
     loop
         insert into rankingAdvanced values (nick, formula.wartosc_domyslna, formula.id);
     end loop;
@@ -103,5 +111,15 @@ begin
 end;
 /
 
+insert into typy values('użytkownik');
+insert into typy values('admin');
+insert into typy values('bot');
 
+insert into gry values('szachy', 2);
+insert into gry values('bierki', 4);
 
+insert into gracze values('abc', 'abc', 'użytkownik');
+insert into gracze values('admin', '123', 'admin');
+
+select * from gry;
+select * from gracze;
