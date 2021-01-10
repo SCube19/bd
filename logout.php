@@ -1,7 +1,5 @@
 <?php 
-
-$_COOKIE['active_username'] = '';
-$_COOKIE['active_password'] = '';
+setcookie('active_username', '', time() + (3600 * 5));
+setcookie('active_password', '', time() + (3600 * 5));
 header('Location:index.php');
-
 ?>

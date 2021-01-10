@@ -1,5 +1,10 @@
 <?php
 session_start();
+if($_SESSION['alert'] == 'true')
+{
+    echo "<script type='text/javascript'>alert('Poprawnie zarejestrowano!'); var i = 0;</script>";
+    $_SESSION['alert'] = '';
+}
 require_once('database_info.php');
 
 $conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");
@@ -29,7 +34,7 @@ else {
             Login:<br>
             <input type='text' name='username' required><br><br>
             Hasło:<br>
-            <input type='text' name='password' required><br><br>
+            <input type='password' name='password' required><br><br>
             <input type='submit' value="Zaloguj"><br><br>
         </form>
         <?php
@@ -44,7 +49,7 @@ else {
             $_SESSION['auth'] = '';
         }
         ?>
-        Jeśli nie masz konta <a href='user_registration.php'>Zarejestruj się.</a><br><br>
+        Jeśli nie masz konta <a href='registration_page.php'>Zarejestruj się.</a><br><br>
         <a href='index.php'>Strona główna</a>
     </body>
 
