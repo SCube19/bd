@@ -12,7 +12,7 @@ oci_execute($result);
 $password = oci_fetch_array($result, OCI_BOTH)['HASLO'];
 
 if (isset($_COOKIE['active_username']) and $_COOKIE['active_password'] == $password)
-    header('Location:index.html');
+    header('Location:index.php');
 else {
 ?>
     <!DOCTYPE html>
@@ -45,7 +45,7 @@ else {
         }
         ?>
         Jeśli nie masz konta <a href='user_registration.php'>Zarejestruj się.</a><br><br>
-        <a href='index.html'>Strona główna</a>
+        <a href='index.php'>Strona główna</a>
     </body>
 
     </html>

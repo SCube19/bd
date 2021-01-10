@@ -21,11 +21,12 @@ if (isset($_COOKIE['active_username']))
 </head>
 
 <body>
-  <?php if ($active_user) : ?>
-    <a href = "logout.php">WYLOGUJ</a><br><br>
-  <?php else : ?>
+  
+  <?php //if ($active_user) : ?>
+    <!-- <a href = "logout.php">WYLOGUJ</a><br><br> -->
+  <?php //else : ?>
     <a href = "login_page.php">LOGOWANIE</a><br><br>
-  <?php endif; ?>
+  <?php //endif; ?>
 
   <a href = "registration_page.php">REJESTRACJA</a>
   
