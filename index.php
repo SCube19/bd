@@ -1,3 +1,11 @@
+<?php
+
+$active_user = False;
+if (isset($_COOKIE['active_username']))
+  $active_user = True;
+
+?>
+
 <!doctype html>
 
 <html lang="en">
@@ -13,7 +21,12 @@
 </head>
 
 <body>
-  <a href = "login_page.php">LOGOWANIE</a><br><br>
+  <?php if ($active_user) : ?>
+    <a href = "logout.php">WYLOGUJ</a><br><br>
+  <?php else : ?>
+    <a href = "login_page.php">LOGOWANIE</a><br><br>
+  <?php endif; ?>
+
   <a href = "registration_page.php">REJESTRACJA</a>
   
 </body>

@@ -1,6 +1,8 @@
 <?php
-$dbhost = 'labdb';     
+$dbhost = 'labdb';
 $dbname = 'bd';
-$dbuser = 'kk418331';
-$dbpass = '$H00michek$';
+$dbuser = 'kj418271';
+// $dbuser = 'scott';
+$dbpass = '14KjaN05uW_2k19';
+// $dbpass = 'tiger';
 ?>
