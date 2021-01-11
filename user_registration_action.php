@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('database_info.php');
+require_once('query.php');
 
 $conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");
 
@@ -19,22 +20,14 @@ if (!$conn) {
 	$numrows = oci_fetch_all($result, $res);
 
 	if ($numrows != 0) {
-		echo "USERNAME TAKEN";
 		$_SESSION['available'] = 'false';
 		header('Location:klient_rejestracja.php');
 	} else if ($input_password != $input_password_repeat) {
 		$_SESSION['password_match'] = 'false';
-		echo "PSW MATch fALSE";
 		header('Location:registration_page.php');
 	} else {
-		echo "wszystko okej";
-
 		//wstawianie nowego użytkownika do bazy
-		$insert = oci_parse($conn, "INSERT INTO gracze(nick, haslo, typ_gracza) VALUES (:nick, :pass, 'użytkownik')");
-		oci_bind_by_name($insert, ":nick", $input_username);
-		oci_bind_by_name($insert, ":pass", $input_password);
-		oci_execute($insert);
-		oci_commit($conn);
+		query($conn, "INSERT INTO gracze(nick, haslo, typ_gracza) VALUES ('".$input_username."','".$input_password."', 'uzytkownik')");
 		$_SESSION['alert'] = 'true';
 		header('Location:login_page.php');
 	}

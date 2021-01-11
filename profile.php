@@ -3,29 +3,52 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Gry.mimuw</title>
-  <meta name="description" content="gierki">
-  <meta name="author" content="SitePoint">
+    <title>Gry.mimuw</title>
+    <meta name="description" content="gierki">
+    <meta name="author" content="SitePoint">
 
-  <link rel="stylesheet" href="styles.css">
-  <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 </head>
 
-<body bgcolor="(100, 50, 150)">
+<body>
+    <!-- nazwa, typ -->
+    <!-- wyświetlanie  rankingów-->
+    <div class="center"><a href="logout.php">WYLOGUJ</a></div>
 
-  <div class="center"><a href="logout.php">WYLOGUJ</a></div>
-  
+    <?php
+    mb_internal_encoding("UTF-8");
+    session_start();
+    require_once('database_info.php');
+    require_once('query.php');
 
-  <a href="leaderboards.php?game=szachy">Szachy</a><br><br>
-  <a href="leaderboards.php?game=bierki">Bierki</a><br><br>
-  <a href="leaderboards.php?game=warcaby">Warcaby</a><br><br>
-  <a href="leaderboards.php?game=poker">Poker</a><br><br>
-  <a href="leaderboards.php?game=pilka">Piłka</a><br><br>
+    if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
+        echo "oci_connect failed\n";
+        $e = oci_error();
+        echo $e['message'];
+    }
 
-  <a href='index.php'>Strona główna</a>
-  
+    $result = query($conn, "SELECT typ_gracza FROM gracze WHERE nick='".$_COOKIE['active_username'] . "'");
+
+    echo '<p>' . "Nick : " . $_COOKIE['active_username'] . '</p>';
+    echo '<p>' . "Typ Gracza : " . $result[0]['TYP_GRACZA'][0] . '</p>';
+
+    $result = query($conn, "SELECT ilosc_zagranych, ilosc_wygranych, ilosc_remisow, gra FROM rankingBasic WHERE nick_gracza='".$_COOKIE['active_username']."'");
+    for ($i = 0; $i < $result[1]; $i++) 
+        echo '<a href="leaderboards.php?game='.$result[0]['GRA'][$i].'">'.strtoupper($result[0]['GRA'][$i].': ').
+            'Z: '.
+            $result[0]['ILOSC_ZAGRANYCH'][$i].
+            '||||| W: '.
+            $result[0]['ILOSC_ZAGRANYCH'][$i].
+            '||||| P: '.
+            $result[0]['ILOSC_ZAGRANYCH'][$i].
+            '</a><br><br>';
+    ?>
+    <a href='index.php'>Strona główna</a>
+
 
 </body>
+
 </html>

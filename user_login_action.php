@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('database_info.php');
+require_once('query.php');
 
 $conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");
 
@@ -17,23 +18,19 @@ if (!$conn) {
 	$input_password = sha1($input_password);
 
 	//zapytanie
-	$result = oci_parse($conn, "SELECT * FROM gracze WHERE nick=:nick");
-	oci_bind_by_name($result, ":nick", $input_username);
-	oci_execute($result);
-
-	$numrows = oci_fetch_all($result, $res);
+	$result = query($conn, "SELECT * FROM gracze WHERE nick='".$input_username."'");
 
 	//zła nazwa użytkownika
-	if ($numrows == 0) {
+	if ($result[1] == 0) {
 		$_SESSION['login_exists'] = 'false';
 		header('Location:login_page.php');
 	} else {
 		//logowanie udane
-		$query_password = $res['HASLO'][0];
+		$query_password = $result[0]['HASLO'][0];
 		if ($input_password == sha1($query_password)) {
 			$_SESSION['auth'] = '';
 			$_SESSION['login_exists'] = '';
-			setcookie('active_username', $input_username, time() + (3600 * 5));
+			setcookie('active_username', $input_username);
 			header('Location:index.php');
 		}
 		//złe hasło
