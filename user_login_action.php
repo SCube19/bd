@@ -2,6 +2,9 @@
 session_start();
 require_once('database_info.php');
 
+if ($_COOKIE['last_page'] == '')
+	setcookie('last_page', 'index.php');
+
 $conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");
 
 if (!$conn) {
@@ -33,8 +36,8 @@ if (!$conn) {
 		if ($input_password == sha1($query_password)) {
 			$_SESSION['auth'] = '';
 			$_SESSION['login_exists'] = '';
-			setcookie('active_username', $input_username, time() + (3600 * 5));
-			header('Location:index.php');
+			setcookie('active_username', $input_username, time() + 300);
+			header('Location:'.$_COOKIE['last_page']);
 		}
 		//złe hasło
 		else {

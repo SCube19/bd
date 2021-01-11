@@ -1,4 +1,5 @@
-<?php session_start();
+<?php
+session_start();
 require_once('database_info.php');
 
 $conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");

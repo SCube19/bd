@@ -1,5 +1,6 @@
 <?php
 session_start();
+setcookie('last_page', 'leaderboards.php', time() + 300);
 $game = htmlspecialchars($_GET['game']);
 if($game == '')
   $game = 'szachy';

@@ -2,7 +2,7 @@
 session_start();
 if($_SESSION['alert'] == 'true')
 {
-    echo "<script type='text/javascript'>alert('Poprawnie zarejestrowano!'); var i = 0;</script>";
+    echo "<script type='text/javascript'>alert('Poprawnie zarejestrowano!');</script>";
     $_SESSION['alert'] = '';
 }
 
@@ -21,7 +21,6 @@ else {
         <meta name="author" content="SitePoint">
 
         <link rel="stylesheet" href="styles.css">
-
         <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
     </head>
 
