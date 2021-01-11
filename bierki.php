@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <h1>Szachy</h1>
+    <h1>Bierki</h1>
   <?php if (isset($_COOKIE['active_username'])) : ?>
     <div class="center"><a href="logout.php">WYLOGUJ</a></div>
     <img class="parowa" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Hotdog_-_Evan_Swigart.jpg">

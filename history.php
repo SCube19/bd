@@ -15,8 +15,9 @@
 </head>
 
 <body>
-    <h1>Szachy</h1>
+
   <?php if (isset($_COOKIE['active_username'])) : ?>
+    <div class="center"><a href="profile.php">PROFIL</a></div>
     <div class="center"><a href="logout.php">WYLOGUJ</a></div>
     <img class="parowa" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Hotdog_-_Evan_Swigart.jpg">
   <?php else : ?>
@@ -26,8 +27,6 @@
     </div>
     <img class="parowa" src="https://s3.amazonaws.com/rapgenius/hotdog.jpg">
   <?php endif; ?>
-  <a href='index.php'>Strona główna</a>
-  <a href='leaderboards.php'>Rankingi</a>
 
 </body>
 

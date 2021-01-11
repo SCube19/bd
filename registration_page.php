@@ -15,8 +15,15 @@ else {
 	<html>
 
 	<head>
-		<meta charset='utf-8'>
-		<title>Strona rejestracji</title>
+		<meta charset="utf-8">
+
+		<title>Gry.mimuw</title>
+		<meta name="description" content="gierki">
+		<meta name="author" content="SitePoint">
+
+		<link rel="stylesheet" href="styles.css">
+
+		<link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 	</head>
 
 	<body>
@@ -46,7 +53,7 @@ else {
 		?>
 		_____________________<br><br>
 		<a href='login_page.php'>Logowanie</a><br><br>
-		<a href='index.html'>Strona główna</a>
+		<a href='index.php'>Strona główna</a>
 	</body>
 
 	</html>

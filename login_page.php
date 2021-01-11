@@ -24,8 +24,15 @@ else {
     <html>
 
     <head>
-        <meta charset='utf-8'>
-        <title>Strona logowania</title>
+        <meta charset="utf-8">
+
+        <title>Gry.mimuw</title>
+        <meta name="description" content="gierki">
+        <meta name="author" content="SitePoint">
+
+        <link rel="stylesheet" href="styles.css">
+
+        <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
     </head>
 
     <body>

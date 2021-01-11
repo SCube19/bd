@@ -1,5 +1,5 @@
 <?php 
-setcookie('active_username', '', time() + (3600 * 5));
-setcookie('active_password', '', time() + (3600 * 5));
+setcookie('active_username', '');
+setcookie('active_password', '');
 header('Location:index.php');
 ?>

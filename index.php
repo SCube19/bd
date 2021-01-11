@@ -17,6 +17,7 @@
 <body>
 
   <?php if (isset($_COOKIE['active_username'])) : ?>
+    <div class="center"><a href="profile.php">PROFIL</a></div>
     <div class="center"><a href="logout.php">WYLOGUJ</a></div>
     <img class="parowa" src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Hotdog_-_Evan_Swigart.jpg">
   <?php else : ?>
@@ -26,7 +27,9 @@
     </div>
     <img class="parowa" src="https://s3.amazonaws.com/rapgenius/hotdog.jpg">
   <?php endif; ?>
-
+  <a href="szachy.php">Szachy</a><br><br>
+  <a href="bierki.php">Bierki</a><br><br>
+  <a href="leaderboards.php">Rankingi</a><br><br>
 
 </body>
 
