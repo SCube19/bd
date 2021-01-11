@@ -1,7 +1,6 @@
 <?php
 session_start();
-if($_SESSION['alert'] == 'true')
-{
+if ($_SESSION['alert'] == 'true') {
     echo "<script type='text/javascript'>alert('Poprawnie zarejestrowano!');</script>";
     $_SESSION['alert'] = '';
 }
@@ -45,6 +44,7 @@ else {
             $_SESSION['auth'] = '';
         }
         ?>
+        
         Jeśli nie masz konta <a href='registration_page.php'>Zarejestruj się.</a><br><br>
         <a href='index.php'>Strona główna</a>
     </body>

@@ -20,19 +20,17 @@ setcookie('last_page', 'szachy.php', time() + 300);
 <body>
 
     <h1>Szachy</h1>
-    <?php if (isset($_COOKIE['active_username'])) : ?>
-        <div class="center">
-            <a href="logout.php">WYLOGUJ</a>
-            <a href="szachy_sym.php">zagrej se</a>
-        </div>
-    <?php else : ?>
-        <div class="center">
+    <div class="center">
+        <?php if (isset($_COOKIE['active_username'])) : ?>
+            <a href="logout.php">WYLOGUJ</a><br><br>
+        <?php else : ?>
             <a href="login_page.php">LOGOWANIE</a><br><br>
-            <a href="registration_page.php">REJESTRACJA</a>
-        </div>
-    <?php endif; ?>
-    <a href='index.php'>Strona główna</a>
-    <a href='leaderboards.php'>Rankingi</a>
+            <a href="registration_page.php">REJESTRACJA</a><br><br>
+        <?php endif; ?>
+        <a href="szachy_sym.php">zagrej se</a><br><br>
+        <a href='index.php'>Strona główna</a><br><br>
+        <a href='leaderboards.php'>Rankingi</a><br><br>
+    </div>
 
 </body>
 

@@ -23,7 +23,6 @@ else {
 		<meta name="author" content="SitePoint">
 
 		<link rel="stylesheet" href="styles.css">
-
 		<link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 	</head>
 

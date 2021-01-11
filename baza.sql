@@ -111,7 +111,7 @@ begin
 end;
 /
 
-insert into typy values('użytkownik');
+insert into typy values('uzytkownik');
 insert into typy values('admin');
 insert into typy values('bot');
 
@@ -122,10 +122,10 @@ insert into gry values('bierki', 4);
 insert into gracze values('alphazero', 'oro', 'bot');
 insert into gracze values('admin', '123', 'admin');
 insert into gracze values('bob', 'oro', 'admin');
-insert into gracze values('abc', 'abc', 'użytkownik');
-insert into gracze values('marek', 'maro', 'użytkownik');
-insert into gracze values('scube420', '6969', 'użytkownik');
-insert into gracze values('darek68', 'hehe', 'użytkownik');
+insert into gracze values('abc', 'abc', 'uzytkownik');
+insert into gracze values('marek', 'maro', 'uzytkownik');
+insert into gracze values('scube420', '6969', 'uzytkownik');
+insert into gracze values('darek68', 'hehe', 'uzytkownik');
 
 -- "SELECT (3*(w-p)+(z-w-p)) from (SELECT ilosc_zagranych z, ilosc_wygranych w, ilosc_przegranych p FROM rankingBasic WHERE nick_gracza='".$nick."' ')
 -- insert into formuly values(1, 'szachy', "", 0);

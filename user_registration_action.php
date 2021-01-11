@@ -30,7 +30,7 @@ if (!$conn) {
 		echo "wszystko okej";
 
 		//wstawianie nowego użytkownika do bazy
-		$insert = oci_parse($conn, "INSERT INTO gracze(nick, haslo, typ_gracza) VALUES (:nick, :pass, 'użytkownik')");
+		$insert = oci_parse($conn, "INSERT INTO gracze(nick, haslo, typ_gracza) VALUES (:nick, :pass, 'uzytkownik')");
 		oci_bind_by_name($insert, ":nick", $input_username);
 		oci_bind_by_name($insert, ":pass", $input_password);
 		oci_execute($insert);
