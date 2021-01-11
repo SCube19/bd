@@ -34,7 +34,6 @@ if (!$conn) {
 			$_SESSION['auth'] = '';
 			$_SESSION['login_exists'] = '';
 			setcookie('active_username', $input_username, time() + (3600 * 5));
-			setcookie('active_password', $input_password, time() + (3600 * 5));
 			header('Location:index.php');
 		}
 		//złe hasło

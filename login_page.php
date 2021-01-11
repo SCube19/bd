@@ -5,18 +5,8 @@ if($_SESSION['alert'] == 'true')
     echo "<script type='text/javascript'>alert('Poprawnie zarejestrowano!'); var i = 0;</script>";
     $_SESSION['alert'] = '';
 }
-require_once('database_info.php');
 
-$conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS");
-
-$username = $_COOKIE['active_username'];
-
-$result = oci_parse($conn, "SELECT * FROM gracze WHERE nick='".$username."'");
-oci_execute($result);
-
-$password = oci_fetch_array($result, OCI_BOTH)['HASLO'];
-
-if (isset($_COOKIE['active_username']) and $_COOKIE['active_password'] == $password)
+if (isset($_COOKIE['active_username']))
     header('Location:index.php');
 else {
 ?>
