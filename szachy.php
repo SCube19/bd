@@ -1,5 +1,5 @@
 <?php
-setcookie('last_page', 'szachy.php', time() + 300);
+setcookie('last_page', 'szachy.php');
 ?>
 
 <!doctype html>

@@ -1,5 +1,5 @@
 <?php
-setcookie('last_page', 'pilka.php', time() + 300);
+setcookie('last_page', 'pilka.php');
 ?>
 
 <!doctype html>

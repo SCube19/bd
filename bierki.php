@@ -1,5 +1,5 @@
 <?php
-setcookie('last_page', 'bierki.php', time() + 300);
+setcookie('last_page', 'bierki.php');
 ?>
 
 <!doctype html>

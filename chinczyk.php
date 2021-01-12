@@ -1,5 +1,5 @@
 <?php
-setcookie('last_page', 'poker.php', time() + 300);
+setcookie('last_page', 'chinczyk.php');
 ?>
 
 <!doctype html>
@@ -18,7 +18,7 @@ setcookie('last_page', 'poker.php', time() + 300);
 </head>
 
 <body>
-    <h1>Poker</h1>
+    <h1>Chińczyk</h1>
     <?php if (isset($_COOKIE['active_username'])) : ?>
         <div class="center"><a href="logout.php">WYLOGUJ</a></div>
     <?php else : ?>

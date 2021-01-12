@@ -14,8 +14,6 @@
 </head>
 
 <body>
-    <!-- nazwa, typ -->
-    <!-- wyświetlanie  rankingów-->
     <div class="center"><a href="logout.php">WYLOGUJ</a></div>
 
     <?php
@@ -24,11 +22,9 @@
     require_once('database_info.php');
     require_once('query.php');
 
-    if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
-        echo "oci_connect failed\n";
-        $e = oci_error();
-        echo $e['message'];
-    }
+    require_once('database_info.php');
+        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) 
+            header("Location: error_page.php");
 
     $result = query($conn, "SELECT typ_gracza FROM gracze WHERE nick='".$_COOKIE['active_username'] . "'");
 
@@ -41,9 +37,9 @@
             'Z: '.
             $result[0]['ILOSC_ZAGRANYCH'][$i].
             '||||| W: '.
-            $result[0]['ILOSC_ZAGRANYCH'][$i].
+            $result[0]['ILOSC_WYGRANYCH'][$i].
             '||||| P: '.
-            $result[0]['ILOSC_ZAGRANYCH'][$i].
+            $result[0]['ILOSC_REMISOW'][$i].
             '</a><br><br>';
     ?>
     <a href='index.php'>Strona główna</a>

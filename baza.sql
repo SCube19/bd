@@ -5,7 +5,7 @@ drop table formuly cascade constraints;
 drop table hSzachy cascade constraints;
 drop table hBierki cascade constraints;
 drop table hWarcaby cascade constraints;
-drop table hPoker cascade constraints;
+drop table hChinczyk cascade constraints;
 drop table hPilka cascade constraints;
 drop table gracze cascade constraints;
 drop table gry cascade constraints;
@@ -17,6 +17,7 @@ create table typy(
 
 create table gry(
     nazwa varchar2(20) primary key,
+    min_graczy number(2) not null,
     max_graczy number(2) not null
 );
 
@@ -49,8 +50,8 @@ create table hBierki(
     id number(6) not null references rozgrywki,
     gracz_1 varchar2(20) not null references gracze,
     gracz_2 varchar2(20) not null references gracze,
-    gracz_3 varchar2(20) not null references gracze,
-    gracz_4 varchar2(20) not null references gracze,
+    gracz_3 varchar2(20) references gracze,
+    gracz_4 varchar2(20) references gracze,
     zwyciezca varchar2(20) not null references gracze
 );
 
@@ -61,15 +62,16 @@ create table hPilka(
     zwyciezca varchar2(20) not null references gracze
 );
 
-create table hPoker(
+create table hChinczyk(
     id number(6) not null references rozgrywki,
     gracz_1 varchar2(20) not null references gracze,
     gracz_2 varchar2(20) not null references gracze,
-    gracz_3 varchar2(20) not null references gracze,
-    gracz_4 varchar2(20) not null references gracze,
-    gracz_5 varchar2(20) not null references gracze,
-    gracz_6 varchar2(20) not null references gracze,
-    zwyciezca varchar2(20) not null references gracze
+    gracz_3 varchar2(20) references gracze,
+    gracz_4 varchar2(20) references gracze,
+    miejsce_1 varchar2(20) not null references gracze,
+    miejsce_2 varchar2(20) not null references gracze,
+    miejsce_3 varchar2(20) references gracze,
+    miejsce_4 varchar2(20) references gracze
 );
 
 create table rankingBasic(
@@ -124,9 +126,11 @@ insert into typy values('uzytkownik');
 insert into typy values('admin');
 insert into typy values('bot');
 
-insert into gry values('szachy', 2);
-insert into gry values('domino', 3);
-insert into gry values('bierki', 4);
+insert into gry values('szachy', 2, 2);
+insert into gry values('bierki', 2, 4);
+insert into gry values('chinczyk', 2, 4);
+insert into gry values('pilka', 2, 2);
+insert into gry values('warcaby', 2, 2);
 
 insert into gracze values('alphazero', 'oro', 'bot');
 insert into gracze values('admin', '123', 'admin');
@@ -135,7 +139,7 @@ insert into gracze values('abc', 'abc', 'uzytkownik');
 insert into gracze values('marek', 'maro', 'uzytkownik');
 insert into gracze values('scube420', '6969', 'uzytkownik');
 insert into gracze values('darek68', 'hehe', 'uzytkownik');
-
+insert into gracze values('kk418331', '$H00michek$', 'admin');
 -- "SELECT (3*(w-p)+(z-w-p)) from (SELECT ilosc_zagranych z, ilosc_wygranych w, ilosc_przegranych p FROM rankingBasic WHERE nick_gracza='".$nick."' ')
 -- insert into formuly values(1, 'szachy', "", 0);
 
