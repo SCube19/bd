@@ -36,14 +36,14 @@ create table hSzachy(
     id number(6) not null references rozgrywki,
     gracz_1 varchar2(20) not null references gracze,
     gracz_2 varchar2(20) not null references gracze,
-    zwyciezca varchar2(20) not null references gracze
+    zwyciezca varchar2(20) references gracze
 );
 
 create table hWarcaby(
     id number(6) not null references rozgrywki,
     gracz_1 varchar2(20) not null references gracze,
     gracz_2 varchar2(20) not null references gracze,
-    zwyciezca varchar2(20) not null references gracze
+    zwyciezca varchar2(20) references gracze
 );
 
 create table hBierki(
@@ -83,7 +83,7 @@ create table rankingBasic(
 );
 
 create table formuly(
-    id number(2) primary key,
+    id number(3) primary key,
     gra varchar2(20) not null references gry,
     formula varchar2(100) not null,
     wartosc_domyslna number(5) not null
@@ -132,6 +132,12 @@ insert into gry values('chinczyk', 2, 4);
 insert into gry values('pilka', 2, 2);
 insert into gry values('warcaby', 2, 2);
 
+insert into formuly (select nvl(max(id), 0) + 1, 'szachy', 'R 32 S 10 R 400 / ^ 10 R 400 / ^ 10 E 400 / ^ + / - * +', 1000 from formuly);
+insert into formuly (select nvl(max(id), 0) + 1 , 'warcaby', 'R 64 S 10 R 400 / ^ 10 R 400 / ^ 10 E 400 / ^ + / - * +', 1000 from formuly);
+insert into formuly (select nvl(max(id), 0) + 1 , 'pilka', 'R 32 S 10 R 400 / ^ 10 R 400 / ^ 10 E 400 / ^ + / - * +', 200 from formuly);
+insert into formuly (select nvl(max(id), 0) + 1 , 'chinczyk', 'Placeholder', 500 from formuly);
+insert into formuly (select nvl(max(id), 0) + 1 , 'bierki', 'Placeholder', 200 from formuly);
+
 insert into gracze values('alphazero', 'oro', 'bot');
 insert into gracze values('admin', '123', 'admin');
 insert into gracze values('bob', 'oro', 'admin');
@@ -140,8 +146,8 @@ insert into gracze values('marek', 'maro', 'uzytkownik');
 insert into gracze values('scube420', '6969', 'uzytkownik');
 insert into gracze values('darek68', 'hehe', 'uzytkownik');
 insert into gracze values('kk418331', '$H00michek$', 'admin');
--- "SELECT (3*(w-p)+(z-w-p)) from (SELECT ilosc_zagranych z, ilosc_wygranych w, ilosc_przegranych p FROM rankingBasic WHERE nick_gracza='".$nick."' ')
--- insert into formuly values(1, 'szachy', "", 0);
+
+
 
 select * from gry;
 select * from gracze;
