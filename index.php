@@ -40,7 +40,6 @@ setcookie('last_page', 'index.php', time() + 300);
         ?>
         <a href="leaderboards.php">Rankingi</a><br><br>
     </div>
-
 </body>
-
 </html>
+
