@@ -53,10 +53,13 @@ setcookie('last_page', 'index.php', time() + 300);
         
         echo '<div class="parent">';
         for ($i = 0; $i < $result[1]; $i++)
-            echo '<div class="box"><p class="cen">'.strtoupper($result[0]['NAZWA'][$i]).'</p>
+            echo '<div class="box">
+                    <div class="container">
                     <a href="' . $result[0]['NAZWA'][$i] .'.php">
                     <img class="box" src="'.$imgs[$i].'">
+                    <div class="middle"><div class="boxtext">'.strtoupper($result[0]['NAZWA'][$i]).'</div></div>
                     </a>
+                    </div>
                 </div>';
         echo '</div>';
 

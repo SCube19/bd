@@ -45,10 +45,10 @@ if (isset($_COOKIE['active_username']))
     ?>
     Jeśli nie masz konta
     <form action="registration_page.php">
-        <input type="submit" value="ZAREJESTRUJ SIĘ">;
+        <input type="submit" value="ZAREJESTRUJ SIĘ">
     </form>
     <form action="index.php">
-        <input type="submit" value="STRONA GŁÓWNA">;
+        <input type="submit" value="STRONA GŁÓWNA">
     </form>
 </body>
 
