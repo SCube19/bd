@@ -19,7 +19,6 @@ if (isset($_COOKIE['active_username']))
     <meta name="author" content="SitePoint">
 
     <link rel="stylesheet" href="styles.css">
-
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 </head>
 
@@ -44,8 +43,13 @@ if (isset($_COOKIE['active_username']))
         $_SESSION['auth'] = '';
     }
     ?>
-    Jeśli nie masz konta <a href='registration_page.php'>Zarejestruj się.</a><br><br>
-    <a href='index.php'>Strona główna</a>
+    Jeśli nie masz konta
+    <form action="registration_page.php">
+        <input type="submit" value="ZAREJESTRUJ SIĘ">;
+    </form>
+    <form action="index.php">
+        <input type="submit" value="STRONA GŁÓWNA">;
+    </form>
 </body>
 
 </html>

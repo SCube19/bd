@@ -43,8 +43,12 @@ if (isset($_COOKIE['player_username']))
 
 	?>
 	_____________________<br><br>
-	<a href='login_page.php'>Logowanie</a><br><br>
-	<a href='index.php'>Strona główna</a>
+	<form action="login_page.php">
+		<input type="submit" value="LOGOWANIE">
+	</form>
+	<form action="index.php">
+		<input type="submit" value="STRONA GŁÓWNA">
+	</form>
 </body>
 
 </html>

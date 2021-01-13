@@ -1,6 +1,6 @@
 <?php
 session_start();
-setcookie('last_page', 'leaderboards.php', time() + 300);
+setcookie('last_page', 'leaderboards.php');
 $game = htmlspecialchars($_GET['game']);
 if($game == '')
   $game = 'szachy';
@@ -28,15 +28,24 @@ if($game == '')
     echo "     x    ".$game;
   ?>
 
-  <?php if (isset($_COOKIE['active_username'])) : ?>
-    <div class="center"><a href="logout.php">WYLOGUJ</a></div>
-  <?php else : ?>
-    <div class="center">
-      <a href="login_page.php">LOGOWANIE</a><br><br>
-      <a href="registration_page.php">REJESTRACJA</a>
-    </div>
-  <?php endif; ?>
-  <a href='index.php'>Strona główna</a>
+<div class="center">
+    <h1>Bierki</h1>
+    <?php if (isset($_COOKIE['active_username'])) : ?>
+            <form action="logout.php">
+            <input type="submit" value="WYLOGUJ" />
+            </form>
+        <?php else : ?>
+            <form action="login_page.php">
+            <input type="submit" value="ZALOGUJ" />
+            </form>
+            <form action="registration_page.php">
+            <input type="submit" value="ZAREJESTRUJ" />
+            </form>
+    <?php endif;?>
+
+  <form action="index.php">
+    <input type="submit" value="STRONA GŁÓWNA" />
+  </form>
 
 </body>
 

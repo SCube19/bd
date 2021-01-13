@@ -19,17 +19,29 @@ setcookie('last_page', 'bierki.php');
 
 <body>
 
-    <h1>Bierki</h1>
     <div class="center">
+        <h1>Bierki</h1>
         <?php if (isset($_COOKIE['active_username'])) : ?>
-            <a href="logout.php">WYLOGUJ</a><br><br>
+            <form action="logout.php">
+                <input type="submit" value="WYLOGUJ" />
+            </form>
         <?php else : ?>
-            <a href="login_page.php">LOGOWANIE</a><br><br>
-            <a href="registration_page.php">REJESTRACJA</a><br><br>
+            <form action="login_page.php">
+                <input type="submit" value="ZALOGUJ" />
+            </form>
+            <form action="registration_page.php">
+                <input type="submit" value="ZAREJESTRUJ" />
+            </form>
         <?php endif; ?>
-        <a href="bierki_sym.php">zagrej se</a><br><br>
-        <a href='index.php'>Strona główna</a><br><br>
-        <a href='leaderboards.php'>Rankingi</a><br><br>
+        <form action="bierki_sym.php">
+            <input type="submit" value="ZAGREJ SE" />
+        </form>
+        <form action="index.php">
+            <input type="submit" value="STRONA GŁÓWNA" />
+        </form>
+        <form action="leaderboards.php?game=bierki">
+            <input type="submit" value="RANKINGI" />
+        </form>
     </div>
 
 </body>

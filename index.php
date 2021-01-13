@@ -17,16 +17,25 @@ setcookie('last_page', 'index.php', time() + 300);
 </head>
 
 <body>
-
-    <div class="center">
+<div class="center">
         <?php if (isset($_COOKIE['active_username'])) : ?>
-            <a href="profile.php">PROFIL</a><br><br>
-            <a href="logout.php">WYLOGUJ</a><br><br>
+            <form action="profile.php">
+            <input type="submit" value="PROFIL" />
+            </form>
+            <form action="logout.php">
+            <input type="submit" value="WYLOGUJ" />
+            </form>
         <?php else : ?>
-            <a href="login_page.php">LOGOWANIE</a><br><br>
-            <a href="registration_page.php">REJESTRACJA</a><br><br>
+            <form action="login_page.php">
+            <input type="submit" value="ZALOGUJ" />
+            </form>
+            <form action="registration_page.php">
+            <input type="submit" value="ZAREJESTRUJ" />
+            </form>
         <?php endif;?>
-        <a href="leaderboards.php">Rankingi</a><br><br>
+        <form action="leaderboards.php">
+            <input type="submit" value="RANKINGI" />
+            </form>
     </div>
     <?php
         require_once('database_info.php');
