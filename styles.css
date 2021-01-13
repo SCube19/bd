@@ -1,3 +1,8 @@
+body {
+    background: rgba(155, 80, 30, 0.794);
+    overflow: hidden;
+}
+
 .center {
     margin: auto;
     width: 50%;
@@ -7,10 +12,37 @@
     border: 3px solid green;
 }
 
-.centerImage {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 25%;
+.cen {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+}
+
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: justify;
+    position: relative;
+    margin: auto;
+}
+
+.box {
+    flex: 1 1 150px;
+    margin: 10px;
+    border-radius: 20px;
+    width: 15%;
     height: auto;
+}
+
+img.box {
+    flex: 1 1 150px;
+    margin: auto;
+    border-radius: 10px;
+    width: 100%;
+    transition: .5s ease;
+}
+
+img.box:hover {
+    opacity: 0.5;
+    border-radius: 40px;
 }
