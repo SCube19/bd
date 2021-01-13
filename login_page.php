@@ -25,7 +25,7 @@ if (isset($_COOKIE['active_username']))
 <body>
     <b>Logowanie</b><br><br>
     <form id='player_log' action='user_login_action.php' method='POST'>
-        Login:<br>
+    Login:<br>
         <input type='text' name='username' required><br><br>
         Hasło:<br>
         <input type='password' name='password' required><br><br>

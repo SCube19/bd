@@ -17,9 +17,9 @@ setcookie('last_page', 'index.php', time() + 300);
 </head>
 
 <body>
+    <div class="bod">
     <div class="up">
-        
-        <div class="center">
+        <div class="right">
             <?php if (isset($_COOKIE['active_username'])) : ?>
                 <form action="profile.php">
                     <input type="submit" value="PROFIL" />
@@ -81,8 +81,7 @@ setcookie('last_page', 'index.php', time() + 300);
 
     oci_close($conn);
     ?>
-
-
+</div>
 </body>
 
 </html>
