@@ -18,15 +18,18 @@ if (isset($_COOKIE['player_username']))
 </head>
 
 <body>
-	<b>Rejestracja</b><br><br>
+	<div class="pagetxt">
+	<div class="center">
+	<div class="center2">
+	<h1>Rejestracja</h1>
 	<form id='user_reg' action='user_registration_action.php' method='POST'>
-		Nick:<br>
+		Login<br>
 		<input type='text' name='username' required><br><br>
-		Hasło:<br>
+		Hasło<br>
 		<input type='password' name='password' required><br><br>
-		Powtórz hasło:<br>
+		Powtórz hasło<br>
 		<input type='password' name='password_repeat' required><br><br>
-		<input type='submit' value="Zarejestruj"><br><br>
+		<input type='submit' value="ZAREJESTRUJ"><br><br>
 	</form>
 	<?php
 	//nazwa użytkownika zajęta
@@ -40,15 +43,16 @@ if (isset($_COOKIE['player_username']))
 		echo "<span style='color:red'><b>Podane hasła różnią się od siebie.</b></span><br><br>";
 		$_SESSION['password_match'] = '';
 	}
-
 	?>
-	_____________________<br><br>
 	<form action="login_page.php">
 		<input type="submit" value="LOGOWANIE">
 	</form>
 	<form action="index.php">
 		<input type="submit" value="STRONA GŁÓWNA">
 	</form>
+</div>
+</div>
+</div>
 </body>
 
 </html>

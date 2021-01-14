@@ -23,13 +23,16 @@ if (isset($_COOKIE['active_username']))
 </head>
 
 <body>
-    <b>Logowanie</b><br><br>
+<div class="pagetxt">
+	<div class="center">
+    <div class="center2">
+    <h1>Logowanie</h1>
     <form id='player_log' action='user_login_action.php' method='POST'>
-    Login:<br>
+    Login<br>
         <input type='text' name='username' required><br><br>
-        Hasło:<br>
+        Hasło<br>
         <input type='password' name='password' required><br><br>
-        <input type='submit' value="Zaloguj"><br><br>
+        <input type='submit' value="ZALOGUJ"><br><br>
     </form>
     <?php
 
@@ -50,6 +53,7 @@ if (isset($_COOKIE['active_username']))
     <form action="index.php">
         <input type="submit" value="STRONA GŁÓWNA">
     </form>
+</div></div></div>
 </body>
 
 </html>
