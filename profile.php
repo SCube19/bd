@@ -10,6 +10,7 @@
     <meta name="author" content="SitePoint">
 
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="profile_styles.php">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
     
 </head>
@@ -19,9 +20,8 @@
         <?php
         mb_internal_encoding("UTF-8");
         session_start();
-        require_once('database_info.php');
-        require_once('query.php');
 
+        require_once('query.php');
         require_once('database_info.php');
         if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
             header("Location: error_page.php");
@@ -46,24 +46,19 @@
 
     <div class="pagetxt">
     <?php
+
     $basic = query($conn, "SELECT ilosc_zagranych, ilosc_wygranych, ilosc_remisow, gra FROM rankingBasic WHERE nick_gracza='" . $_COOKIE['active_username'] . "'");
-    $advanced = query($conn, "SELECT pkt_rankingowe from rankingAdvanced r LEFT JOIN formuly f ON r.id_formuly = f.id WHERE nick_gracza='" . $_COOKIE['active_username'] . "'");
     oci_close($conn);
 
     echo'<div class="center2">';
     for ($i = 0; $i < $basic[1]; $i++)
-        echo '<a href="leaderboards.php?game=' . $basic[0]['GRA'][$i] . '"><div id="ranking">' . strtoupper($basic[0]['GRA'][$i] . ': ') .
-            $advanced[0]['PKT_RANKINGOWE'][$i] .
-            '|<span style="color:white;">'.
-            $basic[0]['ILOSC_ZAGRANYCH'][$i] .
-            '</span>|<span style="color:green;">' .
-            $basic[0]['ILOSC_WYGRANYCH'][$i] .
-            '</span>|<span style="color:red;">'.
-            $basic[0]['ILOSC_REMISOW'][$i] .
-            '</div></a>';
+        echo '<a href="leaderboards.php?game=' . $basic[0]['GRA'][$i] . '"><div class="ranking"><div id="rank'.($i + 1).'"></div>
+            </div></a>';
     echo'</div>';
     ?>
 </div>
+
+
 </body>
 
 </html>

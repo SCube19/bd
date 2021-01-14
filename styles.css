@@ -19,6 +19,7 @@
       }
       
       a {
+          color: gold;
           text-decoration: none;
       }
       
@@ -208,23 +209,4 @@
       
       h1 {
           font-size: 10vh;
-      }
-      
-      #ranking {
-          color: gold;
-          white-space: nowrap;
-          font-size: 400%;
-          margin: 10px;
-          transition: width 0.6s ease-in-out;
-          width: 25vw;
-          height: 10vh;
-          background-image: url("https://images.unsplash.com/photo-1599599810694-b5b37304c041?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9");
-          border-radius: 15px;
-          overflow: hidden;
-          text-align: center;
-      }
-      
-      #ranking:hover {
-          width: 40vw;
-          border-radius: 5px;
       }
