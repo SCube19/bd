@@ -19,6 +19,7 @@ $imgs = array(
 ?>
 
 .ranking {
+display: inline-block;
 color: gold;
 text-shadow: 3px 3px rgb(139, 62, 10);
 white-space: nowrap;
@@ -27,7 +28,6 @@ margin-top:5px;
 margin-bottom: 5px;
 transition: width 0.4s ease-in-out;
 width: 25vw;
-height: 10vh;
 border-radius: 15px;
 overflow: hidden;
 text-align: center;

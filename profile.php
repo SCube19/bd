@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="profile_styles.php">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
-    
+
 </head>
 
 <body>
@@ -45,18 +45,29 @@
     </div>
 
     <div class="pagetxt">
-    <?php
+        <?php
 
-    $basic = query($conn, "SELECT ilosc_zagranych, ilosc_wygranych, ilosc_remisow, gra FROM rankingBasic WHERE nick_gracza='" . $_COOKIE['active_username'] . "'");
-    oci_close($conn);
+        $ranks = query($conn, "SELECT * from rankingBasic natural join (rankingAdvanced r left join formuly f on r.id_formuly = f.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' order by gra");
 
-    echo'<div class="center2">';
-    for ($i = 0; $i < $basic[1]; $i++)
-        echo '<a href="leaderboards.php?game=' . $basic[0]['GRA'][$i] . '"><div class="ranking"><div id="rank'.($i + 1).'"></div>
-            </div></a>';
-    echo'</div>';
-    ?>
-</div>
+        echo '<div class="center2">';
+        for ($i = 0; $i < $ranks[1]; $i++)
+            echo '<div><div class="ranking"><a href="leaderboards.php?game=' . $ranks[0]['GRA'][$i] . '"><div id="rank' . ($i + 1) . '"></div>
+        </a></div>
+        <form class="center2 history" action="history.php?game=' . $ranks[0]['GRA'][$i] . '">
+        <input class="history" type="submit" value="HISTORIA ROZGRYWEK" />
+        </form></div>
+            ';
+
+        for ($i = 0; $i < 4; $i++)
+            echo '<div><div class="ranking"><a href="leaderboards.php"><div id="rank4"></div>
+        </a></div>
+        <form class="center2 history" action="history.php">
+        <input class="history" type="submit" value="HISTORIA ROZGRYWEK" />
+        </form></div>
+            ';
+        echo '</div>';
+        ?>
+    </div>
 
 
 </body>

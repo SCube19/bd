@@ -2,6 +2,10 @@
 session_start();
 if (!isset($_COOKIE['active_username']))
     header('Location:login_page.php');
+
+$game = $_GET['game'];
+if($game == '')
+$game = "szachy";
 ?>
 
 <!doctype html>
@@ -21,7 +25,9 @@ if (!isset($_COOKIE['active_username']))
 
 <body>
 
-    <button onclick="myFunction()">SYMULUJ SZACHY</button>
+<?php
+    echo '<button onclick="myFunction()">SYMULUJ '.strtoupper($game) .'</button>';
+?>
     <script>
         function myFunction() {
             alert("sex");

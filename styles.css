@@ -210,3 +210,27 @@
       h1 {
           font-size: 10vh;
       }
+      
+      .history {
+          float: right;
+          margin-left: 30px;
+      }
+      
+      input[type=submit].history {
+          top: 50%;
+          text-shadow: 1px 1px rgb(28 105 81);
+          -ms-transform: translateY(-50%, -50%);
+          transform: translateY(-50%, -50%);
+          background-color: rgb(212 65 14 / 0%);
+          color: rgb(59 255 147);
+          border-radius: 5px;
+          border-style: double;
+          font-size: large;
+          width: 25vw;
+          height: 8vh;
+      }
+      
+      input[type=submit].history:hover {
+          transition: .4s ease;
+          background-color: rgb(199, 54, 41);
+      }

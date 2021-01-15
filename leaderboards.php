@@ -2,6 +2,7 @@
 session_start();
 setcookie('last_page', 'leaderboards.php');
 $game = htmlspecialchars($_GET['game']);
+$game = $_GET['game'];
 if($game == '')
   $game = 'szachy';
 ?>
@@ -29,6 +30,7 @@ if($game == '')
   ?>
 
 <div class="center">
+<div class="pagetxt">
     <h1>Bierki</h1>
     <?php if (isset($_COOKIE['active_username'])) : ?>
             <form action="logout.php">
@@ -46,7 +48,7 @@ if($game == '')
   <form action="index.php">
     <input type="submit" value="STRONA GŁÓWNA" />
   </form>
-
+        </div></div>
 </body>
 
 </html>
