@@ -1,3 +1,14 @@
+<?php
+session_start();
+$game = htmlspecialchars($_GET['game']);
+if($game == '')
+$game = $_GET['game'];
+if($game == '')
+  $game = 'szachy';
+
+setcookie('last_page', 'leaderboards.php?game='.$game.'');
+?>
+
 <!doctype html>
 
 <html lang="en">
@@ -14,16 +25,39 @@
 </head>
 
 <body>
-    <h1>HISTORY.PHP</h1>
-    <div class="center">
-        <?php if (isset($_COOKIE['active_username'])) : ?>
-            <a href="profile.php">PROFIL</a>
-            <a href="logout.php">WYLOGUJ</a>
-        <?php else : ?>
-            <a href="login_page.php">LOGOWANIE</a><br><br>
-            <a href="registration_page.php">REJESTRACJA</a>
-            <img class="parowa" src="https://s3.amazonaws.com/rapgenius/hotdog.jpg">
-        <?php endif; ?>
+<div class="center">
+        <div class="pagetxt">
+            <?php
+            echo '<h1>HISTORIA '. strtoupper($game) . '</h1>';
+            ?>
+            <?php if (isset($_COOKIE['active_username'])) : ?>
+                <form action="logout.php">
+                    <input type="submit" value="WYLOGUJ" />
+                </form>
+            <?php else : ?>
+                <form action="login_page.php">
+                    <input type="submit" value="ZALOGUJ" />
+                </form>
+                <form action="registration_page.php">
+                    <input type="submit" value="ZAREJESTRUJ" />
+                </form>
+            <?php endif; ?>
+            <?php
+            echo '<form method="GET" action="sym.php">
+            <input type="hidden" name="game" value="'.$game.'">
+            <input type="submit" value="ZAGREJ SE" />';
+            ?>
+
+            <form action="index.php">
+                <input type="submit" value="STRONA GŁÓWNA" />
+            </form>
+            <?php
+            echo '<form method="GET" action="leaderboards.php">
+            <input type="hidden" name="game" value="'.$game.'">
+            <input type="submit" value="RANKINGI" />
+            </form>';
+            ?>
+        </div>
     </div>
 
 </body>

@@ -2,7 +2,7 @@
 $game = htmlspecialchars($_GET['game']);
 if ($game == '')
     $game = 'szachy';
-setcookie('last_page', $game . '.php');
+setcookie('last_page', 'game_panel.php?game='.$game.'');
 ?>
 
 <!doctype html>

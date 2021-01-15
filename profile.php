@@ -53,7 +53,8 @@
         for ($i = 0; $i < $ranks[1]; $i++)
             echo '<div><div class="ranking"><a href="leaderboards.php?game=' . $ranks[0]['GRA'][$i] . '"><div id="rank' . ($i + 1) . '"></div>
         </a></div>
-        <form class="center2 history" action="history.php?game=' . $ranks[0]['GRA'][$i] . '">
+        <form method="GET" class="center2 history" action="history.php">
+        <input type="hidden" name="game" value="'.$ranks[0]['GRA'][$i].'">
         <input class="history" type="submit" value="HISTORIA ROZGRYWEK" />
         </form></div>
             ';

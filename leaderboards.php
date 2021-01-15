@@ -1,10 +1,12 @@
 <?php
 session_start();
-setcookie('last_page', 'leaderboards.php');
 $game = htmlspecialchars($_GET['game']);
+if($game == '')
 $game = $_GET['game'];
 if($game == '')
   $game = 'szachy';
+
+setcookie('last_page', 'leaderboards.php?game='.$game.'');
 ?>
 
 <!doctype html>
