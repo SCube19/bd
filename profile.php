@@ -47,7 +47,7 @@
     <div class="pagetxt">
         <?php
 
-        $ranks = query($conn, "SELECT * from rankingBasic natural join (rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' order by gra");
+        $ranks = query($conn, "SELECT gra from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
         
         echo '<div class="center2">';
         for ($i = 0; $i < $ranks[1]; $i++)

@@ -55,7 +55,7 @@ setcookie('last_page', 'index.php', time() + 300);
             "https://s2.best-wallpaper.net/wallpaper/iphone/1911/Red-and-blue-pawn_iphone_1080x1920.jpg",
             "https://images.wallpaperscraft.com/image/soccer_ball_nike_grass_113053_1080x1920.jpg",
             "https://mfiles.alphacoders.com/166/166285.jpg",
-            "https://www.xmple.com/wallpaper/checkered-black-white-squares-1080x1920-c2-fff5ee-000000-l-60-a-70-f-2.svg"
+            "https://i.pinimg.com/originals/e9/72/9a/e9729ae1740af32fe8ba141d6b78ed51.jpg"
         );
 
         echo '<div class="parent">';

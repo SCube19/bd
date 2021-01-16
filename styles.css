@@ -162,6 +162,7 @@
           cursor: pointer;
           border-radius: 10px;
           width: 20vw;
+          font-size: 0.8vw;
       }
       
       input[type=text],
@@ -208,7 +209,7 @@
       }
       
       h1 {
-          font-size: 10vh;
+          font-size: 7vw;
       }
       
       .history {
@@ -225,9 +226,9 @@
           color: rgb(59 255 147);
           border-radius: 5px;
           border-style: double;
-          font-size: large;
           width: 25vw;
           height: 8vh;
+          font-size: 1.25vw;
       }
       
       input[type=submit].history:hover {
