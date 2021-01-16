@@ -5,7 +5,12 @@ if ($_SESSION['alert'] == 'true') {
     $_SESSION['alert'] = '';
 }
 
+<<<<<<< HEAD
 if (isset($_COOKIE['active_username'])) {
+=======
+if (isset($_COOKIE['active_username']))
+{
+>>>>>>> c25ba3f7b5e0f326de3aa8585d1c8667cd411c06
     header('Location:index.php');
     exit;
 }

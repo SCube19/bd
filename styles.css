@@ -235,3 +235,13 @@
           transition: .4s ease;
           background-color: rgb(199, 54, 41);
       }
+      
+      .clock {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          color: rgba(10, 10, 86, 0.902);
+          font-size: 60px;
+          letter-spacing: 7px;
+      }

@@ -293,7 +293,7 @@ insert into gracze values('mistrz', 'xxx', 'bot');
 insert into gracze values('koxxx', 'xxx', 'bot');
 insert into gracze values('asia', 'xxx', 'bot');
 insert into gracze values('bot', 'xxx', 'bot');
-insert into gracze values('da Vinci', 'xxx', 'bot');
+insert into gracze values('da Vinki', 'xxx', 'bot');
 insert into gracze values('Euleroo', 'xxx', 'bot');
 insert into gracze values('senpai', 'xxx', 'bot');
 insert into gracze values('admin', '123', 'admin');
