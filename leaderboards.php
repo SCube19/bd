@@ -6,7 +6,7 @@ $game = $_GET['game'];
 if($game == '')
   $game = 'szachy';
 
-setcookie('last_page', 'leaderboards.php?game='.$game.'');
+setcookie('last_page', 'leaderboards.php?game='.$game);
 ?>
 
 <!doctype html>

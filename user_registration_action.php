@@ -24,3 +24,4 @@ if ($result[1] != 0) {
 	$_SESSION['alert'] = 'true';
 	header('Location:login_page.php');
 }
+?>

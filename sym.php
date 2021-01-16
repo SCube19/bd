@@ -1,11 +1,14 @@
 <?php
 session_start();
-if (!isset($_COOKIE['active_username']))
-    header('Location:login_page.php');
 
 $game = $_GET['game'];
 if($game == '')
-$game = "szachy";
+    $game = "szachy";
+
+setcookie('last_page', 'sym.php?game='.$game);
+
+if (!isset($_COOKIE['active_username']))
+    header('Location:login_page.php');
 ?>
 
 <!doctype html>
@@ -25,18 +28,13 @@ $game = "szachy";
 
 <body>
 
-<?php
-    echo '<button onclick="myFunction()">SYMULUJ '.strtoupper($game) .'</button>';
-?>
-    <script>
-        function myFunction() {
-            alert("sex");
-        }
-    </script>
-
     <div class="center">
-        <a href="logout.php">WYLOGUJ</a>
-        <a href='index.php'>Strona główna</a>
+        <?php
+            echo '<a href="sym_action.php?game='.$game.'">SYMULUJ '.strtoupper($game).'</a>';
+        ?>
+        <br>
+        <a href="logout.php">WYLOGUJ</a><br>
+        <a href='index.php'>Strona główna</a><br>
     </div>
 
 </body>

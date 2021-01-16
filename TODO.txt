@@ -1,0 +1,27 @@
+--------------------
+
+w profilu po najechaniu na nazwe gry i rozwinieciu sie elo,
+na mniejszym ekranie (chociazby u mnie na lapku) nie miesci
+sie caly napis ze statystykami (u mnie widac tylko do W:)
+
+--------------------
+
+symulacja gier
+
+--------------------
+
+panel admina
+
+--------------------
+
+historia rozgrywek
+
+--------------------
+
+rankingi
+
+--------------------
+
+czm uzytkownik jest zalogowany tak dlugo
+
+--------------------
