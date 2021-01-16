@@ -13,6 +13,7 @@ drop table hPilka cascade constraints;
 drop table gracze cascade constraints;
 drop table gry cascade constraints;
 drop table sposobyObliczania cascade constraints;
+drop table rozgrywki cascade constraints;
 
 create table typy(
     typ varchar2(20) primary key
@@ -63,6 +64,13 @@ create table hChinczyk(
     miejsce_2 varchar2(20) not null references gracze,
     miejsce_3 varchar2(20) references gracze,
     miejsce_4 varchar2(20) references gracze
+);
+
+create table rozgrywki(
+    id number(6) not null,
+    gra varchar(20) not null,
+    constraint pk primary key(id, gra),
+    data timestamp not null
 );
 
 create table rankingBasic(
@@ -164,6 +172,12 @@ begin
 end;
 /
 
+create or replace procedure dodaj_gre_historia(id_rozgrywki number, nazwa_gry varchar2) is
+begin
+    insert into rozgrywki values (id_rozgrywki, nazwa_gry, systimestamp);
+end;
+/
+
 create or replace procedure update_rankingu(nazwa_gry varchar2, gracz varchar2, czy_wygral number) is
     cursor staty is (select ilosc_zagranych, ilosc_wygranych, ilosc_remisow from rankingBasic where nick_gracza = gracz AND gra = nazwa_gry);
 begin
@@ -180,170 +194,85 @@ end;
 /
 
 create or replace trigger update_ranking_chinczyk
-after insert on hChinczyk
+before insert on hChinczyk
 for each row
 declare
     nazwa varchar2(20) := 'chinczyk';
+    nowe_id number(6);
 begin
     update_rankingu(nazwa, :new.miejsce_1, 1);
     update_rankingu(nazwa, :new.miejsce_2, 0);
     update_rankingu(nazwa, :new.miejsce_3, 0);
     update_rankingu(nazwa, :new.miejsce_4, 0);
+
+    select nvl(max(id), 0) + 1 into nowe_id from hChinczyk;
+    dodaj_gre_historia(nowe_id, nazwa);
 end;
 /
 
 create or replace trigger update_ranking_pilka
-after insert on hPilka
+before insert on hPilka
 for each row
 declare
     nazwa varchar2(20) := 'pilka';
+    nowe_id number(6);
 begin
     update_rankingu(nazwa, :new.miejsce_1, 1);
     update_rankingu(nazwa, :new.miejsce_2, 0);
+
+    select nvl(max(id), 0) + 1 into nowe_id from hPilka;
+    dodaj_gre_historia(nowe_id, nazwa);
 end;
 /
 
 create or replace trigger update_ranking_warcaby
-after insert on hWarcaby
+before insert on hWarcaby
 for each row
 declare
     nazwa varchar2(20) := 'warcaby';
+    nowe_id number(6);
 begin
     update_rankingu(nazwa, :new.miejsce_1, 1);
     update_rankingu(nazwa, :new.miejsce_2, 0);
+
+    select nvl(max(id), 0) + 1 into nowe_id from hWarcaby;
+    dodaj_gre_historia(nowe_id, nazwa);
 end;
 /
 
 create or replace trigger update_ranking_szachy
-after insert on hSzachy
+before insert on hSzachy
 for each row
 declare
     nazwa varchar2(20) := 'szachy';
+    nowe_id number(6);
 begin
     update_rankingu(nazwa, :new.miejsce_1, 1);
     update_rankingu(nazwa, :new.miejsce_2, 0);
+
+    select nvl(max(id), 0) + 1 into nowe_id from hSzachy;
+    dodaj_gre_historia(nowe_id, nazwa);
 end;
 /
 
 create or replace trigger update_ranking_bierki
-after insert on hBierki
+before insert on hBierki
 for each row
 declare
     nazwa varchar2(20) := 'bierki';
+    nowe_id number(6);
 begin
     update_rankingu(nazwa, :new.miejsce_1, 1);
     update_rankingu(nazwa, :new.miejsce_2, 0);
     update_rankingu(nazwa, :new.miejsce_3, 0);
     update_rankingu(nazwa, :new.miejsce_4, 0);
+
+    select nvl(max(id), 0) + 1 into nowe_id from hBierki;
+    dodaj_gre_historia(nowe_id, nazwa);
 end;
 /
 
--- after insert on ranking basic -> ranking advanced
--- after insert on history -> ranking basic
-
--- create or replace procedure update_rankingu(player_count number, nazwa varchar2, m1 varchar2, m2 varchar2, m3 varchar2, m4 varchar2) is
--- declare
---     zagrane rankingBasic.ilosc_zagranych%TYPE := 0;
---     wygrane rankingBasic.ilosc_wygranych%TYPE := 0;
---     remisy rankingBasic.ilosc_remisow%TYPE := 0;
--- begin
---     insert into rankingBasic values (m1, zagrane, wygrane, remisy, nazwa);
---
---     if player_count >= 2 then
---     insert into rankingBasic values (m2, zagrane, wygrane, remisy, nazwa);
---     end if;
---
---     if player_count >= 3 then
---     insert into rankingBasic values (m3, zagrane, wygrane, remisy, nazwa);
---     end if;
---
---     if player_count >= 4 then
---     insert into rankingBasic values (m4, zagrane, wygrane, remisy, nazwa);
---     end if;
--- end;
--- /
-
--- create or replace trigger update_ranking_szachy
--- after insert on hSzachy
--- for each row
--- declare
---     column_count NUMBER := 0;
--- begin
---     SELECT count(*) INTO column_count FROM user_tab_columns WHERE table_name = 'HSZACHY';
---     update_rankingu(column_count-1, 'szachy', :new.miejsce_1, :new.miejsce_2, null, null);
--- end;
--- /
-
--------------------------------------------- WORK IN PROGRESS ---------------------------------
-
--- create or replace trigger update_ranking_szachy
--- after insert on hSzachy
--- for each row
--- declare
---     column_count INT := 0;
---     i INT := 1;
---     zagrane rankingBasic.ilosc_zagranych%TYPE := 0;
---     wygrane rankingBasic.ilosc_wygranych%TYPE := 0;
---     remisy rankingBasic.ilosc_remisow%TYPE := 0;
---     gracz VARCHAR2(20) := '';
---     column_name VARCHAR2(20);
---     query_string Varchar2(200);
--- begin
---     SELECT count(*) INTO column_count FROM user_tab_columns WHERE table_name = 'HSZACHY';
--- --     dbms_output.put_line('cc: ' || column_count);
---     WHILE i < column_count LOOP
---         column_name := CONCAT('miejsce_', TO_CHAR(i));
---         gracz := ':new.' || column_name;
--- --         gracz := column_name;
--- --         ' || column_name || ';
---         query_string := 'SELECT ilosc_zagranych, ilosc_wygranych, ilosc_remisow FROM rankingBasic WHERE nick_gracza =' || gracz || 'AND gra = '
---         EXECUTE IMMEDIATE query_string;
---
--- --         ''' begin of sentence ' || string1 || ' end of sentence '''
--- --
--- --         results in:
--- --
--- --         ' begin of sentence string1 end of sentence'
---
---
--- --         commit;
--- --         INTO zagrane, wygrane, remisy
---         dbms_output.put_line('xd2: ' || gracz);
--- --
--- -- --         IF tmp_gracz IS NOT NULL THEN
--- -- --                 zagrane := zagrane + 1;
--- -- --                 IF i = 1 THEN
--- -- --                     wygrane := wygrane + 1;
--- -- --                 ELSE
--- -- --                     przegrane := przegrane + 1;
--- -- --                 END IF;
--- -- --             insert into rankingBasic values (tmp_gracz, zagrane, wygrane, remisy, 'szachy');
--- -- --         END IF;
--- -- --
---         i := i+1;
---     END LOOP;
---
--- end;
--- /
-
-
--- hSzachy hWarcaby hBierki hPilka hChinczyk
-
-
--- create table rankingBasic(
---     nick_gracza varchar2(20) not null references gracze,
---     ilosc_zagranych number(5) not null,
---     ilosc_wygranych number(5) not null,
---     ilosc_remisow number(5) not null,
---     gra varchar2(20) not null references gry
--- );
-
-
 ------------------------------------------DANE POCZATKOWE-----------------------------------------------
-
-
-
-
 
 --formula podstawowa ma id=0
 insert into formuly values (0, 'elo', 'R 32 S 10 R 400 / ^ 10 R 400 / ^ 10 E 400 / ^ + / - * +');

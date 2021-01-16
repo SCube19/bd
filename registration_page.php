@@ -1,6 +1,7 @@
 <?php session_start();
 if (isset($_COOKIE['player_username']))
 	header('Location:index.html');
+	exit;
 ?>
 <!DOCTYPE html>
 <html>

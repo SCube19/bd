@@ -46,12 +46,14 @@ setcookie('last_page', 'index.php', time() + 300);
         <?php
         require_once('database_info.php');
         require_once('query.php');
-        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
+        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
             header("Location: error_page.php");
+            exit;
+        }
 
         $result = query($conn, "SELECT nazwa FROM gry");
         $imgs = array(
-            "straws.jpg",
+            "https://i.imgur.com/DPeTtm2.jpeg",
             "https://s2.best-wallpaper.net/wallpaper/iphone/1911/Red-and-blue-pawn_iphone_1080x1920.jpg",
             "https://images.wallpaperscraft.com/image/soccer_ball_nike_grass_113053_1080x1920.jpg",
             "https://mfiles.alphacoders.com/166/166285.jpg",

@@ -6,8 +6,10 @@ require_once('query.php');
 if ($_COOKIE['last_page'] == '')
 	setcookie('last_page', 'index.php');
 
-if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS")))
+if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
 	header('Location:error_page.php');
+	exit;
+}
 
 //dane z formularza do zmiennych
 $input_username = $_POST['username'];
@@ -24,6 +26,7 @@ oci_close($conn);
 if ($result[1] == 0) {
 	$_SESSION['login_exists'] = 'false';
 	header('Location:login_page.php');
+	exit;
 } else {
 	//logowanie udane
 	$query_password = $result[0]['HASLO'][0];
@@ -32,11 +35,13 @@ if ($result[1] == 0) {
 		$_SESSION['login_exists'] = '';
 		setcookie('active_username', $input_username);
 		header('Location:' . $_COOKIE['last_page']);
+		exit;
 	}
 	//złe hasło
 	else {
 		$_SESSION['auth'] = 'false';
 		header('Location:login_page.php');
+		exit;
 	}
 }
 ?>

@@ -26,13 +26,17 @@
                 $game = "szachy";
 
             //odswiezenie strony cofa do sym
-            if ($_COOKIE['last_page'] == 'sym_action.php?game='.$game)
+            if ($_COOKIE['last_page'] == 'sym_action.php?game='.$game) {
                 header('Location:sym.php?game='.$game);
+                exit;
+            }
 
             setcookie('last_page', 'sym_action.php?game='.$game);
 
-            if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS")))
+            if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
                 header('Location:error_page.php');
+                exit;
+            }
 
             $bot_query = query($conn, "SELECT nick FROM gracze WHERE typ_gracza='bot'");
             $player_query = query($conn, "SELECT min_graczy, max_graczy FROM gry WHERE nazwa='".$game."'");
@@ -42,6 +46,7 @@
             if ($bot_query[1] == 0) {
                 echo '<script type=text/javascript> noBotsAvailable(); </script>';
                 header('Location:sym.php?game='.$game);
+                exit;
             }
 
             $opponent_count = rand($min_players, $max_players) - 1;
