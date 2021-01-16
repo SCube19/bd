@@ -51,7 +51,7 @@ setcookie('last_page', 'index.php', time() + 300);
 
         $result = query($conn, "SELECT nazwa FROM gry");
         $imgs = array(
-            "straws.jpg",
+            "https://i.imgur.com/DPeTtm2.jpeg",
             "https://s2.best-wallpaper.net/wallpaper/iphone/1911/Red-and-blue-pawn_iphone_1080x1920.jpg",
             "https://images.wallpaperscraft.com/image/soccer_ball_nike_grass_113053_1080x1920.jpg",
             "https://mfiles.alphacoders.com/166/166285.jpg",
