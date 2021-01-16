@@ -3,20 +3,19 @@ header("Content-type: text/css");
 
 require_once('query.php');
 require_once('database_info.php');
-if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
+if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
     header("Location: error_page.php");
-    exit;
-}
 
 $ranks = query($conn, "SELECT gra, pkt_rankingowe, ilosc_zagranych, ilosc_wygranych, ilosc_remisow, f.nazwa as nzw from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
 oci_close($conn);
 
 $imgs = array(
-    "straws.jpg",
+    "https://i.imgur.com/DPeTtm2.jpeg",
     "https://s2.best-wallpaper.net/wallpaper/iphone/1911/Red-and-blue-pawn_iphone_1080x1920.jpg",
     "https://images.wallpaperscraft.com/image/soccer_ball_nike_grass_113053_1080x1920.jpg",
     "https://mfiles.alphacoders.com/166/166285.jpg",
-    "https://i.pinimg.com/originals/e9/72/9a/e9729ae1740af32fe8ba141d6b78ed51.jpg"
+    "https://i.pinimg.com/originals/e9/72/9a/e9729ae1740af32fe8ba141d6b78ed51.jpg",
+    "https://mfiles.alphacoders.com/629/thumb-1920-629691.png"
 );
 ?>
 
@@ -39,7 +38,7 @@ width: 50vw;
 border-radius: 5px;
 }
 
-<?php for ($i = 0; $i < $ranks[1]; $i++) {
+<?php for ($i = 0; $i < $ranks[1] + 1; $i++) {
     echo '#rank' . ($i + 1) . ' {
         background-image: url("' . $imgs[$i] . '");
         background-position: center;
@@ -59,5 +58,7 @@ border-radius: 5px;
         ' | R: '.$ranks[0]['ILOSC_REMISOW'][$i].'\';
     }';
 }
+?>
+
 ?>
 

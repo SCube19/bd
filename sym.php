@@ -8,8 +8,10 @@ if($game == '')
 setcookie('last_page', 'sym.php?game='.$game);
 
 if (!isset($_COOKIE['active_username']))
+{
     header('Location:login_page.php');
     exit;
+}
 ?>
 
 <!doctype html>

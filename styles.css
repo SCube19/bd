@@ -236,11 +236,12 @@
           background-color: rgb(199, 54, 41);
       }
       
-      .gamestat {
-          background: rgb(255, 123, 0);
-          width: 100%;
-          max-height: 20%;
-          margin-top: 1%;
-          margin-bottom: 1%;
-          position: relative;
+      .clock {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          color: rgba(10, 10, 86, 0.902);
+          font-size: 60px;
+          letter-spacing: 7px;
       }
