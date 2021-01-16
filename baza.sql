@@ -77,7 +77,7 @@ create table rankingBasic(
     nick_gracza varchar2(20) not null references gracze,
     ilosc_zagranych number(5) not null,
     ilosc_wygranych number(5) not null,
-    ilosc_remisow number(5) not null,
+    ilosc_przegranych number(5) not null,
     gra varchar2(20) not null references gry
 );
 
@@ -179,14 +179,14 @@ end;
 /
 
 create or replace procedure update_rankingu(nazwa_gry varchar2, gracz varchar2, czy_wygral number) is
-    cursor staty is (select ilosc_zagranych, ilosc_wygranych, ilosc_remisow from rankingBasic where nick_gracza = gracz AND gra = nazwa_gry);
+    cursor staty is (select ilosc_zagranych, ilosc_wygranych, ilosc_przegranych from rankingBasic where nick_gracza = gracz AND gra = nazwa_gry);
 begin
     for row in staty loop
         if gracz is not null then
             if czy_wygral = 1 then
                 update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1, ilosc_wygranych = ilosc_wygranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
             else
-                update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
+                update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1, ilosc_przegranych = ilosc_przegranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
             end if;
         end if;
     end loop;
