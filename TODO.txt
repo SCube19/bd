@@ -18,3 +18,5 @@ rankingi
 czm uzytkownik jest zalogowany tak dlugo (jest zalogowany na czas sesji przeglądarki, włącz i wyłącz to cie wyloguje bo time = 0)
 
 --------------------
+
+trigger after insert on ranking basic -> ranking advanced

@@ -3,8 +3,10 @@ header("Content-type: text/css");
 
 require_once('query.php');
 require_once('database_info.php');
-if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
+if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
     header("Location: error_page.php");
+    exit;
+}
 
 $ranks = query($conn, "SELECT gra, pkt_rankingowe, ilosc_zagranych, ilosc_wygranych, ilosc_remisow, f.nazwa as nzw from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
 oci_close($conn);

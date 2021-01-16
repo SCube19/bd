@@ -7,6 +7,7 @@ if ($_SESSION['alert'] == 'true') {
 
 if (isset($_COOKIE['active_username']))
     header('Location:index.php');
+    exit;
 ?>
 <!DOCTYPE html>
 <html>

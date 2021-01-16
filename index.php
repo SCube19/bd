@@ -46,8 +46,10 @@ setcookie('last_page', 'index.php', time() + 300);
         <?php
         require_once('database_info.php');
         require_once('query.php');
-        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
+        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
             header("Location: error_page.php");
+            exit;
+        }
 
         $result = query($conn, "SELECT nazwa FROM gry");
         $imgs = array(
