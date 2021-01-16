@@ -47,8 +47,8 @@
     <div class="pagetxt">
         <?php
 
-        $ranks = query($conn, "SELECT * from rankingBasic natural join (rankingAdvanced r left join (formuly f on r.id_formuly = f.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' order by gra");
-
+        $ranks = query($conn, "SELECT * from rankingBasic natural join (rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' order by gra");
+        
         echo '<div class="center2">';
         for ($i = 0; $i < $ranks[1]; $i++)
             echo '<div><div class="ranking"><a href="leaderboards.php?game=' . $ranks[0]['GRA'][$i] . '"><div id="rank' . ($i + 1) . '"></div>
@@ -59,6 +59,7 @@
         </form></div>
             ';
 
+        //placeholdery
         for ($i = 0; $i < 4; $i++)
             echo '<div><div class="ranking"><a href="leaderboards.php"><div id="rank4"></div>
         </a></div>

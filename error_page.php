@@ -1,3 +1,10 @@
+<?php
+require_once('database_info.php');
+require_once('query.php');
+if ($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))
+    header("Location: index.php");
+?>
+
 <!doctype html>
 
 <html lang="pl">

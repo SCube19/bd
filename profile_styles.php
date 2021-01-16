@@ -6,7 +6,7 @@ require_once('database_info.php');
 if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
     header("Location: error_page.php");
 
-$ranks = query($conn, "SELECT * from rankingBasic natural join (rankingAdvanced r left join formuly f on r.id_formuly = f.id) where nick_gracza = '". $_COOKIE['active_username'] ."' order by gra");
+$ranks = query($conn, "SELECT * from rankingBasic natural join (rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' order by gra");
 oci_close($conn);
 
 $imgs = array(

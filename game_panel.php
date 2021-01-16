@@ -42,7 +42,8 @@ setcookie('last_page', 'game_panel.php?game='.$game.'');
             <?php
             echo '<form method="GET" action="sym.php">
             <input type="hidden" name="game" value="'.$game.'">
-            <input type="submit" value="ZAGREJ SE" />';
+            <input type="submit" value="ZAGREJ SE" />
+            </form>';
             ?>
 
             <form action="index.php">

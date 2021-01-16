@@ -103,9 +103,9 @@ create or replace procedure dodaj_rankingi(nick varchar2) is
     cursor sposobyCur is (select wartosc_domyslna, id from sposobyObliczania);
     cursor graCur is (select nazwa from gry);
 begin
-    for gra in graCur
+    for game in graCur
     loop
-    insert into rankingBasic values (nick, 0, 0, 0, gra.nazwa);
+        insert into rankingBasic values (nick, 0, 0, 0, game.nazwa);
     end loop;
 
     for sposob in sposobyCur
@@ -135,10 +135,10 @@ end;
 create or replace procedure dodanie_gry(nazwa varchar2) is
     cursor graczeCur is (select nick from gracze);
 begin
-    insert into sposobyObliczania (select nvl(max(id), 0) + 1, 0, nazwa, 1000);
+    insert into sposobyObliczania values ((select nvl(max(id), 0) + 1 from sposobyObliczania), 0, nazwa, 1000);
     for gracz in graczeCur
     loop
-        insert into rankingBasic(gracz, 0, 0, 0, nazwa);
+        insert into rankingBasic values (gracz.nick, 0, 0, 0, nazwa);
     end loop;
 end;
 /
@@ -156,7 +156,7 @@ create or replace procedure dodanie_sposobu(id number, wrt number) is
 begin
    for gracz in graczeCur
    loop
-        insert into rankingAdvanced(gracz, wrt, id);
+        insert into rankingAdvanced values (gracz.nick, wrt, id);
    end loop;
 end;
 /
