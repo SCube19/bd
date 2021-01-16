@@ -25,41 +25,63 @@ setcookie('last_page', 'leaderboards.php?game='.$game.'');
 </head>
 
 <body>
-<div class="center">
-        <div class="pagetxt">
-            <?php
-            echo '<h1>HISTORIA '. strtoupper($game) . '</h1>';
-            ?>
-            <?php if (isset($_COOKIE['active_username'])) : ?>
-                <form action="logout.php">
-                    <input type="submit" value="WYLOGUJ" />
+<div class="bod">
+        <div class="up">
+            
+                <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
+           
+            <div class="right">
+                <?php if (isset($_COOKIE['active_username'])) : ?>
+                    <form action="profile.php">
+                        <input type="submit" value="PROFIL" />
+                    </form>
+                    <form action="logout.php">
+                        <input type="submit" value="WYLOGUJ" />
+                    </form>
+                <?php else : ?>
+                    <form action="login_page.php">
+                        <input type="submit" value="ZALOGUJ" />
+                    </form>
+                    <form action="registration_page.php">
+                        <input type="submit" value="ZAREJESTRUJ" />
+                    </form>
+                <?php endif; ?>
+                <form action="leaderboards.php">
+                    <input type="submit" value="RANKINGI" />
                 </form>
-            <?php else : ?>
-                <form action="login_page.php">
-                    <input type="submit" value="ZALOGUJ" />
-                </form>
-                <form action="registration_page.php">
-                    <input type="submit" value="ZAREJESTRUJ" />
-                </form>
-            <?php endif; ?>
-            <?php
-            echo '<form method="GET" action="sym.php">
-            <input type="hidden" name="game" value="'.$game.'">
-            <input type="submit" value="ZAGREJ SE" />';
-            ?>
-
-            <form action="index.php">
-                <input type="submit" value="STRONA GŁÓWNA" />
-            </form>
-            <?php
-            echo '<form method="GET" action="leaderboards.php">
-            <input type="hidden" name="game" value="'.$game.'">
-            <input type="submit" value="RANKINGI" />
-            </form>';
-            ?>
+            </div>
         </div>
+    
+    <div class="gamestat">
+    <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
+           
+           <div class="right">
+               <?php if (isset($_COOKIE['active_username'])) : ?>
+                   <form action="profile.php">
+                       <input type="submit" value="PROFIL" />
+                   </form>
+                   <form action="logout.php">
+                       <input type="submit" value="WYLOGUJ" />
+                   </form>
+               <?php else : ?>
+                   <form action="login_page.php">
+                       <input type="submit" value="ZALOGUJ" />
+                   </form>
+                   <form action="registration_page.php">
+                       <input type="submit" value="ZAREJESTRUJ" />
+                   </form>
+               <?php endif; ?>
+               <form action="leaderboards.php">
+                   <input type="submit" value="RANKINGI" />
+               </form>
+           </div>
     </div>
 
+    <div class="center2">
+    <?php
+        
+    ?>
+    </div>
 </body>
 
 </html>

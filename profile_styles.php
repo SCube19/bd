@@ -41,7 +41,9 @@ border-radius: 5px;
     echo '#rank' . ($i + 1) . ' {
         background-image: url("' . $imgs[$i] . '");
         background-position: center;
-        background-blend-mode: saturation;
+        background-color: #3c3c63;
+        background-blend-mode: hard-light;
+        font-weight:bold;
         border-radius: 15px;
         height: 8vh;
         font-size: 3vw;
