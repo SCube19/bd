@@ -97,7 +97,10 @@
                 alert("Aktualnie nie ma dostępnych botów na stronie, przepraszamy!");
             }
         </script>
-        <form action="sym_action.php">
+        <form method ="GET" action="sym_action.php">
+            <?php
+                echo '<input type="hidden" name="game" value="'.$game.'">';
+            ?>
             <input type="submit" value="ZAGRAJ PONOWNIE" />
         </form>
         <?php
