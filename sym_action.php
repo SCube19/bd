@@ -38,6 +38,17 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
         if ($game == '')
             $game = "szachy";
 
+        $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+
+        if ($pageWasRefreshed) {
+            header('Location:sym.php?game=' . $game);
+            exit;
+        }
+
+        $game = $_GET['game'];
+        if ($game == '')
+            $game = "szachy";
+
 
 
         setcookie('last_page', 'sym_action.php?game=' . $game);
@@ -60,28 +71,8 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
 
         $opponent_count = rand($min_players, $max_players) - 1;
 
-        ///////////////////////////////////////// symulacja
-
-        //shuffle calego arraya botow moze byc wolne
-        function uniqueRandom($min, $max, $count)
-        {
-            $res = range($min, $max);
-            shuffle($res);
-            return array_slice($res, 0, $count);
-        }
-
-        $bot_rownums = uniqueRandom(0, $bot_query[1] - 1, $opponent_count);
-        $players = array();
-
-        for ($i = 0; $i < $opponent_count; $i++) {
-            $players[] = $bot_query[0]['NICK'][$bot_rownums[$i]];
-        }
-        $players[] = $_COOKIE['active_username'];
-
-        shuffle($players);
-
         //inserty
-        $new_id = query($conn, "SELECT nvl(max(id), 0) + 1 x FROM h" . ucfirst($game));
+        $new_id = query($conn, "SELECT nvl(max(id), 0) + 1 x FROM h" . $game);
         $values = "" . $new_id[0]['X'][0];
 
         for ($i = 0; $i < $opponent_count + 1; $i++) {
@@ -92,9 +83,8 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
         for ($i = 0; $i < $max_players - $opponent_count - 1; $i++)
             $values .= ",NULL";
 
-        query($conn, "INSERT INTO h" . ucfirst($game) . " VALUES (" . $values . ")");
+        query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
         oci_commit($conn);
-        //trigger do tego ^
 
         for ($i = 0; $i < $opponent_count + 1; $i++) {
             echo '<h2>' . ($i + 1) . ': ' . $players[$i] . '</h2><br>';
@@ -107,6 +97,12 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
                 alert("Aktualnie nie ma dostępnych botów na stronie, przepraszamy!");
             }
         </script>
+        <form method="GET" action="sym_action.php">
+            <?php
+            echo '<input type="hidden" name="game" value="' . $game . '">';
+            ?>
+            <input type="submit" value="ZAGRAJ PONOWNIE" />
+        </form>
         <?php
         echo '<a href="game_panel.php?game=' . $game . '">POWRÓT</a><br>'
         ?>
