@@ -31,6 +31,9 @@ setcookie('last_page', 'game_panel.php?game='.$game.'');
                 <form action="logout.php">
                     <input type="submit" value="WYLOGUJ" />
                 </form>
+                <form action="profile.php">
+                    <input type="submit" value="PROFIL" />
+                </form>
             <?php else : ?>
                 <form action="login_page.php">
                     <input type="submit" value="ZALOGUJ" />
@@ -39,22 +42,22 @@ setcookie('last_page', 'game_panel.php?game='.$game.'');
                     <input type="submit" value="ZAREJESTRUJ" />
                 </form>
             <?php endif; ?>
+            <form method="GET" action="sym.php">
             <?php
-            echo '<form method="GET" action="sym.php">
-            <input type="hidden" name="game" value="'.$game.'">
-            <input type="submit" value="ZAGREJ SE" />
-            </form>';
+                echo '<input type="hidden" name="game" value="'.$game.'">';
             ?>
+            <input type="submit" value="GRAJ" />
+            </form>
 
             <form action="index.php">
                 <input type="submit" value="STRONA GŁÓWNA" />
             </form>
+            <form method="GET" action="leaderboards.php">
             <?php
-            echo '<form method="GET" action="leaderboards.php">
-            <input type="hidden" name="game" value="'.$game.'">
-            <input type="submit" value="RANKINGI" />
-            </form>';
+                echo '<input type="hidden" name="game" value="'.$game.'">';
             ?>
+            <input type="submit" value="RANKINGI" />
+            </form>
         </div>
     </div>
 </body>
