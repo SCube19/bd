@@ -21,7 +21,7 @@ setcookie('last_page', 'game_panel.php?game='.$game.'');
 </head>
 
 <body>
-
+<div class="bod">
     <div class="center">
         <div class="pagetxt">
             <?php
@@ -56,6 +56,7 @@ setcookie('last_page', 'game_panel.php?game='.$game.'');
             </form>';
             ?>
         </div>
+    </div>
     </div>
 </body>
 

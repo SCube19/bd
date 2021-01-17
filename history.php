@@ -26,11 +26,11 @@ setcookie('last_page', 'leaderboards.php?game='.$game.'');
 
 <body>
 <div class="bod">
-<div class="bod">
         <div class="up">
-            
-                <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
-           
+        <?php
+            echo '<div class="left">' . $game . '</div>';
+        ?>
+
                 <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
                 <script src="clock.js">
                 </script>
@@ -58,11 +58,47 @@ setcookie('last_page', 'leaderboards.php?game='.$game.'');
         </div>
     
 
-    <div class="center2">
+    <div class="center2 pagetxt">
     <?php
-        
+        session_start();
+
+        require_once('query.php');
+        require_once('database_info.php');
+        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
+            header("Location: error_page.php");
+            exit;
+        }
+
+        $histories = query($conn, "SELECT * from h".$game." h left join (select id, gra, to_char(data, 'YYYY/MM/DD HH24:MI:SS') data from rozgrywki ) r on r.id = h.id and r.gra = '".$game."'");
+        $places = count($histories[0]) - 3;
+        echo '<div class="ranking">';
+        for($i = 0; $i < $histories[1]; $i++)
+        {
+            echo '<div class="gameHis"';
+            if($histories[0]['MIEJSCE_1'][$i] == $_COOKIE['active_username'])
+                echo 'style="background-color:#149f44;"><div class="hisHead">WYGRANA';
+            else
+                echo 'style="background-color:#c41212;"><div class="hisHead">PRZEGRANA';
+
+            echo '<div class="date">'.$histories[0]['DATA'][$i].'</div></div>';
+            for($j = 0; $j < $places; $j++)
+            {
+                if($histories[0]['MIEJSCE_'.($j + 1).''][$i] != '')
+                {
+                    echo '<div class="players">';
+                    if($histories[0]['MIEJSCE_'.($j + 1).''][$i] == $_COOKIE['active_username'])
+                        echo '<div id="usr">';
+                    echo ($j + 1).'. '.$histories[0]['MIEJSCE_'.($j + 1).''][$i].'</div>';
+                    if($histories[0]['MIEJSCE_'.($j + 1).''][$i] == $_COOKIE['active_username'])
+                        echo '</div>';
+                }
+            }
+            echo '</div>';
+        }
+        echo '</div>'
     ?>
     </div>
+</div>
 </body>
 
 </html>

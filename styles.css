@@ -242,6 +242,42 @@
           left: 50%;
           transform: translateX(-50%) translateY(-50%);
           color: rgba(10, 10, 86, 0.902);
-          font-size: 60px;
+          font-size: 3.5vw;
           letter-spacing: 7px;
+      }
+      
+      .gameHis {
+          transition: max-height 1.5s cubic-bezier(0, 0.74, 0.35, 1.11);
+          width: 50vw;
+          max-height: 4vw;
+          margin-bottom: 1vh;
+          overflow: hidden;
+      }
+      
+      .gameHis:hover {
+          transition: max-height 1s cubic-bezier(0.71, 0.11, 0.24, 1.27);
+          max-height: 21vw;
+      }
+      
+      .date {
+          float: right;
+          margin-right: 1%;
+      }
+      
+      .hisHead {
+          font-size: 1.2vw;
+          text-align: center;
+          padding-top: 1.3vw;
+          margin-bottom: 1.5vw;
+      }
+      
+      .players {
+          font-size: 1.5vw;
+          margin-bottom: 0.5vw;
+          margin-left: 20%;
+      }
+      
+      #usr {
+          font-weight: bold;
+          text-shadow: 2px 2px orange;
       }
