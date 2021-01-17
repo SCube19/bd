@@ -5,8 +5,7 @@ if ($_SESSION['alert'] == 'true') {
     $_SESSION['alert'] = '';
 }
 
-if (isset($_COOKIE['active_username']))
-{
+if (isset($_COOKIE['active_username'])) {
     header('Location:index.php');
     exit;
 }

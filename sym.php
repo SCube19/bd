@@ -7,8 +7,7 @@ if($game == '')
 
 setcookie('last_page', 'sym.php?game='.$game);
 
-if (!isset($_COOKIE['active_username']))
-{
+if (!isset($_COOKIE['active_username'])) {
     header('Location:login_page.php');
     exit;
 }
@@ -30,14 +29,34 @@ if (!isset($_COOKIE['active_username']))
 </head>
 
 <body>
-
     <div class="center">
-        <?php
-            echo '<a href="sym_action.php?game='.$game.'">SYMULUJ '.strtoupper($game).'</a>';
-        ?>
-        <br>
-        <a href="logout.php">WYLOGUJ</a><br>
-        <a href='index.php'>Strona główna</a><br>
+        <div class="pagetxt">
+            <?php
+                echo '<h1>'. strtoupper($game) . '</h1>';
+            ?>
+
+            <form action="logout.php">
+                <input type="submit" value="WYLOGUJ" />
+            </form>
+            <form action="profile.php">
+                <input type="submit" value="PROFIL" />
+            </form>
+            <form method="GET" action="sym_action.php">
+            <?php
+                echo '<input type="hidden" name="game" value="'.$game.'">';
+            ?>
+            <input type="submit" value="GRAJ" />
+            </form>
+            <form action="index.php">
+                <input type="submit" value="STRONA GŁÓWNA" />
+            </form>
+            <form method="GET" action="leaderboards.php">
+            <?php
+                echo '<input type="hidden" name="game" value="'.$game.'">';
+            ?>
+            <input type="submit" value="RANKINGI" />
+            </form>
+        </div>
     </div>
 
 </body>

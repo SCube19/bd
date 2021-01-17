@@ -6,7 +6,7 @@ require_once('database_info.php');
 if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
     header("Location: error_page.php");
 
-$ranks = query($conn, "SELECT gra, pkt_rankingowe, ilosc_zagranych, ilosc_wygranych, ilosc_remisow, f.nazwa as nzw from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
+$ranks = query($conn, "SELECT gra, pkt_rankingowe, ilosc_zagranych, ilosc_wygranych, ilosc_przegranych, f.nazwa as nzw from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
 oci_close($conn);
 
 $imgs = array(
@@ -55,7 +55,7 @@ border-radius: 5px;
     }';
     echo '#rank' . ($i + 1) . ':hover:before {
         content:\''.strtoupper($ranks[0]['NZW'][$i]).' : '.$ranks[0]['PKT_RANKINGOWE'][$i].' | Z: '.$ranks[0]['ILOSC_ZAGRANYCH'][$i].' | W: '.$ranks[0]['ILOSC_WYGRANYCH'][$i].
-        ' | R: '.$ranks[0]['ILOSC_REMISOW'][$i].'\';
+        ' | P: '.$ranks[0]['ILOSC_PRZEGRANYCH'][$i].'\';
     }';
 }
 ?>
