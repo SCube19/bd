@@ -25,8 +25,9 @@
             if($game == '')
                 $game = "szachy";
 
-            //odswiezenie strony cofa do sym
-            if ($_COOKIE['last_page'] == 'sym_action.php?game='.$game) {
+            $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+
+            if($pageWasRefreshed) {
                 header('Location:sym.php?game='.$game);
                 exit;
             }
@@ -71,7 +72,7 @@
             shuffle($players);
 
             //inserty
-            $new_id = query($conn, "SELECT nvl(max(id), 0) + 1 x FROM h".ucfirst($game));
+            $new_id = query($conn, "SELECT nvl(max(id), 0) + 1 x FROM h".$game);
             $values = "".$new_id[0]['X'][0];
 
             for ($i = 0; $i < $opponent_count + 1; $i++) {
@@ -82,9 +83,8 @@
             for ($i = 0; $i < $max_players - $opponent_count - 1; $i++)
                 $values .= ",NULL";
             
-            query($conn, "INSERT INTO h".ucfirst($game)." VALUES (".$values.")");
+            query($conn, "INSERT INTO h".$game." VALUES (".$values.")");
             oci_commit($conn);
-            //trigger do tego ^
 
             for ($i = 0; $i < $opponent_count + 1; $i++) {
                 echo '<h2>'.($i+1).': '.$players[$i].'</h2><br>';
@@ -97,6 +97,9 @@
                 alert("Aktualnie nie ma dostępnych botów na stronie, przepraszamy!");
             }
         </script>
+        <form action="sym_action.php">
+            <input type="submit" value="ZAGRAJ PONOWNIE" />
+        </form>
         <?php
             echo '<a href="sym.php?game='.$game.'">POWRÓT</a><br>'
         ?>
