@@ -68,8 +68,9 @@ create table hChinczyk(
 
 create table rozgrywki(
     id number(6) not null,
-    gra varchar(20) not null,
-    constraint pk primary key(id, gra),
+    gra varchar(20) not null references gry,
+    nick_gracza varchar2(20) not null references gracze,
+    constraint pk primary key(id, gra, nick_gracza),
     data timestamp not null
 );
 
@@ -172,24 +173,23 @@ begin
 end;
 /
 
-create or replace procedure dodaj_gre_historia(id_rozgrywki number, nazwa_gry varchar2) is
+create or replace procedure dodaj_gre_historia(id_rozgrywki number, nazwa_gry varchar2, nick varchar2) is
 begin
-    insert into rozgrywki values (id_rozgrywki, nazwa_gry, systimestamp);
+    if nick is not null then
+        insert into rozgrywki values (id_rozgrywki, nazwa_gry, nick, systimestamp);
+    end if;
 end;
 /
 
 create or replace procedure update_rankingu(nazwa_gry varchar2, gracz varchar2, czy_wygral number) is
-    cursor staty is (select ilosc_zagranych, ilosc_wygranych, ilosc_przegranych from rankingBasic where nick_gracza = gracz AND gra = nazwa_gry);
 begin
-    for row in staty loop
-        if gracz is not null then
-            if czy_wygral = 1 then
-                update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1, ilosc_wygranych = ilosc_wygranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
-            else
-                update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1, ilosc_przegranych = ilosc_przegranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
-            end if;
+    if gracz is not null then
+        if czy_wygral = 1 then
+            update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1, ilosc_wygranych = ilosc_wygranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
+        else
+            update rankingBasic set ilosc_zagranych = ilosc_zagranych + 1, ilosc_przegranych = ilosc_przegranych + 1 where nick_gracza = gracz and gra = nazwa_gry;
         end if;
-    end loop;
+    end if;
 end;
 /
 
@@ -206,7 +206,10 @@ begin
     update_rankingu(nazwa, :new.miejsce_4, 0);
 
     select nvl(max(id), 0) + 1 into nowe_id from hChinczyk;
-    dodaj_gre_historia(nowe_id, nazwa);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_1);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_2);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_3);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_4);
 end;
 /
 
@@ -221,7 +224,8 @@ begin
     update_rankingu(nazwa, :new.miejsce_2, 0);
 
     select nvl(max(id), 0) + 1 into nowe_id from hPilka;
-    dodaj_gre_historia(nowe_id, nazwa);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_1);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_2);
 end;
 /
 
@@ -236,7 +240,8 @@ begin
     update_rankingu(nazwa, :new.miejsce_2, 0);
 
     select nvl(max(id), 0) + 1 into nowe_id from hWarcaby;
-    dodaj_gre_historia(nowe_id, nazwa);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_1);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_2);
 end;
 /
 
@@ -251,7 +256,8 @@ begin
     update_rankingu(nazwa, :new.miejsce_2, 0);
 
     select nvl(max(id), 0) + 1 into nowe_id from hSzachy;
-    dodaj_gre_historia(nowe_id, nazwa);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_1);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_2);
 end;
 /
 
@@ -268,7 +274,10 @@ begin
     update_rankingu(nazwa, :new.miejsce_4, 0);
 
     select nvl(max(id), 0) + 1 into nowe_id from hBierki;
-    dodaj_gre_historia(nowe_id, nazwa);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_1);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_2);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_3);
+    dodaj_gre_historia(nowe_id, nazwa, :new.miejsce_4);
 end;
 /
 
@@ -303,6 +312,3 @@ insert into gracze values('marek', 'maro', 'uzytkownik');
 insert into gracze values('scube420', '6969', 'uzytkownik');
 insert into gracze values('darek68', 'hehe', 'uzytkownik');
 insert into gracze values('kk418331', '$H00michek$', 'admin');
-
-select * from gry;
-select * from gracze;
