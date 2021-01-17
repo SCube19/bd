@@ -30,8 +30,12 @@
 
         $result = query($conn, "SELECT typ_gracza FROM gracze WHERE nick='" . $_COOKIE['active_username'] . "'");
 
+        if ($result[0]['TYP_GRACZA'][0] == 'admin')
+            echo '<a href="admin_panel.php">';
         if ($result[0]['TYP_GRACZA'][0] != 'uzytkownik')
             echo '<div class="left">' . $result[0]['TYP_GRACZA'][0] . '</div>';
+        if ($result[0]['TYP_GRACZA'][0] == 'admin')
+            echo '</a>';
         echo '<div id="nick">' . $_COOKIE['active_username'] . '</div>';
         ?>
 
@@ -50,13 +54,14 @@
         <?php
 
         $ranks = query($conn, "SELECT gra from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
-        
+        oci_close($conn);
+
         echo '<div class="center2">';
         for ($i = 0; $i < $ranks[1]; $i++)
             echo '<div><div class="ranking"><a href="leaderboards.php?game=' . $ranks[0]['GRA'][$i] . '"><div id="rank' . ($i + 1) . '"></div>
         </a></div>
         <form method="GET" class="center2 history" action="history.php">
-        <input type="hidden" name="game" value="'.$ranks[0]['GRA'][$i].'">
+        <input type="hidden" name="game" value="' . $ranks[0]['GRA'][$i] . '">
         <input class="history" type="submit" value="HISTORIA ROZGRYWEK" />
         </form></div>
             ';

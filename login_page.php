@@ -10,7 +10,8 @@ if (isset($_COOKIE['active_username'])) {
     exit;
 }
 ?>
-<!DOCTYPE html>
+<!doctype html>
+<html lang="pl">
 <html>
 
 <head>
@@ -25,37 +26,39 @@ if (isset($_COOKIE['active_username'])) {
 </head>
 
 <body>
-<div class="pagetxt">
-	<div class="center">
-    <div class="center2">
-    <h1>Logowanie</h1>
-    <form id='player_log' action='user_login_action.php' method='POST'>
-    Login<br>
-        <input type='text' name='username' required><br><br>
-        Hasło<br>
-        <input type='password' name='password' required><br><br>
-        <input type='submit' value="ZALOGUJ"><br><br>
-    </form>
-    <?php
+    <div class="pagetxt">
+        <div class="center">
+            <div class="center2">
+                <h1>Logowanie</h1>
+                <form id='player_log' action='user_login_action.php' method='POST'>
+                    Login<br>
+                    <input type='text' name='username' required><br><br>
+                    Hasło<br>
+                    <input type='password' name='password' required><br><br>
+                    <input type='submit' value="ZALOGUJ"><br><br>
+                </form>
+                <?php
 
-    if ($_SESSION['login_exists'] == 'false') {
-        echo "<span style='color:red'><b>Niepoprawna nazwa użytkownika.</b></span><br><br>";
-        $_SESSION['login_exists'] = '';
-    }
+                if ($_SESSION['login_exists'] == 'false') {
+                    echo "<span style='color:red'><b>Niepoprawna nazwa użytkownika.</b></span><br><br>";
+                    $_SESSION['login_exists'] = '';
+                }
 
-    if ($_SESSION['auth'] == 'false') {
-        echo "<span style='color:red'><b>Niepoprawne hasło.</b></span><br><br>";
-        $_SESSION['auth'] = '';
-    }
-    ?>
-    Jeśli nie masz konta
-    <form action="registration_page.php">
-        <input type="submit" value="ZAREJESTRUJ SIĘ">
-    </form>
-    <form action="index.php">
-        <input type="submit" value="STRONA GŁÓWNA">
-    </form>
-</div></div></div>
+                if ($_SESSION['auth'] == 'false') {
+                    echo "<span style='color:red'><b>Niepoprawne hasło.</b></span><br><br>";
+                    $_SESSION['auth'] = '';
+                }
+                ?>
+                Jeśli nie masz konta
+                <form action="registration_page.php">
+                    <input type="submit" value="ZAREJESTRUJ SIĘ">
+                </form>
+                <form action="index.php">
+                    <input type="submit" value="STRONA GŁÓWNA">
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
