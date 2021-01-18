@@ -293,7 +293,7 @@ insert into typy values('bot');
 insert into gry values('szachy', 'Gracze dysponuja bierkami w sklad ktorych wchodzi szesnascie bierek: 
 krol, hetman, dwa gonce, dwa skoczki, dwie wieze oraz osiem pionow. Gre zawsze rozpoczynaja biale. 
 Gracze na zmiane wykonuja posuniecia swoimi bierkami zgodnie z 
-zasadami ruchu dla danej bierki i jesli wejdzie ona na pole zajmowane przez przeciwnika, zbija jego bierkę. Szach jest grozba zbicia krola. 
+zasadami ruchu dla danej bierki i jesli wejdzie ona na pole zajmowane przez przeciwnika, zbija jego bierke. Szach jest grozba zbicia krola. 
 Mat, czyli postawienie krola przeciwnika w szachu, przed ktorym nie ma obrony, konczy partie i oznacza zwyciestwo gracza, ktorego bierka matuje krola przeciwnika
 ', 2, 2);
 

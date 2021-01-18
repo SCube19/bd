@@ -18,6 +18,10 @@
 <body>
     <div class="pagetxt">
         <h1>SIUR ;D</h1>
+        <?php
+            session_start();
+            
+        ?>
     </div>
 
 

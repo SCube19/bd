@@ -6,6 +6,14 @@ if ($game == '')
 if ($game == '')
     $game = 'szachy';
 
+$player = htmlspecialchars($_GET['player']);
+if ($player == "")
+    $player = $_COOKIE['active_username'];
+if ($player == "") {
+    header("Location: ".$_COOKIE['last_page'].".php");
+    exit;
+}
+
 setcookie('last_page', 'leaderboards.php?game=' . $game . '');
 ?>
 
@@ -73,12 +81,12 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
             exit;
         }
 
-        $histories = query($conn, "SELECT * from h" . $game . " h left join (select id, gra, nick_gracza, to_char(data, 'YYYY/MM/DD HH24:MI:SS') data from rozgrywki ) r on r.id = h.id and r.gra = '" . $game . "' where nick_gracza = '" . $_COOKIE['active_username'] . "' order by data desc");
+        $histories = query($conn, "SELECT * from h" . $game . " h left join (select id, gra, nick_gracza, to_char(data, 'YYYY/MM/DD HH24:MI:SS') data from rozgrywki ) r on r.id = h.id and r.gra = '" . $game . "' where nick_gracza = '" . $player . "' order by data desc");
         $places = count($histories[0]) - 3;
         echo '<div class="ranking">';
         for ($i = 0; $i < $histories[1]; $i++) {
             echo '<div class="gameHis"';
-            if ($histories[0]['MIEJSCE_1'][$i] == $_COOKIE['active_username'])
+            if ($histories[0]['MIEJSCE_1'][$i] == $player)
                 echo 'style="background-color:#149f44;"><div class="hisHead">WYGRANA';
             else
                 echo 'style="background-color:#c41212;"><div class="hisHead">PRZEGRANA';
@@ -87,10 +95,10 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
             for ($j = 0; $j < $places; $j++) {
                 if ($histories[0]['MIEJSCE_' . ($j + 1) . ''][$i] != '') {
                     echo '<div class="players">';
-                    if ($histories[0]['MIEJSCE_' . ($j + 1) . ''][$i] == $_COOKIE['active_username'])
+                    if ($histories[0]['MIEJSCE_' . ($j + 1) . ''][$i] == $player)
                         echo '<div id="usr">';
                     echo ($j + 1) . '. ' . $histories[0]['MIEJSCE_' . ($j + 1) . ''][$i] . '</div>';
-                    if ($histories[0]['MIEJSCE_' . ($j + 1) . ''][$i] == $_COOKIE['active_username'])
+                    if ($histories[0]['MIEJSCE_' . ($j + 1) . ''][$i] == $player)
                         echo '</div>';
                 }
             }
