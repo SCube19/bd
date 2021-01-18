@@ -384,12 +384,12 @@
           flex-wrap: wrap;
           justify-content: center;
       }
-
-    table a {
-        display:block;
-        text-decoration:none;
-    }
-
-    table #ranking-user a {
-        color: red;
-    }
+      
+      table a {
+          display: block;
+          text-decoration: none;
+      }
+      
+      a.ranking-user {
+          color: red;
+      }

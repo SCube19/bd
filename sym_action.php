@@ -33,13 +33,13 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
 </head>
 
 <body>
-    <script type="text/JavaScript" src="ratings.js"></script>
     <div class="center pagetxt" style="background: linear-gradient(180deg, rgba(250,73,24,1) 0%, rgba(255,150,11,1) 100%);">
             <p class="symhead">WYNIK SYMULACJI</p>
             <?php
             session_start();
             require_once('database_info.php');
             require_once('query.php');
+            require_once('ratings.php');
 
             if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
                 header('Location:error_page.php');
@@ -93,15 +93,28 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
             
             query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
             oci_commit($conn);
-            
+            // //update rankingów 
             $formulas = query($conn, "SELECT formula from sposobyObliczania left join formuly on id_formuly=formuly.id where gra = '".$game."'");
+            $tmp = query($conn, "SELECT pkt_rankingowe from rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id where nick_gracza = '".$players[0]."' and gra = '".$game."'");
+            $win_rank = $tmp[0]['PKT_RANKINGOWE'][0];
             
-            for($i = 0; $i < count($players); $i++)
+            for($i = 1; $i < count($players); $i++)
             {
-                echo '<script type="text/JavaScript">
-            document.getElementById("rating").innerHTML = String(rating("'.$result[0]['FORMULA'][0].'",'. $result[0]['PKT_RANKINGOWE'][0].', 1200, ["S", 1]));
-            </script>';
+                $tmp = query($conn, "SELECT pkt_rankingowe from rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id where nick_gracza = '".$players[$i]."' and gra = '".$game."'");
+                $ranks[] = $tmp[0]['PKT_RANKINGOWE'][0];
             }
+            $max_loser = max($ranks);
+            query($conn, "UPDATE rankingAdvanced SET PKT_RANKINGOWE = ".rating($formulas[0]['FORMULA'][0], $win_rank, $max_loser, ["S", 1]).
+            " where nick_gracza = '".$players[0]."' and id_sposobu = (SELECT id from sposobyObliczania where gra = '".$game."')");
+            oci_commit($conn);
+            for($i = 0; $i < count($players) - 1; $i++)
+            {
+                query($conn, "UPDATE rankingAdvanced SET PKT_RANKINGOWE = ".rating($formulas[0]['FORMULA'][0], $ranks[$i], $win_rank, ["S", -$i]).
+                    " where nick_gracza = '".$players[$i + 1]."' and id_sposobu = (SELECT id from sposobyObliczania where gra = '".$game."')");
+                oci_commit($conn);
+            }
+            oci_close($conn);
+            
             if ($players[0] == $_COOKIE['active_username'])
                 echo '<div id="win">ZWYCIĘZCA</div><div id="winner" class="player">' . $players[0] . '</div>';
             else

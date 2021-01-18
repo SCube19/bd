@@ -79,21 +79,19 @@ setcookie('last_page', 'leaderboards.php?game=' . $game);
 
             $table_string = "";
             for ($i = 0; $i < $ranking[1]; $i++) {
-                if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username']) {
-                    $table_string .= '<div id="ranking-user">';
-                }
+
                 $table_string .=
                     '<tr>
                         <td>' . $i . '</td>
                         <td>
-                        <a href = "profile.php?player='.$ranking[0]['NICK_GRACZA'][$i].'">'.
-                         $ranking[0]['NICK_GRACZA'][$i]
-                        .'</a></td>
+                        <a href = "profile.php?player=' . $ranking[0]['NICK_GRACZA'][$i] . '"';
+                if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
+                    $table_string .= 'class="ranking-user"';
+                $table_string .= '>' .
+                    $ranking[0]['NICK_GRACZA'][$i]
+                    . '</a></td>
                         <td>' . $ranking[0]['PKT_RANKINGOWE'][$i] . '</td>
                     </tr>';
-                if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username']) {
-                    $table_string .= '</div>';
-                }
             }
 
 
