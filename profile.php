@@ -10,7 +10,17 @@
     <meta name="author" content="SitePoint">
 
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="profile_styles.php">
+    <?php
+        $player = htmlspecialchars($_GET['player']);
+        if ($player == "")
+            $player = $_COOKIE['active_username'];
+        if ($player == "") {
+            header("Location: " . $_COOKIE['last_page'] . ".php");
+            exit;
+        }
+
+        echo '<link rel="stylesheet" href="profile_styles.php?player=' . $player . '">';
+    ?>
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 
 </head>
@@ -28,15 +38,15 @@
             exit;
         }
 
-        $result = query($conn, "SELECT typ_gracza FROM gracze WHERE nick='" . $_COOKIE['active_username'] . "'");
+        $result = query($conn, "SELECT * FROM gracze WHERE nick='" . $player . "'");
 
-        if ($result[0]['TYP_GRACZA'][0] == 'admin')
+        if ($result[0]['TYP_GRACZA'][0] == 'admin' && $result[0]['NICK'][0] == $_COOKIE['active_username'])
             echo '<a href="admin_panel.php">';
         if ($result[0]['TYP_GRACZA'][0] != 'uzytkownik')
             echo '<div class="left">' . $result[0]['TYP_GRACZA'][0] . '</div>';
         if ($result[0]['TYP_GRACZA'][0] == 'admin')
             echo '</a>';
-        echo '<div id="nick">' . $_COOKIE['active_username'] . '</div>';
+        echo '<div id="nick">' . $player . '</div>';
         ?>
 
 
@@ -53,7 +63,7 @@
     <div class="pagetxt">
         <?php
 
-        $ranks = query($conn, "SELECT gra from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
+        $ranks = query($conn, "SELECT gra from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $player . "' and id_formuly=0 order by gra");
         oci_close($conn);
 
         echo '<div class="center2">';
@@ -62,6 +72,7 @@
         </a></div>
         <form method="GET" class="center2 history" action="history.php">
         <input type="hidden" name="game" value="' . $ranks[0]['GRA'][$i] . '">
+        <input type="hidden" name="player" value="' . $player . '">
         <input class="history" type="submit" value="HISTORIA ROZGRYWEK" />
         </form></div>
             ';

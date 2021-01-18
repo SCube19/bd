@@ -6,7 +6,16 @@ require_once('database_info.php');
 if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8')))
     header("Location: error_page.php");
 
-$ranks = query($conn, "SELECT gra, pkt_rankingowe, ilosc_zagranych, ilosc_wygranych, ilosc_przegranych, f.nazwa as nzw from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $_COOKIE['active_username'] . "' and id_formuly=0 order by gra");
+$player = htmlspecialchars($_GET['player']);
+if ($player == '')
+$player = $_COOKIE['active_username'];
+
+if ($player == "") {
+    header("Location: ".$_COOKIE['last_page'].".php");
+    exit;
+}
+
+$ranks = query($conn, "SELECT gra, pkt_rankingowe, ilosc_zagranych, ilosc_wygranych, ilosc_przegranych, f.nazwa as nzw from rankingBasic natural join (rankingAdvanced r left join (sposobyObliczania s left join formuly f on f.id = s.id_formuly) on r.id_sposobu = s.id) where nick_gracza = '" . $player . "' and id_formuly=0 order by gra");
 oci_close($conn);
 
 $imgs = array(
