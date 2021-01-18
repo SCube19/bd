@@ -41,11 +41,11 @@
 
 
         <div class="right">
-            <form action="logout.php">
-                <input type="submit" value="WYLOGUJ" />
-            </form>
             <form action="index.php">
                 <input type="submit" value="STRONA GŁÓWNA" />
+            </form>
+            <form action="logout.php">
+                <input type="submit" value="WYLOGUJ" />
             </form>
         </div>
     </div>

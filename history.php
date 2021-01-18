@@ -40,9 +40,6 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
                 <form action="profile.php">
                     <input type="submit" value="PROFIL" />
                 </form>
-                <form action="logout.php">
-                    <input type="submit" value="WYLOGUJ" />
-                </form>
             <?php else : ?>
                 <form action="login_page.php">
                     <input type="submit" value="ZALOGUJ" />
@@ -50,10 +47,17 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
                 <form action="registration_page.php">
                     <input type="submit" value="ZAREJESTRUJ" />
                 </form>
-            <?php endif; ?>
-            <form action="index.php">
-                <input type="submit" value="STRONA GŁÓWNA" />
-            </form>
+            <?php endif;
+            echo '<form action="index.php">
+        <input type="submit" value="STRONA GŁÓWNA" />
+    </form>';
+
+            if (isset($_COOKIE['active_username']))
+                echo '<form action="logout.php">
+            <input type="submit" value="WYLOGUJ" />
+        </form>';
+            ?>
+
         </div>
     </div>
 

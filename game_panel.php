@@ -21,35 +21,38 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
 </head>
 
 <body>
-    <div class="up">
+<div class="up">
 
-        <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
+<img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
 
-        <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
-        <script src="clock.js">
-        </script>
+<div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+<script src="clock.js">
+</script>
 
-        <div class="right">
-            <?php if (isset($_COOKIE['active_username'])) : ?>
-                <form action="profile.php">
-                    <input type="submit" value="PROFIL" />
-                </form>
-                <form action="logout.php">
-                    <input type="submit" value="WYLOGUJ" />
-                </form>
-            <?php else : ?>
-                <form action="login_page.php">
-                    <input type="submit" value="ZALOGUJ" />
-                </form>
-                <form action="registration_page.php">
-                    <input type="submit" value="ZAREJESTRUJ" />
-                </form>
-            <?php endif; ?>
-            <form action="index.php">
-                <input type="submit" value="STRONA GŁÓWNA" />
-            </form>
-        </div>
-    </div>
+<div class="right">
+    <?php if (isset($_COOKIE['active_username'])) : ?>
+        <form action="profile.php">
+            <input type="submit" value="PROFIL" />
+        </form>
+    <?php else : ?>
+        <form action="login_page.php">
+            <input type="submit" value="ZALOGUJ" />
+        </form>
+        <form action="registration_page.php">
+            <input type="submit" value="ZAREJESTRUJ" />
+        </form>
+    <?php endif;
+    echo '<form action="leaderboards.php">
+        <input type="submit" value="RANKINGI" />
+    </form>';
+
+    if (isset($_COOKIE['active_username']))
+        echo '<form action="logout.php">
+            <input type="submit" value="WYLOGUJ" />
+        </form>';
+    ?>
+</div>
+</div>
     <div class="center gamebox">
     <div class="divider"></div>
     <div class="desc">
@@ -77,7 +80,7 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
                     $img = "https://www.kurnik.pl/pilka/img/i0.gif";
                     break;
                 case 'szachy':
-                    $img = "https://lh3.googleusercontent.com/proxy/Bl0zKY9SYpsYgZZGww-xBQULWN6vhbA3uAVaEoFlJb7VE_gOFAdjDahGcJAzniIBNkvW_vyiYXY2zUgFyHvd8EyovtuuQ64";
+                    $img = "https://www.chess.com/bundles/web/images/offline-play/standardboard.6a504885.png";
                     break;
                 case 'warcaby':
                     $img = "https://www.kurnik.pl/warcaby/img/img1.gif";

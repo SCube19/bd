@@ -137,7 +137,7 @@
       }
       
       input[type=submit]:hover {
-          background-color: #2db7cfab;
+          background-color: #2cc1db;
           color: rgb(216, 42, 42)
       }
       
@@ -320,10 +320,62 @@
           margin-bottom: 5%;
       }
       
+      .symhead {
+          font-size: 5vw;
+          margin-top: 1%;
+          color: #942dcfab;
+          text-shadow: 2px 2px #f5d1ff;
+          margin-bottom: 1%;
+          font-weight: bold;
+      }
+      
       .divider {
           border-style: double;
           left: 50%;
           position: absolute;
           height: 99%;
           color: gold;
+      }
+      
+      #winner {
+          color: rgb(0, 255, 128);
+          font-size: 2vw;
+          font-weight: bold;
+          text-shadow: 1px 1px black;
+          margin-bottom: 3%;
+      }
+      
+      .loser {
+          color: red;
+          flex: 1 0 20%;
+          font-size: 1.7vw;
+          text-shadow: 1px 1px black;
+          font-weight: 0;
+          margin: 2%;
+      }
+      
+      input[type=submit].playagain {
+          color: #1d00ff;
+          background-color: #eaff37;
+          border-style: dashed;
+          border-radius: 30px;
+          margin: 10%;
+      }
+      
+      input[type=submit].playagain:hover {
+          color: rgb(255, 2, 2);
+          background-color: rgb(0, 255, 200);
+      }
+      
+      #win {
+          font-size: 4vw;
+          color: rgb(0, 255, 128);
+          text-shadow: 1px 1px #0a4c36;
+          margin-top: 0;
+      }
+      
+      .symbox {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
       }

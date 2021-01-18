@@ -34,7 +34,7 @@ text-align: center;
 }
 
 .ranking:hover {
-width: 50vw;
+width: 55vw;
 border-radius: 5px;
 }
 
@@ -54,8 +54,8 @@ border-radius: 5px;
         content:\'' . strtoupper($ranks[0]['GRA'][$i]) . '\';
     }';
     echo '#rank' . ($i + 1) . ':hover:before {
-        content:\'' . strtoupper($ranks[0]['NZW'][$i]) . ' : ' . $ranks[0]['PKT_RANKINGOWE'][$i] . ' | Z: ' . $ranks[0]['ILOSC_ZAGRANYCH'][$i] . ' | W: ' . $ranks[0]['ILOSC_WYGRANYCH'][$i] .
-        ' | P: ' . $ranks[0]['ILOSC_PRZEGRANYCH'][$i] . '\';
+        content:\'' . strtoupper($ranks[0]['NZW'][$i]) . ' : ' . $ranks[0]['PKT_RANKINGOWE'][$i] . ' / G: ' . $ranks[0]['ILOSC_ZAGRANYCH'][$i] . ' / W: ' . $ranks[0]['ILOSC_WYGRANYCH'][$i] .
+        ' / P: ' . $ranks[0]['ILOSC_PRZEGRANYCH'][$i] . '\';
     }';
 }
 ?>
