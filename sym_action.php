@@ -93,10 +93,17 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
             query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
             oci_commit($conn);
 
-            echo '<div id="win">ZWYCIĘZCA</div><div id="winner">' . $players[0] . '</div>';
+            if ($players[0] == $_COOKIE['active_username'])
+                echo '<div id="win">ZWYCIĘZCA</div><div id="winner" class="player">1. ' . $players[0] . '</div>';
+            else
+                echo '<div id="win">ZWYCIĘZCA</div><div id="winner">1. ' . $players[0] . '</div>';
             echo '<div class="symbox">';
+            
             for ($i = 1; $i < $opponent_count + 1; $i++) {
-                echo '<div class="loser">' . ($i + 1) . '. ' . $players[$i] . '</div>';
+                if ($players[$i] == $_COOKIE['active_username'])
+                    echo '<div class="loser player">' . ($i + 1) . '. ' . $players[$i] . '</div>';
+                else
+                    echo '<div class="loser">' . ($i + 1) . '. ' . $players[$i] . '</div>';
             }
             echo '</div>';
             oci_close($conn);

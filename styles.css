@@ -342,7 +342,6 @@
           font-size: 2vw;
           font-weight: bold;
           text-shadow: 1px 1px black;
-          text-decoration: underline;
           margin-bottom: 3%;
       }
       
@@ -353,6 +352,10 @@
           text-shadow: 1px 1px black;
           font-weight: 0;
           margin: 2%;
+      }
+      
+      .player {
+          text-decoration: underline;
       }
       
       input[type=submit].playagain {

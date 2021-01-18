@@ -110,6 +110,9 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
                 ?>
                 <input type="submit" value="RANKINGI" />
             </form>
+            <form action="index.php">
+                <input type="submit" value="POWRÓT" />
+            </form>
         </div>
     </div>
 
