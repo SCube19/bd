@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <html lang="en">
 
 <head>
@@ -12,8 +13,8 @@
 </head>
 
 <body>
-    <div class="center">
-        <h1>WYNIK SYMULACJI</h1>
+    <div class="center pagetxt">
+        <h2>WYNIK SYMULACJI</h2>
         <br><br><br>
 
         <?php
@@ -104,11 +105,17 @@
             ?>
             <input type="submit" value="ZAGRAJ PONOWNIE" />
         </form>
+       
+        <form method="GET" action="sym_action.php">
         <?php
-        echo '<a href="game_panel.php?game=' . $game . '">POWRÓT</a><br>'
+        echo '<input type="hidden" name="game" value="game_panel.php?game=' . $game . '">';
         ?>
-        <a href="logout.php">WYLOGUJ</a><br>
-        <a href='index.php'>Strona główna</a><br>
+        <input type="submit" value="POWRÓT" />
+        </form>
+        <form method="GET" action="index.php">
+            <input type="hidden" name="game" value="game_panel.php?game=' . $game . '">
+        <input type="submit" value="STRONA GŁÓWNA" />
+
     </div>
 
 </body>
