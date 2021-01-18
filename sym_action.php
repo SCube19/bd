@@ -113,14 +113,13 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
                 <input class="playagain" type="submit" value="ZAGRAJ PONOWNIE" />
             </form>
 
-            <form method="GET" action="sym_action.php">
+            <form method="GET" action="game_panel.php">
                 <?php
-                echo '<input type="hidden" name="game" value="game_panel.php?game=' . $game . '">';
+                echo '<input type="hidden" name="game" value="'.$game.'">';
                 ?>
                 <input type="submit" value="POWRÓT" />
             </form>
-            <form method="GET" action="index.php">
-                <input type="hidden" name="game" value="game_panel.php?game=' . $game . '">
+            <form action="index.php">
                 <input type="submit" value="STRONA GŁÓWNA" />
             </form>
     </div>
