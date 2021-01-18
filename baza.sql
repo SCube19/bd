@@ -21,7 +21,7 @@ create table typy(
 
 create table gry(
     nazwa varchar2(20) primary key,
-    opis varchar2(200),
+    opis varchar2(600),
     min_graczy number(2) not null,
     max_graczy number(2) not null
 );
@@ -290,11 +290,37 @@ insert into typy values('uzytkownik');
 insert into typy values('admin');
 insert into typy values('bot');
 
-insert into gry values('szachy', 'Grasz pionkami. I wgl fajnie sie gra w szachy zagraj se w szachy', 2, 2);
-insert into gry values('warcaby', 'Grasz pionkami, ale nie takimi fajnymi jak w szachach. I wgl srednio sie gra w warcaby zagraj se w warcaby', 2, 2);
-insert into gry values('chinczyk', 'Znowu grasz pionkami co jest kruczi', 2, 4);
-insert into gry values('pilka', 'Gralo sie w gimnazjum oj gralo', 2, 2);
-insert into gry values('bierki', 'Patyki jakies ciongasz', 2, 4);
+insert into gry values('szachy', 'Gracze dysponuja bierkami w sklad ktorych wchodzi szesnascie bierek: 
+krol, hetman, dwa gonce, dwa skoczki, dwie wieze oraz osiem pionow. Gre zawsze rozpoczynaja biale. 
+Gracze na zmiane wykonuja posuniecia swoimi bierkami zgodnie z 
+zasadami ruchu dla danej bierki i jesli wejdzie ona na pole zajmowane przez przeciwnika, zbija jego bierkę. Szach jest grozba zbicia krola. 
+Mat, czyli postawienie krola przeciwnika w szachu, przed ktorym nie ma obrony, konczy partie i oznacza zwyciestwo gracza, ktorego bierka matuje krola przeciwnika
+', 2, 2);
+
+insert into gry values('warcaby', 'Warcaby rozgrywane sa na planszy o rozmiarze 8x8 pol pokolorowanych na przemian na kolor jasny i ciemny. Kazdy 
+gracz rozpoczyna gre z dwunastoma pionami ustawionymi na ciemniejszych polach planszy, po ktorych sie poruszaja.
+Jako pierwszy ruch wykonuje grajacy pionami bialymi, po czym gracze wykonuja na zmiane kolejne ruchy. 
+Celem gry jest zbicie wszystkich pionow przeciwnika albo zablokowanie wszystkich, 
+ktore pozostaja na planszy, pozbawiajac przeciwnika mozliwosci wykonania ruchu. Piony moga poruszac sie o 
+jedno pole do przodu po przekatnej na wolne pola.', 2, 2);
+
+insert into gry values('chinczyk', 'Na poczatku pionki kazdego z graczy sa w schowku. 
+Gracze rzucaja kostka po trzy razy, az ktorys z graczy wyrzuci 6 - wtedy ustawia jeden ze 
+swoich pionkow na polu startowym i rzuca jeszcze raz, nastepnie przesuwa pionek w kierunku 
+zgodnym z ruchem wskazowek zegara. Jezeli ktorys gracz wyrzuci 6, moze rzucic jeszcze raz. Jesli podczas gry pionek jednego gracza stanie na polu zajmowanym przez drugiego, 
+pionek stojacy tutaj poprzednio zostaje zbity i wraca do swojego schowka. Kiedy gracz obejdzie pionkiem cala plansze dookola, wprowadza swoj pionek do domku.', 2, 4);
+
+insert into gry values('pilka', 'Gra rozgrywa sie na boisku o wymiarach 10x8 kratek, z bramkami o szerokosci 2 kratek. 
+Celem jest umieszczenie w bramce przeciwnika pilki, ktora na poczatku jest na srodku. 
+Koniec gry nastepuje tez gdy ktorys z graczy nie moze wykonac zadnego ruchu. W jednym ruchu pilka moze byc przemieszczona poziomo, 
+pionowo lub po ukosie. Trasa pilki jest oznaczona linia. Pilka nie moze przemieszczac sie po brzegu boiska ani liniach, ale moze sie od nich sie odbijac - 
+wtedy gracz wykonuje kolejny ruch.', 2, 2);
+
+insert into gry values('bierki', 'Gra polega na zbieraniu bierek tak aby nie poruszyc innych. 
+Bierki zostaja na poczatku rozsypane. Gracze kolejno zbieraja bierki w taki sposob aby nie poruszyc pozostalych bierek. 
+Dozwolone jest pomaganie sobie, wczesniej zebranymi bierkami. Jezeli jakakolwiek z lezacych bierek drgnie kolejka przechodzi na 
+nastepnego gracza. Gra konczy sie gdy wszystkie bierki zostana zebrane. Kaada z zebranych bierek ma okreslona wartosc punktowa. 
+Wygrywa gracz ktory zbierze najwiecej punktow.', 2, 4);
 
 insert into gracze values('alphazero', 'oro', 'bot');
 insert into gracze values('uzytkownik_slayer', 'xxx', 'bot');

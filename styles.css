@@ -276,8 +276,54 @@
       
       .gamebox {
           background-color: rgb(255, 174, 0);
-          width: 100%;
-          border-color: gold;
+          width: 80%;
+          height: 25vw;
+          padding: 0;
+      }
+      
+      .desc {
+          width: 50%;
+          height: 96%;
+          float: left;
+          padding-top: 1%;
+      }
+      
+      img.desc {
+          width: 50%;
+          height: 60%;
+          border-style: solid;
+          border-color: #942dcfab;
+          margin-left: 25%;
+          margin-right: 25%;
+          padding: 0;
+      }
+      
+      .desctxt {
+          font-size: 1vw;
+          color: rgb(20, 37, 187);
+          padding: 40% 0 0%;
+          font-family: Arial, Helvetica, sans-serif;
+          padding: 40% 1% 0% 1%;
+      }
+      
+      .gamebuttons {
+          float: right;
+          width: 50%;
+          height: 100%;
+      }
+      
+      h2 {
+          font-size: 7vw;
+          margin-top: 1%;
+          color: #942dcfab;
+          text-shadow: 2px 2px navy;
+          margin-bottom: 5%;
+      }
+      
+      .divider {
           border-style: double;
-          border-width: thick;
+          left: 50%;
+          position: absolute;
+          height: 99%;
+          color: gold;
       }

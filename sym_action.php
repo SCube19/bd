@@ -1,16 +1,3 @@
-<?php
-if ($_COOKIE['active_username'] == '') {
-    header('Location: login_page.php');
-    exit;
-}
-
-//odswiezenie strony cofa do sym
-if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
-    header('Location:game_panel.php?game=' . $game);
-    exit;
-}
-?>
-
 <html lang="en">
 
 <head>
@@ -41,15 +28,9 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
         $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
 
         if ($pageWasRefreshed) {
-            header('Location:sym.php?game=' . $game);
+            header('Location:game_panel.php?game=' . $game);
             exit;
         }
-
-        $game = $_GET['game'];
-        if ($game == '')
-            $game = "szachy";
-
-
 
         setcookie('last_page', 'sym_action.php?game=' . $game);
 
@@ -71,6 +52,26 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
 
         $opponent_count = rand($min_players, $max_players) - 1;
 
+        ///////////////////////////////////////// symulacja
+
+        //shuffle calego arraya botow moze byc wolne
+        function uniqueRandom($min, $max, $count)
+        {
+            $res = range($min, $max);
+            shuffle($res);
+            return array_slice($res, 0, $count);
+        }
+
+        $bot_rownums = uniqueRandom(0, $bot_query[1] - 1, $opponent_count);
+        $players = array();
+
+        for ($i = 0; $i < $opponent_count; $i++) {
+            $players[] = $bot_query[0]['NICK'][$bot_rownums[$i]];
+        }
+        $players[] = $_COOKIE['active_username'];
+
+        shuffle($players);
+
         //inserty
         $new_id = query($conn, "SELECT nvl(max(id), 0) + 1 x FROM h" . $game);
         $values = "" . $new_id[0]['X'][0];
@@ -87,7 +88,7 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
         oci_commit($conn);
 
         for ($i = 0; $i < $opponent_count + 1; $i++) {
-            echo '<h2>' . ($i + 1) . ': ' . $players[$i] . '</h2><br>';
+            echo '<h3>' . ($i + 1) . ': ' . $players[$i] . '</h3><br>';
         }
 
         oci_close($conn);
@@ -107,7 +108,7 @@ if ($_COOKIE['last_page'] == 'sym_action.php?game=' . $game) {
         echo '<a href="game_panel.php?game=' . $game . '">POWRÓT</a><br>'
         ?>
         <a href="logout.php">WYLOGUJ</a><br>
-        <a href='index.php'>STRONA GŁÓWNA</a><br>
+        <a href='index.php'>Strona główna</a><br>
     </div>
 
 </body>
