@@ -33,6 +33,7 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
 </head>
 
 <body>
+    <script type="text/JavaScript" src="ratings.js"></script>
     <div class="center pagetxt" style="background: linear-gradient(180deg, rgba(250,73,24,1) 0%, rgba(255,150,11,1) 100%);">
             <p class="symhead">WYNIK SYMULACJI</p>
             <?php
@@ -89,14 +90,22 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
             }
             for ($i = 0; $i < $max_players - $opponent_count - 1; $i++)
                 $values .= ",NULL";
-
+            
             query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
             oci_commit($conn);
-
+            
+            $formulas = query($conn, "SELECT formula from sposobyObliczania left join formuly on id_formuly=formuly.id where gra = '".$game."'");
+            
+            for($i = 0; $i < count($players); $i++)
+            {
+                echo '<script type="text/JavaScript">
+            document.getElementById("rating").innerHTML = String(rating("'.$result[0]['FORMULA'][0].'",'. $result[0]['PKT_RANKINGOWE'][0].', 1200, ["S", 1]));
+            </script>';
+            }
             if ($players[0] == $_COOKIE['active_username'])
-                echo '<div id="win">ZWYCIĘZCA</div><div id="winner" class="player">1. ' . $players[0] . '</div>';
+                echo '<div id="win">ZWYCIĘZCA</div><div id="winner" class="player">' . $players[0] . '</div>';
             else
-                echo '<div id="win">ZWYCIĘZCA</div><div id="winner">1. ' . $players[0] . '</div>';
+                echo '<div id="win">ZWYCIĘZCA</div><div id="winner">' . $players[0] . '</div>';
             echo '<div class="symbox">';
             
             for ($i = 1; $i < $opponent_count + 1; $i++) {
