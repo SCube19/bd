@@ -8,7 +8,7 @@
       }
       
       html {
-          background: linear-gradient(180deg, rgba(5, 5, 54, 1) 0%, rgba(0, 54, 106, 1) 51%, rgba(0, 103, 163, 1) 82%, rgba(0, 129, 255, 1) 100%);
+          background: linear-gradient(180deg, rgba(0, 0, 0, 1) 27%, rgba(14, 27, 101, 1) 71%, rgba(0, 122, 182, 1) 100%);
           min-height: 100%;
       }
       
@@ -385,11 +385,72 @@
           justify-content: center;
       }
       
+      a.ranking-user {
+          color: cyan;
+      }
+      
+      thead,
+      tbody {
+          font-size: 2vw;
+          text-align: center;
+          display: block;
+      }
+      
+      tbody {
+          height: 50vh;
+          overflow-y: auto;
+          overflow-x: hidden;
+      }
+      
+      td.playertd {
+          width: 40vw;
+      }
+      
+      td.ranktd {
+          width: 10vw;
+      }
+      
+      td.idtd {
+          width: 4.5vw;
+      }
+      
+      td,
+      th {
+          padding: 1vh;
+      }
+      
+      .header {
+          margin: 0;
+          text-align: center;
+          color: ghostwhite;
+      }
+      
+      h3 {
+          font-size: 3vw;
+          color: #df2be2;
+          font-weight: bold;
+          text-shadow: -1px 2px #fdff78;
+          margin-bottom: 1vh;
+          text-align: center;
+      }
+      
       table a {
+          color: black;
           display: block;
           text-decoration: none;
       }
       
-      a.ranking-user {
-          color: red;
+      .glow {
+          -webkit-animation: glow 3s ease-in-out infinite alternate;
+          -moz-animation: glow 3s ease-in-out infinite alternate;
+          animation: glow 3s ease-in-out infinite alternate;
+      }
+      
+      @-webkit-keyframes glow {
+          from {
+              text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e6a5e2, 0 0 40px #e761a4, 0 0 50px #c05289, 0 0 60px #db56c9, 0 0 70px #da6fda;
+          }
+          to {
+              text-shadow: 0 0 20px #fff, 0 0 30px #ffffff, 0 0 40px #cabdc4, 0 0 50px #f5ee91, 0 0 60px #afbd90, 0 0 70px #f6f466, 0 0 80px #c2e474;
+          }
       }

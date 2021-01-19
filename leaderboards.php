@@ -56,62 +56,66 @@ setcookie('last_page', 'leaderboards.php?game=' . $game);
             </form>
         </div>
     </div>
-    <div class="center">
-        <div class="pagetxt">
-            <?php
-            echo '<h1>RANKING ' . strtoupper($game) . '</h1>';
-            ?>
-            <?php
-            session_start();
+    <?php
+    echo '<h3 class="glow">RANKING ' . strtoupper($game) . '</h3>';
+    ?>
+    <?php
+    session_start();
 
-            require_once('query.php');
-            require_once('database_info.php');
-            if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
-                header("Location: error_page.php");
-                exit;
-            }
+    require_once('query.php');
+    require_once('database_info.php');
+    if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
+        header("Location: error_page.php");
+        exit;
+    }
 
-            $player = $_GET['player'];
-            if ($player == "")
-                $player = $_COOKIE['active_username'];
+    $player = $_GET['player'];
+    if ($player == "")
+        $player = $_COOKIE['active_username'];
 
-            $ranking = query($conn, "SELECT * from rankingAdvanced r join sposobyObliczania s on r.id_sposobu = s.id WHERE gra = '" . $game . "' ORDER BY PKT_RANKINGOWE DESC");
+    $ranking = query($conn, "SELECT * from rankingAdvanced r join sposobyObliczania s on r.id_sposobu = s.id WHERE gra = '" . $game . "' ORDER BY PKT_RANKINGOWE DESC");
 
-            $table_string = "";
-            for ($i = 0; $i < $ranking[1]; $i++) {
+    $table_string = "";
+    for ($i = 0; $i < $ranking[1]; $i++) {
+        if($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
+            $color = "red";
+        else if ($i % 2 == 0)
+            $color = "yellow";
+        else
+            $color = "orange";
 
-                $table_string .=
-                    '<tr>
-                        <td>' . $i . '</td>
-                        <td>
-                        <a href = "profile.php?player=' . $ranking[0]['NICK_GRACZA'][$i] . '"';
-                if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
-                    $table_string .= 'class="ranking-user"';
-                $table_string .= '>' .
-                    $ranking[0]['NICK_GRACZA'][$i]
-                    . '</a></td>
-                        <td>' . $ranking[0]['PKT_RANKINGOWE'][$i] . '</td>
-                    </tr>';
-            }
+        $table_string .=
+            '<tr style="background-color:' . $color . '">
+                <td class="idtd">' . ($i+1) . '</td>
+                <td class="playertd">
+                <a href = "profile.php?player=' . $ranking[0]['NICK_GRACZA'][$i] . '"';
+        if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
+            $table_string .= 'class="ranking-user"';
+        $table_string .= '>' .
+            $ranking[0]['NICK_GRACZA'][$i]
+            . '</a></td>
+                 <td class="ranktd">' . $ranking[0]['PKT_RANKINGOWE'][$i] . '</td>
+            </tr>';
+    }
 
 
-            echo '<table>
+
+    echo '<div class="center2"><table>
                     <thead>
                         <tr>
-                            <th>POZYCJA</th>
-                            <th>NICK</th>
-                            <th>ELO</th>
+                            <th class="header glow" style="width:4.5vw;">POZ.</th>
+                            <th class="header glow" style="width:40vw;">NICK</th>
+                            <th class="header glow" style="width:10vw;">ELO</th>
                         </tr>
                     </thead>
                     <tbody>'
-                . $table_string .
-                '</tbody>
-                </table>';
+        . $table_string .
+        '</tbody>
+                </table></div>';
 
-            ?>
+    ?>
 
-        </div>
-    </div>
+
 </body>
 
 </html>
