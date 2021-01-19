@@ -77,15 +77,6 @@
         </form></div>
             ';
 
-        //placeholdery
-        for ($i = 0; $i < 4; $i++)
-            echo '<div><div class="ranking"><a href="leaderboards.php"><div id="rank6"></div>
-        </a></div>
-        <form class="center2 history" action="history.php">
-        <input class="history" type="submit" value="HISTORIA ROZGRYWEK" />
-        </form></div>
-            ';
-        echo '</div>';
         ?>
     </div>
 

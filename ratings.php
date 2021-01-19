@@ -3,28 +3,27 @@
 function overrideLetters($formula, $mapping)
 {
     $expr = explode(" ", $formula);
-    for($i = 0; $i < count($expr); $i++)
-        if(($key = array_search($expr[$i], $mapping)) != false)
+    for ($i = 0; $i < count($expr); $i++)
+        if (($key = array_search($expr[$i], $mapping)) != false)
             $expr[$i] = $mapping[$key + 1];
-    
+
     return implode(" ", $expr);
 }
 
 function rating($formula, $rating, $opponentRating)
 {
     $mapping = array();
-    $mapping[] = "SEX";
+    $mapping[] = "Easteregg";
     $mapping[] = "E";
     $mapping[] = strval($opponentRating);
     $mapping[] = "R";
     $mapping[] = strval($rating);
 
-    for($i = 3; $i < func_num_args(); $i++)
-    { 
+    for ($i = 3; $i < func_num_args(); $i++) {
         $mapping[] = strval(func_get_arg($i)[0]);
         $mapping[] = strval(func_get_arg($i)[1]);
     }
-    
+
     return RPN::Calculate(overrideLetters($formula, $mapping));
 }
 
@@ -40,11 +39,11 @@ class RPN
 
         $pattern_array = explode(' ', str_replace("  ", " ", trim(self::$pattern)));
         $acceptable_operators = array("+", "-", "/", "*", "^");
-        $calculationResult='';
+        $calculationResult = '';
 
         if (count($pattern_array) == 1)
             return 'RPN::Calculate() requires more than 2 characters.';
-        elseif ( !in_array(end($pattern_array), $acceptable_operators) )
+        elseif (!in_array(end($pattern_array), $acceptable_operators))
             return 'RPN::Calculate() requires the last character to be an operator';
 
         foreach ($pattern_array as $value) {
@@ -73,10 +72,10 @@ class RPN
                 }
                 array_push($numbers, $calculationResult);
             } else {
-                return 'RPN::Calculate() found an invalid character of '.$value . '. This character is not allowed.';
+                return 'RPN::Calculate() found an invalid character of ' . $value . '. This character is not allowed.';
             }
         }
         return floor($calculationResult);
     }
 }
-?>
+

@@ -144,7 +144,6 @@ WHERE gra = '".$game."' and nazwa='".$formula."' ORDER BY PKT_RANKINGOWE DESC");
 
     ?>
 
-
 </body>
 
 </html>
