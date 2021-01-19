@@ -448,9 +448,19 @@
       
       @-webkit-keyframes glow {
           from {
-              text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e6a5e2, 0 0 40px #e761a4, 0 0 50px #c05289, 0 0 60px #db56c9, 0 0 70px #da6fda;
+              text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #e761a4, 0 0 60px #db56c9, 0 0 70px #da6fda;
           }
           to {
-              text-shadow: 0 0 20px #fff, 0 0 30px #ffffff, 0 0 40px #cabdc4, 0 0 50px #f5ee91, 0 0 60px #afbd90, 0 0 70px #f6f466, 0 0 80px #c2e474;
+              text-shadow: 0 0 20px #fff, 0 0 30px #ffffff, 0 0 50px #f5ee91, 0 0 70px #f6f466, 0 0 80px #c2e474;
           }
+      }
+      
+      .choose {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-50%);
+          color: rgba(10, 10, 86, 0.902);
+          font-size: 2.5vw;
+          letter-spacing: 7px;
       }

@@ -7,6 +7,23 @@ if ($game == '')
     $game = 'szachy';
 
 setcookie('last_page', 'leaderboards.php?game=' . $game);
+
+require_once('query.php');
+require_once('database_info.php');
+if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
+    header("Location: error_page.php");
+    exit;
+}
+
+$player = $_GET['player'];
+if ($player == "")
+    $player = $_COOKIE['active_username'];
+
+$formula = query($conn, "SELECT ");
+$formulas = query($conn, "SELECT");
+$games = query($conn, "SELECT nazwa from gry");
+$ranking = query($conn, "SELECT * from rankingAdvanced r join sposobyObliczania s on r.id_sposobu = s.id WHERE gra = '" . $game . "' ORDER BY PKT_RANKINGOWE DESC");
+
 ?>
 
 <!doctype html>
@@ -29,9 +46,16 @@ setcookie('last_page', 'leaderboards.php?game=' . $game);
 
         <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
 
-        <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
-        <script src="clock.js">
-        </script>
+        <select class="choose" name=":0">
+            <option>:)</option>
+            <option>:D</option>
+            <option>XD</option>
+            <option>;0</option>
+            <option>;d</option>
+            <option>:p</option>
+            <option>siur</option>
+            <option>hihi</option>
+        </select>
 
         <div class="right">
             <?php if (isset($_COOKIE['active_username'])) : ?>
@@ -60,24 +84,10 @@ setcookie('last_page', 'leaderboards.php?game=' . $game);
     echo '<h3 class="glow">RANKING ' . strtoupper($game) . '</h3>';
     ?>
     <?php
-    session_start();
-
-    require_once('query.php');
-    require_once('database_info.php');
-    if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32UTF8'))) {
-        header("Location: error_page.php");
-        exit;
-    }
-
-    $player = $_GET['player'];
-    if ($player == "")
-        $player = $_COOKIE['active_username'];
-
-    $ranking = query($conn, "SELECT * from rankingAdvanced r join sposobyObliczania s on r.id_sposobu = s.id WHERE gra = '" . $game . "' ORDER BY PKT_RANKINGOWE DESC");
 
     $table_string = "";
     for ($i = 0; $i < $ranking[1]; $i++) {
-        if($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
+        if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
             $color = "red";
         else if ($i % 2 == 0)
             $color = "yellow";
@@ -86,7 +96,7 @@ setcookie('last_page', 'leaderboards.php?game=' . $game);
 
         $table_string .=
             '<tr style="background-color:' . $color . '">
-                <td class="idtd">' . ($i+1) . '</td>
+                <td class="idtd">' . ($i + 1) . '</td>
                 <td class="playertd">
                 <a href = "profile.php?player=' . $ranking[0]['NICK_GRACZA'][$i] . '"';
         if ($ranking[0]['NICK_GRACZA'][$i] == $_COOKIE['active_username'])
@@ -97,8 +107,6 @@ setcookie('last_page', 'leaderboards.php?game=' . $game);
                  <td class="ranktd">' . $ranking[0]['PKT_RANKINGOWE'][$i] . '</td>
             </tr>';
     }
-
-
 
     echo '<div class="center2"><table>
                     <thead>
