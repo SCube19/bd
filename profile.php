@@ -46,6 +46,14 @@
             echo '<div class="left">' . $result[0]['TYP_GRACZA'][0] . '</div>';
         if ($result[0]['TYP_GRACZA'][0] == 'admin')
             echo '</a>';
+        
+        if($result[0]['NICK'][0] == $_COOKIE['active_username'])
+            echo '<div class="del">
+            <a href="del.php">
+                USUN KONTO
+            </a>
+                </div>';
+
         echo '<div id="nick">' . $player . '</div>';
         ?>
 

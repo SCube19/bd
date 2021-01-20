@@ -487,3 +487,16 @@
           border: 2px solid #b7658b;
           box-shadow: 1px 1px black;
       }
+      
+      .del a {
+          margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 25%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          text-decoration: underline;
+          text-decoration-style: double;
+          text-shadow: 2px 2px rgb(139, 51, 48);
+          color: rgb(187, 31, 20);
+      }
