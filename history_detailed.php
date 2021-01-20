@@ -2,12 +2,7 @@
 session_start();
 $game = htmlspecialchars($_GET['game']);
 $id = htmlspecialchars($_GET['id']);
-
-$player = $_COOKIE['active_username'];
-if ($player == "") {
-    header("Location: " . $_COOKIE['last_page'] . ".php");
-    exit;
-}
+$player = htmlspecialchars($_GET['player']);
 
 setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '');
 ?>
@@ -30,7 +25,6 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
 <body>
 
     <div class="up">
-
         <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
 
         <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
@@ -38,20 +32,22 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
         </script>
 
         <div class="right">
-            <?php if (isset($_COOKIE['active_username'])) : ?>
-                <form action="profile.php">
+            <?php if ($_COOKIE['active_username'] == $player)
+                echo '<form action="profile.php">
                     <input type="submit" value="PROFIL" />
-                </form>
-            <?php else : ?>
-                <form action="login_page.php">
+                </form>';
+            else
+                echo '<form>
+                <input type="button" value="POWRÓT" onclick="history.back()">
+               </form>';
+            if (!isset($_COOKIE['active_username'])) {
+                echo '<form action="login_page.php">
                     <input type="submit" value="ZALOGUJ" />
-                </form>
-                <form action="registration_page.php">
-                    <input type="submit" value="ZAREJESTRUJ" />
-                </form>
-            <?php endif;
-            echo '<form action="leaderboards.php">
-        <input type="submit" value="RANKINGI" />
+                </form>';
+            }
+
+            echo '<form action="index.php">
+        <input type="submit" value="STRONA GŁÓWNA" />
     </form>';
 
             if (isset($_COOKIE['active_username']))
@@ -59,6 +55,7 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
             <input type="submit" value="WYLOGUJ" />
         </form>';
             ?>
+
         </div>
     </div>
 
@@ -91,10 +88,10 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
                     <table>
                     <thead>
                         <tr>
-                        <th class="header glow" style="width:4.5vw;">TURA</th>';
+                        <th class="header glow" style="width:5vw;">TURA</th>';
 
     for ($i = 0; $i < $player_count; $i++)
-        $table_header .= '<th class="header glow" style="width:40vw;">' . $table_arr[$i] . '</th>';
+        $table_header .= '<th class="header glow" style="width:20vw;">' . $table_arr[$i] . '</th>';
 
     $table_header .= '</tr>
                     </thead>';
@@ -103,12 +100,26 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
 
     $table_body = '';
 
-    $table_body .= '<tr>';
+    $color = "yellow";
+    $isTurn = true;
+    $table_body .= '<tr style="background-color:'.$color.';">';
     for ($i = $player_count; $i < $table_arr_size; $i++) {
-        $table_body .= '<td>' . $table_arr[$i] . '</td>';
+        if($isTurn)
+            $cls = "turn";
+        else
+            $cls = "notation";
 
-        if (($i + 2) % ($player_count + 1) == 0) 
-            $table_body .= '</tr><tr>';
+        $table_body .= '<td class="'.$cls.'">' . $table_arr[$i] . '</td>';
+    
+        $isTurn = false;
+        if ($i + 2 > $player_count * 2 && $i + 2 < $table_arr_size - 1 && ($i + 2) % ($player_count + 1) == 0) {
+            if($color == "yellow")
+                $color = "orange";
+            else
+                $color = "yellow";
+            $isTurn = true;
+            $table_body .= '</tr><tr style="background-color:'.$color.';">';
+        }
     }
     $table_body .= '</tr>';
     $table_string = $table_header .

@@ -136,7 +136,8 @@
           border-radius: 40px;
       }
       
-      input[type=submit]:hover {
+      input[type=submit]:hover,
+      input[type=button]:hover {
           background-color: #2cc1db;
           color: rgb(216, 42, 42)
       }
@@ -502,5 +503,9 @@
       }
       
       .notation {
-          color: gold;
+          width: 20vw;
+      }
+      
+      .turn {
+          width: 5vw;
       }

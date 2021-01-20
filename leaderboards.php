@@ -91,14 +91,15 @@ WHERE gra = '" . $game . "' and nazwa='" . $formula . "' ORDER BY PKT_RANKINGOWE
                     <input type="submit" value="ZAREJESTRUJ" />
                 </form>
             <?php endif;
+            echo '<form action="index.php">
+                <input type="submit" value="STRONA GŁÓWNA" />
+            </form>';
+
             if (isset($_COOKIE['active_username']))
                 echo '<form action="logout.php">
-            <input type="submit" value="WYLOGUJ" />
-        </form>';
+                    <input type="submit" value="WYLOGUJ" />
+                </form>';
             ?>
-            <form action="index.php">
-                <input type="submit" value="STRONA GŁÓWNA" />
-            </form>
         </div>
     </div>
     <?php

@@ -9,12 +9,8 @@ if ($game == '')
 $player = htmlspecialchars($_GET['player']);
 if ($player == "")
     $player = $_COOKIE['active_username'];
-if ($player == "") {
-    header("Location: " . $_COOKIE['last_page'] . ".php");
-    exit;
-}
 
-setcookie('last_page', 'leaderboards.php?game=' . $game . '');
+setcookie('last_page', 'history.php?game=' . $game . '&player=' . $player . '');
 ?>
 
 <!doctype html>
@@ -44,18 +40,20 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
         </script>
 
         <div class="right">
-            <?php if (isset($_COOKIE['active_username'])) : ?>
-                <form action="profile.php">
+            <?php if ($_COOKIE['active_username'] == $player)
+                echo '<form action="profile.php">
                     <input type="submit" value="PROFIL" />
-                </form>
-            <?php else : ?>
-                <form action="login_page.php">
+                </form>';
+                else
+                echo '<form>
+                <input type="button" value="POWRÓT" onclick="history.back()">
+               </form>';
+            if (!isset($_COOKIE['active_username'])) {
+                echo '<form action="login_page.php">
                     <input type="submit" value="ZALOGUJ" />
-                </form>
-                <form action="registration_page.php">
-                    <input type="submit" value="ZAREJESTRUJ" />
-                </form>
-            <?php endif;
+                </form>';
+            }
+
             echo '<form action="index.php">
         <input type="submit" value="STRONA GŁÓWNA" />
     </form>';
@@ -85,7 +83,7 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
         $places = count($histories[0]) - 3;
         echo '<div class="ranking">';
         for ($i = 0; $i < $histories[1]; $i++) {
-            echo '<a href="history_detailed.php?id=' . $histories[0]['ID'][$i] . '&game=' . $game . '"><div class="gameHis"';
+            echo '<a href="history_detailed.php?id=' . $histories[0]['ID'][$i] . '&game=' . $game . '&player='.$player.'"><div class="gameHis"';
             if ($histories[0]['MIEJSCE_1'][$i] == $player)
                 echo 'style="background-color:#149f44;"><div class="hisHead">WYGRANA';
             else

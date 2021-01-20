@@ -18,7 +18,7 @@
         header("Location: " . $_COOKIE['last_page'] . ".php");
         exit;
     }
-
+    setcookie('last_page', 'profile.php?player=' . $player . '');
     echo '<link rel="stylesheet" href="profile_styles.php?player=' . $player . '">';
     ?>
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
@@ -40,14 +40,14 @@
 
         $result = query($conn, "SELECT * FROM gracze WHERE nick='" . $player . "'");
 
-        if ($result[0]['TYP_GRACZA'][0] == 'admin' && $result[0]['NICK'][0] == $_COOKIE['active_username'])
+        if ($result[0]['TYP_GRACZA'][0] == 'admin' && $player == $_COOKIE['active_username'])
             echo '<a href="admin_panel.php">';
         if ($result[0]['TYP_GRACZA'][0] != 'uzytkownik')
             echo '<div class="left">' . $result[0]['TYP_GRACZA'][0] . '</div>';
-        if ($result[0]['TYP_GRACZA'][0] == 'admin')
+        if ($result[0]['TYP_GRACZA'][0] == 'admin' && $player == $_COOKIE['active_username'])
             echo '</a>';
 
-        if ($result[0]['NICK'][0] == $_COOKIE['active_username'])
+        if ($player == $_COOKIE['active_username'])
             echo '<div class="del">
             <a href="del.php">
                 USUN KONTO
@@ -59,12 +59,23 @@
 
 
         <div class="right">
-            <form action="index.php">
-                <input type="submit" value="STRONA GŁÓWNA" />
-            </form>
-            <form action="logout.php">
+            <?php
+            if ($_COOKIE['active_username'] == "")
+                echo '<form action="login_page.php">
+                <input type="submit" value="ZALOGUJ" />
+                 </form>';
+            echo '<form action="index.php">
+            <input type="submit" value="STRONA GŁÓWNA" />
+         </form>';
+            if ($player == $_COOKIE['active_username'])
+                echo '<form action="logout.php">
                 <input type="submit" value="WYLOGUJ" />
-            </form>
+            </form>';
+            if($player != $_COOKIE['active_username'])
+                echo '<form action="leaderboards.php">
+                <input type="submit" value="POWRÓT DO RANKINGÓW" />
+            </form>';
+            ?>
         </div>
     </div>
 
