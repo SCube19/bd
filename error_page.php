@@ -15,7 +15,8 @@
 </head>
 
 <body>
-    <div class="center">Something happened. I'm sowwy. Will you forgive me, pretty please?</div>
+    <div class="center pagetxt"><h3>Something happened. I'm sowwy. Will you forgive me, pretty please?</h3>
     <img class="centerImage" src="https://cdn131.picsart.com/321754608035211.png?type=webp&to=min&r=1280">
+    </div>
 </body>
 </html>
