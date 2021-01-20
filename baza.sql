@@ -52,7 +52,7 @@ create table hBierki(
     miejsce_2 varchar2(20) not null references gracze,
     miejsce_3 varchar2(20) references gracze,
     miejsce_4 varchar2(20) references gracze,
-    historia varchar2(300) not null
+    historia varchar2(600) not null
 );
 
 create table hPilka(
@@ -68,7 +68,7 @@ create table hChinczyk(
     miejsce_2 varchar2(20) not null references gracze,
     miejsce_3 varchar2(20) references gracze,
     miejsce_4 varchar2(20) references gracze,
-    historia varchar2(300) not null
+    historia varchar2(600) not null
 );
 
 create table rozgrywki(
