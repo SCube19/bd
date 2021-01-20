@@ -108,7 +108,7 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
 
         $multiplier = 1;
         if ($game == 'bierki' || $game == 'chinczyk')
-            $multiplier = 3;
+            $multiplier = 5;
 
         query($conn, "UPDATE rankingAdvanced SET PKT_RANKINGOWE = " . intval($win_rank + $multiplier * (rating($formulas[0]['FORMULA'][0], $win_rank, $max_loser, ["S", 1]) - $win_rank)) .
             " where nick_gracza = '" . $players[0] . "' and id_sposobu = (SELECT id from sposobyObliczania where gra = '" . $game . "' and id_formuly=0)");

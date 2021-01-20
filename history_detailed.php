@@ -33,6 +33,10 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
 
         <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
 
+        <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+        <script src="clock.js">
+        </script>
+
         <div class="right">
             <?php if (isset($_COOKIE['active_username'])) : ?>
                 <form action="profile.php">
@@ -46,14 +50,15 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
                     <input type="submit" value="ZAREJESTRUJ" />
                 </form>
             <?php endif;
+            echo '<form action="leaderboards.php">
+        <input type="submit" value="RANKINGI" />
+    </form>';
+
             if (isset($_COOKIE['active_username']))
                 echo '<form action="logout.php">
-                    <input type="submit" value="WYLOGUJ" />
-                    </form>';
+            <input type="submit" value="WYLOGUJ" />
+        </form>';
             ?>
-            <form action="index.php">
-                <input type="submit" value="STRONA GŁÓWNA" />
-            </form>
         </div>
     </div>
 
@@ -69,16 +74,14 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
 
     $notation = query($conn, "SELECT * from h" . $game . " where id=" . $id . "");
 
-    // echo '<div class=notation>' . $notation[0]['HISTORIA'][0] . '</div>';
-
     $arr_size = count($notation[0]);
 
     $player_count = 0;
     $miejsce = 'MIEJSCE_';
-    for ($i = 1; $i < $arr_size-1; $i++) {
-        $miejsce_tmp = $miejsce.$i;
+    for ($i = 1; $i < $arr_size - 1; $i++) {
+        $miejsce_tmp = $miejsce . $i;
         if ($notation[0][$miejsce_tmp][0] != '')
-            $player_count++; 
+            $player_count++;
     }
 
     $notation = $notation[0]['HISTORIA'][0];
@@ -91,7 +94,7 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
                         <th class="header glow" style="width:4.5vw;">TURA</th>';
 
     for ($i = 0; $i < $player_count; $i++)
-        $table_header .= '<th class="header glow" style="width:40vw;">'.$table_arr[$i].'</th>';
+        $table_header .= '<th class="header glow" style="width:40vw;">' . $table_arr[$i] . '</th>';
 
     $table_header .= '</tr>
                     </thead>';
@@ -99,18 +102,19 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
     $table_arr_size = count($table_arr);
 
     $table_body = '';
-    
+
+    $table_body .= '<tr>';
     for ($i = $player_count; $i < $table_arr_size; $i++) {
-        $table_body .= '<td>'.$table_arr[$i].'</td>';
+        $table_body .= '<td>' . $table_arr[$i] . '</td>';
 
-        if (($i+2) % ($player_count+1) == 0)
-            $table_body .= '</tr>';
+        if (($i + 2) % ($player_count + 1) == 0) 
+            $table_body .= '</tr><tr>';
     }
-
-    $table_string = $table_header.
-                    '<tbody>'
-                    . $table_body .
-                    '</tbody>
+    $table_body .= '</tr>';
+    $table_string = $table_header .
+        '<tbody>'
+        . $table_body .
+        '</tbody>
                     </table>
                     </div>';
 
