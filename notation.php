@@ -82,7 +82,7 @@ function notation($game, $players)
         $rNotation .= ($i + 1) . '.' . $pls[$i] . ' ';
     $rNotation .= '] ';
 
-    $maxSize = 500;
+    $maxSize = 600 - strlen($rNotation);
     $maxMove = 16;
     if ($game == 'bierki')
         $maxMove = 12;
