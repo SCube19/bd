@@ -100,13 +100,13 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
                 $values .= ludoN();
                 break;
             case 'pilka':
-                $values .= soccerN();
+                $values .= soccerN($players);
                 break;
             case 'szachy':
                 $values .= chessN($players);
                 break;
             case 'warcaby':
-                $values .= checkersN();
+                $values .= checkersN($players);
                 break;
             default:
         }

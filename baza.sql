@@ -35,13 +35,15 @@ create table gracze(
 create table hSzachy(
     id number(6) primary key,
     miejsce_1 varchar2(20) not null references gracze,
-    miejsce_2 varchar2(20) not null references gracze
+    miejsce_2 varchar2(20) not null references gracze,
+    historia varchar2(600) not null
 );
 
 create table hWarcaby(
     id number(6) primary key,
     miejsce_1 varchar2(20) not null references gracze,
-    miejsce_2 varchar2(20) not null references gracze
+    miejsce_2 varchar2(20) not null references gracze,
+    historia varchar2(600) not null
 );
 
 create table hBierki(
@@ -49,13 +51,15 @@ create table hBierki(
     miejsce_1 varchar2(20) not null references gracze,
     miejsce_2 varchar2(20) not null references gracze,
     miejsce_3 varchar2(20) references gracze,
-    miejsce_4 varchar2(20) references gracze
+    miejsce_4 varchar2(20) references gracze,
+    historia varchar2(300) not null
 );
 
 create table hPilka(
     id number(6) primary key,
     miejsce_1 varchar2(20) not null references gracze,
-    miejsce_2 varchar2(20) not null references gracze
+    miejsce_2 varchar2(20) not null references gracze,
+    historia varchar2(600) not null
 );
 
 create table hChinczyk(
@@ -63,7 +67,8 @@ create table hChinczyk(
     miejsce_1 varchar2(20) not null references gracze,
     miejsce_2 varchar2(20) not null references gracze,
     miejsce_3 varchar2(20) references gracze,
-    miejsce_4 varchar2(20) references gracze
+    miejsce_4 varchar2(20) references gracze,
+    historia varchar2(300) not null
 );
 
 create table rozgrywki(
@@ -349,7 +354,8 @@ insert into gracze values('abc', 'xxx', 'bot');
 insert into gracze values('marek', 'xxx', 'bot');
 insert into gracze values('scube420', 'xxx', 'bot');
 insert into gracze values('quebonafide', 'xxx', 'bot');
-insert into gracze values('kk418331', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'admin');
+insert into gracze values('kk418331', 'a5e0467f5f947628892806b645f7641ecacd179e', 'admin');
 
 commit;
 
+select * from gracze;
