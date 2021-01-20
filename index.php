@@ -10,7 +10,7 @@ setcookie('last_page', 'index.php', time() + 300);
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
@@ -49,7 +49,7 @@ setcookie('last_page', 'index.php', time() + 300);
             ?>
         </div>
     </div>
-    
+
     <?php
     require_once('database_info.php');
     require_once('query.php');

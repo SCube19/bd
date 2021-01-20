@@ -1,25 +1,25 @@
 <!doctype html>
 
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="utf-8">
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <?php
-        $player = htmlspecialchars($_GET['player']);
-        if ($player == "")
-            $player = $_COOKIE['active_username'];
-        if ($player == "") {
-            header("Location: " . $_COOKIE['last_page'] . ".php");
-            exit;
-        }
+    $player = htmlspecialchars($_GET['player']);
+    if ($player == "")
+        $player = $_COOKIE['active_username'];
+    if ($player == "") {
+        header("Location: " . $_COOKIE['last_page'] . ".php");
+        exit;
+    }
 
-        echo '<link rel="stylesheet" href="profile_styles.php?player=' . $player . '">';
+    echo '<link rel="stylesheet" href="profile_styles.php?player=' . $player . '">';
     ?>
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 
@@ -46,8 +46,8 @@
             echo '<div class="left">' . $result[0]['TYP_GRACZA'][0] . '</div>';
         if ($result[0]['TYP_GRACZA'][0] == 'admin')
             echo '</a>';
-        
-        if($result[0]['NICK'][0] == $_COOKIE['active_username'])
+
+        if ($result[0]['NICK'][0] == $_COOKIE['active_username'])
             echo '<div class="del">
             <a href="del.php">
                 USUN KONTO

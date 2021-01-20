@@ -19,14 +19,14 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
 ?>
 
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="utf-8">
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
@@ -41,6 +41,7 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
         require_once('query.php');
         require_once('ratings.php');
         require_once('query.php');
+        require_once('notation.php');
 
         if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
             header('Location:error_page.php');
@@ -92,6 +93,25 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
         for ($i = 0; $i < $max_players - $opponent_count - 1; $i++)
             $values .= ",NULL";
 
+        switch ($game) {
+            case 'bierki':
+                $values .= piecesN();
+                break;
+            case 'chinczyk':
+                $values .= ludoN();
+                break;
+            case 'pilka':
+                $values .= soccerN();
+                break;
+            case 'szachy':
+                $values .= chessN();
+                break;
+            case 'warcaby':
+                $values .= checkersN();
+                break;
+            default:
+        }
+        
         query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
         oci_commit($conn);
 
@@ -99,7 +119,7 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
         $formulas = query($conn, "SELECT * from sposobyObliczania left join formuly on id_formuly=formuly.id where gra = '" . $game . "'");
         $tmp = query($conn, "SELECT pkt_rankingowe from rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id where nick_gracza = '" . $players[0] . "' and gra = '" . $game . "' order by r.id_sposobu");
         $win_rank = $tmp[0]['PKT_RANKINGOWE'][0];
-        
+
         for ($i = 1; $i < count($players); $i++) {
             $tmp = query($conn, "SELECT pkt_rankingowe from rankingAdvanced r left join sposobyObliczania s on r.id_sposobu = s.id where nick_gracza = '" . $players[$i] . "' and gra = '" . $game . "'order by r.id_sposobu");
             $ranks[] = $tmp[0]['PKT_RANKINGOWE'][0];
@@ -107,9 +127,9 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
         $max_loser = max($ranks);
 
         $multiplier = 1;
-        if($game == 'bierki' || $game == 'chinczyk')
+        if ($game == 'bierki' || $game == 'chinczyk')
             $multiplier = 3;
-        
+
         query($conn, "UPDATE rankingAdvanced SET PKT_RANKINGOWE = " . intval($win_rank + $multiplier * (rating($formulas[0]['FORMULA'][0], $win_rank, $max_loser, ["S", 1]) - $win_rank)) .
             " where nick_gracza = '" . $players[0] . "' and id_sposobu = (SELECT id from sposobyObliczania where gra = '" . $game . "' and id_formuly=0)");
         oci_commit($conn);
@@ -126,19 +146,10 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
             case 'chinczyk':
                 $win_rank = $tmp[0]['PKT_RANKINGOWE'][1];
                 query($conn, "UPDATE rankingAdvanced SET PKT_RANKINGOWE = " . rating($formulas[0]['FORMULA'][1], $win_rank, $max_loser) .
-                " where nick_gracza = '" . $players[0] . "' and id_sposobu = (SELECT id from sposobyObliczania where gra = '" . $game . "' and id_formuly=".$formulas[0]['ID_FORMULY'][1].")");
+                    " where nick_gracza = '" . $players[0] . "' and id_sposobu = (SELECT id from sposobyObliczania where gra = '" . $game . "' and id_formuly=" . $formulas[0]['ID_FORMULY'][1] . ")");
                 oci_commit($conn);
-               
                 break;
-            case 'pilka':
 
-                break;
-            case 'szachy':
-
-                break;
-            case 'warcaby':
-
-                break;
             default:
         }
         oci_close($conn);

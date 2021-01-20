@@ -3,7 +3,7 @@ session_start();
 $game = htmlspecialchars($_GET['game']);
 if ($game == '')
     $game = $_GET['game'];
-if($game == '')
+if ($game == '')
     $game = $_COOKIE['last_game'];
 if ($game == '')
     $game = 'szachy';
@@ -23,28 +23,28 @@ if ($player == "")
     $player = $_COOKIE['active_username'];
 
 $formula = $_GET['formula'];
-if($formula == '')
+if ($formula == '')
     $formula = query($conn, "SELECT nazwa from formuly where id=0")[0]['NAZWA'][0];
 
 
-$formulas = query($conn, "SELECT nazwa from formuly left join sposobyObliczania s on formuly.id = s.id_formuly where gra = '".$game."'");
+$formulas = query($conn, "SELECT nazwa from formuly left join sposobyObliczania s on formuly.id = s.id_formuly where gra = '" . $game . "'");
 $games = query($conn, "SELECT nazwa from gry");
 $ranking = query($conn, "SELECT nick_gracza, pkt_rankingowe, nazwa
 from rankingAdvanced r left join sposobyObliczania s left join formuly f on s.id_formuly = f.id on r.id_sposobu = s.id
-WHERE gra = '".$game."' and nazwa='".$formula."' ORDER BY PKT_RANKINGOWE DESC");
+WHERE gra = '" . $game . "' and nazwa='" . $formula . "' ORDER BY PKT_RANKINGOWE DESC");
 
 ?>
 
 <!doctype html>
 
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="utf-8">
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
@@ -56,28 +56,28 @@ WHERE gra = '".$game."' and nazwa='".$formula."' ORDER BY PKT_RANKINGOWE DESC");
         <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
 
         <?php
-            echo 
-            '<div class="choose">
+        echo
+        '<div class="choose">
             <div style="float:left;" class="fullform">
             <form action="leaderboards.php" method="get">
             <select name="game">
             <option value="" disabled selected>Wybierz gre</option>';
-            for($i = 0; $i < $games[1]; $i++)
-                echo '<option value="'.$games[0]['NAZWA'][$i].'">'.strtoupper($games[0]['NAZWA'][$i]).'</option>';
-            echo '</select>
+        for ($i = 0; $i < $games[1]; $i++)
+            echo '<option value="' . $games[0]['NAZWA'][$i] . '">' . strtoupper($games[0]['NAZWA'][$i]) . '</option>';
+        echo '</select>
             <input class="rnk" type="submit" value="WYBIERZ">
             </form></div>';
 
-            echo '<div style="float:right;"class="fullform"><form action="leaderboards.php" method="get">
+        echo '<div style="float:right;"class="fullform"><form action="leaderboards.php" method="get">
             <select name="formula">
             <option value="" disabled selected>Wybierz rodzaj</option>';
-            for($i = 0; $i < $formulas[1]; $i++)
-                echo '<option value='.$formulas[0]['NAZWA'][$i].'>'.strtoupper($formulas[0]['NAZWA'][$i]).'</option>';
-            echo '</select>
+        for ($i = 0; $i < $formulas[1]; $i++)
+            echo '<option value=' . $formulas[0]['NAZWA'][$i] . '>' . strtoupper($formulas[0]['NAZWA'][$i]) . '</option>';
+        echo '</select>
             <input class="rnk" type="submit" value="WYBIERZ">
             </form></div></div>';
         ?>
-        
+
         <div class="right">
             <?php if (isset($_COOKIE['active_username'])) : ?>
                 <form action="profile.php">
@@ -134,7 +134,7 @@ WHERE gra = '".$game."' and nazwa='".$formula."' ORDER BY PKT_RANKINGOWE DESC");
                         <tr>
                             <th class="header glow" style="width:4.5vw;">POZ.</th>
                             <th class="header glow" style="width:40vw;">NICK</th>
-                            <th class="header glow" style="width:10vw;">'.strtoupper($formula).'</th>
+                            <th class="header glow" style="width:10vw;">' . strtoupper($formula) . '</th>
                         </tr>
                     </thead>
                     <tbody>'

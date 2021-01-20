@@ -19,7 +19,7 @@ if (isset($_COOKIE['active_username'])) {
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">

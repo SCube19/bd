@@ -497,6 +497,6 @@
           transform: translate(-50%, -50%);
           text-decoration: underline;
           text-decoration-style: double;
-          text-shadow: 2px 2px rgb(139, 51, 48);
+          text-shadow: 1px 1px rgb(139, 51, 48);
           color: rgb(187, 31, 20);
       }

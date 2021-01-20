@@ -10,7 +10,7 @@ $player = htmlspecialchars($_GET['player']);
 if ($player == "")
     $player = $_COOKIE['active_username'];
 if ($player == "") {
-    header("Location: ".$_COOKIE['last_page'].".php");
+    header("Location: " . $_COOKIE['last_page'] . ".php");
     exit;
 }
 
@@ -19,14 +19,14 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
 
 <!doctype html>
 
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="utf-8">
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
@@ -85,7 +85,7 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
         $places = count($histories[0]) - 3;
         echo '<div class="ranking">';
         for ($i = 0; $i < $histories[1]; $i++) {
-            echo '<div class="gameHis"';
+            echo '<a href="history_detailed.php?id=' . $histories[0]['ID'][$i] . '&game=' . $game . '"><div class="gameHis"';
             if ($histories[0]['MIEJSCE_1'][$i] == $player)
                 echo 'style="background-color:#149f44;"><div class="hisHead">WYGRANA';
             else
@@ -102,7 +102,7 @@ setcookie('last_page', 'leaderboards.php?game=' . $game . '');
                         echo '</div>';
                 }
             }
-            echo '</div>';
+            echo '</div></a>';
         }
         echo '</div>'
         ?>

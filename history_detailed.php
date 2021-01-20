@@ -1,3 +1,17 @@
+<?php
+session_start();
+$game = htmlspecialchars($_GET['game']);
+$id = htmlspecialchars($_GET['id']);
+
+$player = $_COOKIE['active_username'];
+if ($player == "") {
+    header("Location: " . $_COOKIE['last_page'] . ".php");
+    exit;
+}
+
+setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '');
+?>
+
 <!doctype html>
 
 <html lang="pl">
@@ -14,10 +28,8 @@
 </head>
 
 <body>
-    <div class="center pagetxt">
-        <h3>Something happened. I'm sowwy. Will you forgive me, pretty please?</h3>
-        <img class="centerImage" src="https://cdn131.picsart.com/321754608035211.png?type=webp&to=min&r=1280">
-    </div>
+
+    
 </body>
 
 </html>

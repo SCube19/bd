@@ -14,50 +14,50 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
 
     <title>Gry.mimuw</title>
     <meta name="description" content="gierki">
-    <meta name="author" content="SitePoint">
+    <meta name="author" content="kk418331+kj418271">
 
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="https://www.mimuw.edu.pl/sites/default/files/mim_mini.png" type="image/png">
 </head>
 
 <body>
-<div class="up">
+    <div class="up">
 
-<img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
+        <img class="left" src="https://www.mimuw.edu.pl/sites/all/themes/mimuwtheme/images/MIM_logo_sygnet_pl.png">
 
-<div id="MyClockDisplay" class="clock" onload="showTime()"></div>
-<script src="clock.js">
-</script>
+        <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+        <script src="clock.js">
+        </script>
 
-<div class="right">
-    <?php if (isset($_COOKIE['active_username'])) : ?>
-        <form action="profile.php">
-            <input type="submit" value="PROFIL" />
-        </form>
-    <?php else : ?>
-        <form action="login_page.php">
-            <input type="submit" value="ZALOGUJ" />
-        </form>
-        <form action="registration_page.php">
-            <input type="submit" value="ZAREJESTRUJ" />
-        </form>
-    <?php endif;
-    echo '<form action="leaderboards.php">
+        <div class="right">
+            <?php if (isset($_COOKIE['active_username'])) : ?>
+                <form action="profile.php">
+                    <input type="submit" value="PROFIL" />
+                </form>
+            <?php else : ?>
+                <form action="login_page.php">
+                    <input type="submit" value="ZALOGUJ" />
+                </form>
+                <form action="registration_page.php">
+                    <input type="submit" value="ZAREJESTRUJ" />
+                </form>
+            <?php endif;
+            echo '<form action="leaderboards.php">
         <input type="submit" value="RANKINGI" />
     </form>';
 
-    if (isset($_COOKIE['active_username']))
-        echo '<form action="logout.php">
+            if (isset($_COOKIE['active_username']))
+                echo '<form action="logout.php">
             <input type="submit" value="WYLOGUJ" />
         </form>';
-    ?>
-</div>
-</div>
+            ?>
+        </div>
+    </div>
     <div class="center gamebox">
-    <div class="divider"></div>
-    <div class="desc">
-        <?php
-        mb_internal_encoding("UTF-8");
+        <div class="divider"></div>
+        <div class="desc">
+            <?php
+            mb_internal_encoding("UTF-8");
             session_start();
 
             require_once('query.php');
@@ -66,10 +66,9 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
                 header("Location: error_page.php");
                 exit;
             }
-            $desc = query($conn, "SELECT opis from gry where nazwa='".$game."'");
+            $desc = query($conn, "SELECT opis from gry where nazwa='" . $game . "'");
             oci_close($conn);
-            switch($game)
-            {
+            switch ($game) {
                 case 'bierki':
                     $img = "https://upload.wikimedia.org/wikipedia/commons/5/53/Bierki.JPG";
                     break;
@@ -89,9 +88,9 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
                     $img = "https://lh3.googleusercontent.com/proxy/Bl0zKY9SYpsYgZZGww-xBQULWN6vhbA3uAVaEoFlJb7VE_gOFAdjDahGcJAzniIBNkvW_vyiYXY2zUgFyHvd8EyovtuuQ64";
             }
 
-            echo '<img class="desc" src='.$img.'>';
-            echo '<div class="desctxt">'.utf8_encode($desc[0]['OPIS'][0]).'</div>';
-        ?>
+            echo '<img class="desc" src=' . $img . '>';
+            echo '<div class="desctxt">' . utf8_encode($desc[0]['OPIS'][0]) . '</div>';
+            ?>
         </div>
         <div class="gamebuttons">
             <?php

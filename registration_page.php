@@ -12,7 +12,7 @@ if (isset($_COOKIE['player_username'])) {
 
 	<title>Gry.mimuw</title>
 	<meta name="description" content="gierki">
-	<meta name="author" content="SitePoint">
+	<meta name="author" content="kk418331+kj418271">
 
 	<link rel="stylesheet" href="styles.css">
 
