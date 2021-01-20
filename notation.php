@@ -118,10 +118,32 @@ function ludoN($players)
     $pls = $players;
     shuffle($pls);
 
-    $rNotation = '[';
+    $rNotation = '[ ';
     for($i = 0; $i < count($pls); $i++)
         $rNotation .= ($i + 1).'.'.$pls[$i].' ';
     $rNotation .= '] '; 
-    return ",'placeholder history'";
+
+    $maxSize = 500;
+    $maxMove = 16;
+    $maxMoves = floor($maxSize/$maxMove);
+    $moves = rand(floor($maxMoves/4), $maxMoves);
+
+    for ($i = 1; $i <= $moves; $i++) {
+        $rNotation .= $i.'. ';
+        for($j = 0; $j < count($pls); $j++)
+        {
+            $d6 = rand(1, 6);
+            $rNotation .= $d6;
+            if(rand(0, 100) > 90)
+                $rNotation .= '^';
+            else if($d6 == 6 && rand(0, 100) > 85)
+                $rNotation .= '+';
+            else if(rand(0, 100) > 75)
+                $rNotation .= '-';
+            $rNotation .= ' ';
+        }
+    }
+
+    return ",'".$rNotation."'";
 }
 ?>
