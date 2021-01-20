@@ -2,7 +2,7 @@
 function chessN($players)
 {
     $white = rand(0, 1);
-    $rNotation = '1.'.$players[$white].' 2.'.$players[1-$white].' ';
+    $rNotation = '[1.'.$players[$white].' 2.'.$players[1-$white].'] ';
     
     $pieces = ['', 'B', 'Q', 'K', 'R', 'N'];
     $letters = ['a','b','c','d','e','f','g','h'];
@@ -37,7 +37,7 @@ function chessN($players)
 function checkersN($players)
 {
     $white = rand(0, 1);
-    $rNotation = '1.'.$players[$white].' 2.'.$players[1-$white].' ';
+    $rNotation = '[1.'.$players[$white].' 2.'.$players[1-$white].'] ';
 
     $maxSize = 500;
     $maxMove = 16;
@@ -64,7 +64,7 @@ function checkersN($players)
 function soccerN($players)
 {
     $white = rand(0, 1);
-    $rNotation = '1.'.$players[$white].' 2.'.$players[1-$white].' ';
+    $rNotation = '[1.'.$players[$white].' 2.'.$players[1-$white].'] ';
 
     $maxSize = 500;
     $maxMove = 16;
@@ -86,13 +86,45 @@ function soccerN($players)
     return ",'".$rNotation."'";
 }
 
-function piecesN()
+function piecesN($players)
 {
-    return ",'placeholder history'";
+    $pls = $players;
+    shuffle($pls);
+
+    $rNotation = '[';
+    for($i = 0; $i < count($pls); $i++)
+        $rNotation .= ($i + 1).'.'.$pls[$i].' ';
+    $rNotation .= '] '; 
+
+    $maxSize = 500;
+    $maxMove = 16;
+    $maxMoves = floor($maxSize/$maxMove);
+    $moves = rand(floor($maxMoves/4), $maxMoves);
+
+    for ($i = 1; $i <= $moves; $i++) {
+        $rNotation .= $i.'. ';
+        for($j = 0; $j < 2; $j++)
+        {
+            $bounces = rand(1, 5);
+            for($q = 0; $q < $bounces; $q++)
+                $rNotation .= rand(1, 8);
+            $rNotation .= ' ';
+        }
+
+    }
+
+    return ",'".$rNotation."'";
 }
 
-function ludoN()
+function ludoN($players)
 {
+    $pls = $players;
+    shuffle($pls);
+
+    $rNotation = '[';
+    for($i = 0; $i < count($pls); $i++)
+        $rNotation .= ($i + 1).'.'.$pls[$i].' ';
+    $rNotation .= '] '; 
     return ",'placeholder history'";
 }
 ?>

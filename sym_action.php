@@ -94,10 +94,10 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
 
         switch ($game) {
             case 'bierki':
-                $values .= piecesN();
+                $values .= piecesN($players);
                 break;
             case 'chinczyk':
-                $values .= ludoN();
+                $values .= ludoN($players);
                 break;
             case 'pilka':
                 $values .= soccerN($players);
