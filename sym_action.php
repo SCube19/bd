@@ -91,26 +91,7 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
         }
         for ($i = 0; $i < $max_players - $opponent_count - 1; $i++)
             $values .= ",NULL";
-
-        switch ($game) {
-            case 'bierki':
-                $values .= piecesN($players);
-                break;
-            case 'chinczyk':
-                $values .= ludoN($players);
-                break;
-            case 'pilka':
-                $values .= soccerN($players);
-                break;
-            case 'szachy':
-                $values .= chessN($players);
-                break;
-            case 'warcaby':
-                $values .= checkersN($players);
-                break;
-            default:
-        }
-
+        $values .= notation($game, $players);
         query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
         oci_commit($conn);
 
