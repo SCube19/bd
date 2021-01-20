@@ -34,6 +34,12 @@ if (isset($_COOKIE['player_username'])) {
 					<input type='submit' value="ZAREJESTRUJ"><br><br>
 				</form>
 				<?php
+				//nazwa użytkownika zawiera spacje
+				if ($_SESSION['no_spaces'] == 'false') {
+					echo "<span style='color:red'><b>Login nie może zawierać spacji.</b></span><br><br>";
+					$_SESSION['no_spaces'] = '';
+				}
+
 				//nazwa użytkownika zajęta
 				if ($_SESSION['available'] == 'false') {
 					echo "<span style='color:red'><b>Podana nazwa użytkownika jest zajęta.</b></span><br><br>";

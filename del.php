@@ -9,6 +9,9 @@
  }
 
  $result = query($conn, "DELETE from gracze where nick='".$_COOKIE['active_username']."'");
+ $result = query($conn, "DELETE from rankingBasic where nick='".$_COOKIE['active_username']."'");
+ $result = query($conn, "DELETE from rankingAdvanced where nick='".$_COOKIE['active_username']."'");
+
  header('Location:logout.php');
 
 ?>

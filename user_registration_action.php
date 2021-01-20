@@ -12,6 +12,12 @@ $input_username = $_POST['username'];
 $input_password = sha1($_POST['password']);
 $input_password_repeat = sha1($_POST['password_repeat']);
 
+if (strpos($input_username, ' ') !== false) {
+    $_SESSION['no_spaces'] = 'false';
+	header('Location:registration_page.php');
+	exit;
+}
+
 $result = query($conn, "SELECT * FROM gracze WHERE nick='" . $input_username . "'");
 
 if ($result[1] != 0) {

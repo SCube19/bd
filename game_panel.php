@@ -70,7 +70,7 @@ setcookie('last_page', 'game_panel.php?game=' . $game . '');
             oci_close($conn);
             switch ($game) {
                 case 'bierki':
-                    $img = "https://upload.wikimedia.org/wikipedia/commons/5/53/Bierki.JPG";
+                    $img = "https://i.imgur.com/DfOw1um.jpeg";
                     break;
                 case 'chinczyk':
                     $img = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Menschenaergern.svg/1200px-Menschenaergern.svg.png";

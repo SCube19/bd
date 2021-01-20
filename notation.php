@@ -77,10 +77,9 @@ function notation($game, $players)
     $pls = $players;
     shuffle($pls);
 
-    $rNotation = '[ ';
+    $rNotation = '';
     for ($i = 0; $i < count($pls); $i++)
-        $rNotation .= ($i + 1) . '.' . $pls[$i] . ' ';
-    $rNotation .= '] ';
+        $rNotation .= $pls[$i] . ' ';
 
     $maxSize = 500;
     $maxMove = 16;
