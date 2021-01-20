@@ -103,8 +103,10 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
     for ($i = $player_count; $i < $table_arr_size; $i++) {
         $table_body .= '<td>'.$table_arr[$i].'</td>';
 
-        if (($i+2) % ($player_count+1) == 0)
+        if ($i+2 > $player_count * 2 && $i+2 < $table_arr_size-1 && ($i+2) % ($player_count+1) == 0) {
             $table_body .= '</tr>';
+            $table_body .= '<tr>';
+        }
     }
 
     $table_string = $table_header.
