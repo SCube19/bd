@@ -9,8 +9,8 @@ if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
 }
 
 $input_username = $_POST['username'];
-$input_password = $_POST['password'];
-$input_password_repeat = $_POST['password_repeat'];
+$input_password = sha1($_POST['password']);
+$input_password_repeat = sha1($_POST['password_repeat']);
 
 $result = query($conn, "SELECT * FROM gracze WHERE nick='" . $input_username . "'");
 

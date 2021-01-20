@@ -13,10 +13,10 @@ if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
 
 //dane z formularza do zmiennych
 $input_username = $_POST['username'];
-$input_password = $_POST['password'];
+$input_password = sha1($_POST['password']);
 
-//hasowanie hasla
-$input_password = sha1($input_password);
+
+// //hasowanie hasla
 
 //zapytanie
 $result = query($conn, "SELECT * FROM gracze WHERE nick='" . $input_username . "'");
@@ -30,7 +30,7 @@ if ($result[1] == 0) {
 } else {
 	//logowanie udane
 	$query_password = $result[0]['HASLO'][0];
-	if ($input_password == sha1($query_password)) {
+	if ($input_password == $query_password) {
 		$_SESSION['auth'] = '';
 		$_SESSION['login_exists'] = '';
 		setcookie('active_username', $input_username);

@@ -78,4 +78,3 @@ class RPN
         return floor($calculationResult);
     }
 }
-

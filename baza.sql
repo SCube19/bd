@@ -28,7 +28,7 @@ create table gry(
 
 create table gracze(
     nick varchar2(20) primary key,
-    haslo varchar2(20) not null,
+    haslo varchar2(40) not null,
     typ_gracza varchar2(20) not null references typy
 );
 
@@ -285,56 +285,71 @@ end;
 
 --formula podstawowa ma id=0
 insert into formuly values (0, 'elo', 'R 32 S 10 R 400 / ^ 10 R 400 / ^ 10 E 400 / ^ + / - * +');
+insert into formuly values (1, 'bsc_scr', 'R E 15 / +');
 
 insert into typy values('uzytkownik');
 insert into typy values('admin');
 insert into typy values('bot');
 
-insert into gry values('szachy', 'Gracze dysponuja bierkami w sklad ktorych wchodzi szesnascie bierek: 
-krol, hetman, dwa gonce, dwa skoczki, dwie wieze oraz osiem pionow. Gre zawsze rozpoczynaja biale. 
-Gracze na zmiane wykonuja posuniecia swoimi bierkami zgodnie z 
-zasadami ruchu dla danej bierki i jesli wejdzie ona na pole zajmowane przez przeciwnika, zbija jego bierke. Szach jest grozba zbicia krola. 
+insert into gry values('szachy', 'Gracze dysponuja bierkami w sklad ktorych wchodzi szesnascie bierek:
+krol, hetman, dwa gonce, dwa skoczki, dwie wieze oraz osiem pionow. Gre zawsze rozpoczynaja biale.
+Gracze na zmiane wykonuja posuniecia swoimi bierkami zgodnie z
+zasadami ruchu dla danej bierki i jesli wejdzie ona na pole zajmowane przez przeciwnika, zbija jego bierke. Szach jest grozba zbicia krola.
 Mat, czyli postawienie krola przeciwnika w szachu, przed ktorym nie ma obrony, konczy partie i oznacza zwyciestwo gracza, ktorego bierka matuje krola przeciwnika
 ', 2, 2);
 
-insert into gry values('warcaby', 'Warcaby rozgrywane sa na planszy o rozmiarze 8x8 pol pokolorowanych na przemian na kolor jasny i ciemny. Kazdy 
+insert into gry values('warcaby', 'Warcaby rozgrywane sa na planszy o rozmiarze 8x8 pol pokolorowanych na przemian na kolor jasny i ciemny. Kazdy
 gracz rozpoczyna gre z dwunastoma pionami ustawionymi na ciemniejszych polach planszy, po ktorych sie poruszaja.
-Jako pierwszy ruch wykonuje grajacy pionami bialymi, po czym gracze wykonuja na zmiane kolejne ruchy. 
-Celem gry jest zbicie wszystkich pionow przeciwnika albo zablokowanie wszystkich, 
-ktore pozostaja na planszy, pozbawiajac przeciwnika mozliwosci wykonania ruchu. Piony moga poruszac sie o 
+Jako pierwszy ruch wykonuje grajacy pionami bialymi, po czym gracze wykonuja na zmiane kolejne ruchy.
+Celem gry jest zbicie wszystkich pionow przeciwnika albo zablokowanie wszystkich,
+ktore pozostaja na planszy, pozbawiajac przeciwnika mozliwosci wykonania ruchu. Piony moga poruszac sie o
 jedno pole do przodu po przekatnej na wolne pola.', 2, 2);
 
-insert into gry values('chinczyk', 'Na poczatku pionki kazdego z graczy sa w schowku. 
-Gracze rzucaja kostka po trzy razy, az ktorys z graczy wyrzuci 6 - wtedy ustawia jeden ze 
-swoich pionkow na polu startowym i rzuca jeszcze raz, nastepnie przesuwa pionek w kierunku 
-zgodnym z ruchem wskazowek zegara. Jezeli ktorys gracz wyrzuci 6, moze rzucic jeszcze raz. Jesli podczas gry pionek jednego gracza stanie na polu zajmowanym przez drugiego, 
+insert into gry values('chinczyk', 'Na poczatku pionki kazdego z graczy sa w schowku.
+Gracze rzucaja kostka po trzy razy, az ktorys z graczy wyrzuci 6 - wtedy ustawia jeden ze
+swoich pionkow na polu startowym i rzuca jeszcze raz, nastepnie przesuwa pionek w kierunku
+zgodnym z ruchem wskazowek zegara. Jezeli ktorys gracz wyrzuci 6, moze rzucic jeszcze raz. Jesli podczas gry pionek jednego gracza stanie na polu zajmowanym przez drugiego,
 pionek stojacy tutaj poprzednio zostaje zbity i wraca do swojego schowka. Kiedy gracz obejdzie pionkiem cala plansze dookola, wprowadza swoj pionek do domku.', 2, 4);
 
-insert into gry values('pilka', 'Gra rozgrywa sie na boisku o wymiarach 10x8 kratek, z bramkami o szerokosci 2 kratek. 
-Celem jest umieszczenie w bramce przeciwnika pilki, ktora na poczatku jest na srodku. 
-Koniec gry nastepuje tez gdy ktorys z graczy nie moze wykonac zadnego ruchu. W jednym ruchu pilka moze byc przemieszczona poziomo, 
-pionowo lub po ukosie. Trasa pilki jest oznaczona linia. Pilka nie moze przemieszczac sie po brzegu boiska ani liniach, ale moze sie od nich sie odbijac - 
+insert into gry values('pilka', 'Gra rozgrywa sie na boisku o wymiarach 10x8 kratek, z bramkami o szerokosci 2 kratek.
+Celem jest umieszczenie w bramce przeciwnika pilki, ktora na poczatku jest na srodku.
+Koniec gry nastepuje tez gdy ktorys z graczy nie moze wykonac zadnego ruchu. W jednym ruchu pilka moze byc przemieszczona poziomo,
+pionowo lub po ukosie. Trasa pilki jest oznaczona linia. Pilka nie moze przemieszczac sie po brzegu boiska ani liniach, ale moze sie od nich sie odbijac -
 wtedy gracz wykonuje kolejny ruch.', 2, 2);
 
-insert into gry values('bierki', 'Gra polega na zbieraniu bierek tak aby nie poruszyc innych. 
-Bierki zostaja na poczatku rozsypane. Gracze kolejno zbieraja bierki w taki sposob aby nie poruszyc pozostalych bierek. 
-Dozwolone jest pomaganie sobie, wczesniej zebranymi bierkami. Jezeli jakakolwiek z lezacych bierek drgnie kolejka przechodzi na 
-nastepnego gracza. Gra konczy sie gdy wszystkie bierki zostana zebrane. Kaada z zebranych bierek ma okreslona wartosc punktowa. 
+insert into gry values('bierki', 'Gra polega na zbieraniu bierek tak aby nie poruszyc innych.
+Bierki zostaja na poczatku rozsypane. Gracze kolejno zbieraja bierki w taki sposob aby nie poruszyc pozostalych bierek.
+Dozwolone jest pomaganie sobie, wczesniej zebranymi bierkami. Jezeli jakakolwiek z lezacych bierek drgnie kolejka przechodzi na
+nastepnego gracza. Gra konczy sie gdy wszystkie bierki zostana zebrane. Kaada z zebranych bierek ma okreslona wartosc punktowa.
 Wygrywa gracz ktory zbierze najwiecej punktow.', 2, 4);
 
-insert into gracze values('alphazero', 'oro', 'bot');
+insert into sposobyObliczania (select nvl(max(id), 0) + 1, 1, 'bierki', 0 from sposobyObliczania);
+insert into sposobyObliczania (select nvl(max(id), 0) + 1, 1, 'chinczyk', 0 from sposobyObliczania);
+
+insert into gracze values('alphazero', 'xxx', 'bot');
 insert into gracze values('uzytkownik_slayer', 'xxx', 'bot');
 insert into gracze values('mistrz', 'xxx', 'bot');
 insert into gracze values('koxxx', 'xxx', 'bot');
 insert into gracze values('asia', 'xxx', 'bot');
 insert into gracze values('bot', 'xxx', 'bot');
 insert into gracze values('da Vinki', 'xxx', 'bot');
-insert into gracze values('Euleroo', 'xxx', 'bot');
+insert into gracze values('euler', 'xxx', 'bot');
 insert into gracze values('senpai', 'xxx', 'bot');
-insert into gracze values('admin', '123', 'admin');
-insert into gracze values('bob', 'oro', 'admin');
-insert into gracze values('abc', 'abc', 'uzytkownik');
-insert into gracze values('marek', 'maro', 'uzytkownik');
-insert into gracze values('scube420', '6969', 'uzytkownik');
-insert into gracze values('darek68', 'hehe', 'uzytkownik');
-insert into gracze values('kk418331', '$H00michek$', 'admin');
+insert into gracze values('joe_mama', 'xxx', 'bot');
+insert into gracze values('xXx_jason2005_xXx', 'xxx', 'bot');
+insert into gracze values('username', 'xxx', 'bot');
+insert into gracze values('Pewdiepie', 'xxx', 'bot');
+insert into gracze values('hide on bush', 'xxx', 'bot');
+insert into gracze values('faker', 'xxx', 'bot');
+insert into gracze values('Cauchy', 'xxx', 'bot');
+insert into gracze values('zero-two', 'xxx', 'bot');
+insert into gracze values('Rem', 'xxx', 'bot');
+insert into gracze values('Ram', 'xxx', 'bot');
+insert into gracze values('abc', 'xxx', 'bot');
+insert into gracze values('marek', 'xxx', 'bot');
+insert into gracze values('scube420', 'xxx', 'bot');
+insert into gracze values('quebonafide', 'xxx', 'bot');
+insert into gracze values('kk418331', 'da39a3ee5e6b4b0d3255bfef95601890afd80709', 'admin');
+
+commit;
+
