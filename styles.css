@@ -446,7 +446,7 @@
           animation: glow 1.5s ease-out infinite alternate;
       }
       
-      @-webkit-keyframes glow {
+      @keyframes glow {
           from {
               text-shadow: 0 0 10px #fff, 0 0 20px rgb(247, 190, 190), 0 0 40px #e761a4, 0 0 60px #db56c9, 0 0 70px #da6fda;
           }
@@ -499,4 +499,8 @@
           text-decoration-style: double;
           text-shadow: 1px 1px rgb(139, 51, 48);
           color: rgb(187, 31, 20);
+      }
+      
+      .notation {
+          color: gold;
       }

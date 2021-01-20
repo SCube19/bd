@@ -40,7 +40,6 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
         require_once('database_info.php');
         require_once('query.php');
         require_once('ratings.php');
-        require_once('query.php');
         require_once('notation.php');
 
         if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
@@ -104,14 +103,14 @@ setcookie('last_page', 'sym_action.php?game=' . $game);
                 $values .= soccerN();
                 break;
             case 'szachy':
-                $values .= chessN();
+                $values .= chessN($players);
                 break;
             case 'warcaby':
                 $values .= checkersN();
                 break;
             default:
         }
-        
+
         query($conn, "INSERT INTO h" . $game . " VALUES (" . $values . ")");
         oci_commit($conn);
 

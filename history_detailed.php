@@ -28,7 +28,21 @@ setcookie('last_page', 'history_detailed.php?id=' . $id . '&game=' . $game . '')
 </head>
 
 <body>
+    <?php
+        session_start();
+        require_once('database_info.php');
+        require_once('query.php');
+        
+        if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS"))) {
+            header('Location:error_page.php');
+            exit;
+        }
+        
+        $notation = query($conn, "SELECT historia from h".$game." where id=".$id."");
 
+        echo '<div class=notation>'.$notation[0]['HISTORIA'][0].'</div>';
+    
+    ?>
     
 </body>
 
