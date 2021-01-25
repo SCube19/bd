@@ -391,5 +391,6 @@ insert into gracze values('marlenqqa', 'xxx', 'bot');
 insert into gracze values('drake', 'xxx', 'bot');
 insert into gracze values('kanije_zachodni', 'xxx', 'bot');
 insert into gracze values('kk418331', 'a5e0467f5f947628892806b645f7641ecacd179e', 'admin');
+insert into gracze values('kj418271', 'fb19f56cfa357eb991b3253907c6e422d88fb513', 'admin');
 
 commit;
