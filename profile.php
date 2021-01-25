@@ -40,6 +40,8 @@
 
         $result = query($conn, "SELECT * FROM gracze WHERE nick='" . $player . "'");
 
+        if($result[0]['TYP_GRACZA'][0] == 'usuniety')
+            header("Location: error_page.php");
         if ($result[0]['TYP_GRACZA'][0] == 'admin' && $player == $_COOKIE['active_username'])
             echo '<a href="admin_panel.php">';
         if ($result[0]['TYP_GRACZA'][0] != 'uzytkownik')
