@@ -81,6 +81,7 @@ setcookie('last_page', 'history.php?game=' . $game . '&player=' . $player . '');
 
         $histories = query($conn, "SELECT * from h" . $game . " h left join (select id, gra, nick_gracza, to_char(data, 'YYYY/MM/DD HH24:MI:SS') data from rozgrywki ) r on r.id = h.id and r.gra = '" . $game . "' where nick_gracza = '" . $player . "' order by data desc");
         $places = count($histories[0]) - 3;
+        
         echo '<div class="ranking">';
         for ($i = 0; $i < $histories[1]; $i++) {
             echo '<a href="history_detailed.php?id=' . $histories[0]['ID'][$i] . '&game=' . $game . '&player='.$player.'"><div class="gameHis"';

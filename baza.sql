@@ -292,6 +292,7 @@ insert into formuly values (1, 'bsc_scr', 'R E 15 / +');
 insert into typy values('uzytkownik');
 insert into typy values('admin');
 insert into typy values('bot');
+insert into typy values('usuniety');
 
 insert into gry values('szachy', 'Gracze dysponuja bierkami w sklad ktorych wchodzi szesnascie bierek:
 krol, hetman, dwa gonce, dwa skoczki, dwie wieze oraz osiem pionow. Gre zawsze rozpoczynaja biale.
