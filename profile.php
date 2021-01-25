@@ -47,12 +47,12 @@
         if ($result[0]['TYP_GRACZA'][0] == 'admin' && $player == $_COOKIE['active_username'])
             echo '</a>';
 
-        if ($player == $_COOKIE['active_username'])
-            echo '<div class="del">
-            <a href="del.php">
-                USUN KONTO
-            </a>
-                </div>';
+        // if ($player == $_COOKIE['active_username'])
+        //     echo '<div class="del">
+        //     <a href="del.php">
+        //         USUN KONTO
+        //     </a>
+        //         </div>';
 
         echo '<div id="nick">' . $player . '</div>';
         ?>

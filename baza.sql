@@ -1,6 +1,3 @@
---po zaladowaniu bazy na sql komenda @baza.sql
---trzeba sie zrelogowac aby baza dzialala na stronie
---(to samo sie ma do jakiejkolwiek modyfikacji bazy)
 drop table typy cascade constraints;
 drop table rankingAdvanced cascade constraints;
 drop table rankingBasic cascade constraints;
@@ -390,7 +387,24 @@ insert into gracze values('yandere_dev', 'xxx', 'bot');
 insert into gracze values('marlenqqa', 'xxx', 'bot');
 insert into gracze values('drake', 'xxx', 'bot');
 insert into gracze values('kanije_zachodni', 'xxx', 'bot');
+insert into gracze values('wektor', 'xxx', 'bot');
+insert into gracze values('weeb420', 'xxx', 'bot');
+insert into gracze values('anime_lover12', 'xxx', 'bot');
+insert into gracze values('skkf', 'xxx', 'bot');
+insert into gracze values('kanue_wschodni', 'xxx', 'bot');
+insert into gracze values('galio_main', 'xxx', 'bot');
+insert into gracze values('pepe_sadge', 'xxx', 'bot');
+insert into gracze values('peepo_hapi', 'xxx', 'bot');
+insert into gracze values('deeznuts', 'xxx', 'bot');
+insert into gracze values('bts_lover', 'xxx', 'bot');
+insert into gracze values('bedoes', 'xxx', 'bot');
+insert into gracze values('okrasa', 'xxx', 'bot');
+insert into gracze values('prawo_pascala', 'xxx', 'bot');
+insert into gracze values('hen', 'xxx', 'bot');
+insert into gracze values('tai', 'xxx', 'bot');
 insert into gracze values('kk418331', 'a5e0467f5f947628892806b645f7641ecacd179e', 'admin');
 insert into gracze values('kj418271', 'fb19f56cfa357eb991b3253907c6e422d88fb513', 'admin');
 
 commit;
+
+select * from gracze;
