@@ -11,6 +11,7 @@ if (!($conn = oci_connect($dbuser, $dbpass, "//labora.mimuw.edu.pl/LABS", 'AL32U
 $result = query($conn, "UPDATE gracze set typ_gracza='usuniety', haslo = 'xxx' where nick='" . $_COOKIE['active_username'] . "'");
 $result = query($conn, "DELETE from rankingBasic where nick_gracza='" . $_COOKIE['active_username'] . "'");
 $result = query($conn, "DELETE from rankingAdvanced where nick_gracza='" . $_COOKIE['active_username'] . "'");
+
 oci_commit($conn);
 oci_close($conn);
 
